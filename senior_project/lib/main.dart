@@ -5,7 +5,6 @@ import 'package:senior_project/screens/wrapper.dart';
 import 'package:senior_project/services/auth.dart';
 import 'package:senior_project/models/user.dart';
 import 'firebase_options.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

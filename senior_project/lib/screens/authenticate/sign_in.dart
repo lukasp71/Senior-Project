@@ -78,9 +78,11 @@ class _SignInState extends State<SignIn> {
                             dynamic result = await _auth
                                 .signInWithEmailAndPassword(email, password);
                             if (result == null) {
-                              setState(() => error =
-                                  'could not sign in with those credentials');
-                              setState(() => loading = false);
+                              setState(() {
+                                error =
+                                    'could not sign in with those credentials';
+                                loading = false;
+                              });
                             }
                           }
                         },
