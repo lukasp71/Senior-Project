@@ -7,11 +7,19 @@ import 'package:senior_project/services/databse.dart';
 import 'package:provider/provider.dart';
 import '../../models/userinfo.dart';
 
-class Home extends StatelessWidget {
-  final AuthService _auth = AuthService();
+final AuthService _auth = AuthService();
 
+class Home extends StatefulWidget {
+  const Home({super.key});
+   
+@override
+_HomeScreenState createState() => _HomeScreenState();
+
+}
+class _HomeScreenState extends State <Home> {
   @override
   Widget build(BuildContext context) {
+
     return StreamProvider<List<UserInformation>?>.value(
       value: DatabaseService(uid: "").userData,
       initialData: null,
