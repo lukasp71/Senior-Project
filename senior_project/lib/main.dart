@@ -5,7 +5,7 @@ import 'package:senior_project/screens/wrapper.dart';
 import 'package:senior_project/services/auth.dart';
 import 'package:senior_project/models/user.dart';
 import 'firebase_options.dart';
-import 'package:senior_project/screens/home/get_started.dart';
+//import 'package:senior_project/screens/home/get_started.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
