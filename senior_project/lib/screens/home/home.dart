@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:senior_project/screens/home/user_data.dart';
 import 'package:senior_project/services/auth.dart';
@@ -8,6 +7,11 @@ import 'package:provider/provider.dart';
 import '../../models/userinfo.dart';
 
 final AuthService _auth = AuthService();
+
+
+void main() {
+  runApp(const Home());
+}
 
 class Home extends StatefulWidget {
   const Home({super.key});
