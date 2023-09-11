@@ -2,6 +2,8 @@ import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import "package:senior_project/models/userinfo.dart";
+import "package:senior_project/screens/home/user_title.dart";
+import 'package:senior_project/screens/home/user_title.dart';
 
 class UserData extends StatefulWidget {
   const UserData({super.key});
@@ -13,11 +15,14 @@ class UserData extends StatefulWidget {
 class _userDataState extends State<UserData> {
   @override
   Widget build(BuildContext context) {
-    final data = Provider.of<List<UserInformation>>(context);
-    data.forEach((UserInfo) {
-      print(UserInfo.name);
-      print(UserInfo.progress);
-    });
-    return const Placeholder();
+    final data = Provider.of<List<UserInformation>?>(context);
+
+    return ListView.builder(
+        itemCount: data!.length,
+        itemBuilder: (context, index) {
+          return UserTitle(
+            title: data[index],
+          );
+        });
   }
 }
