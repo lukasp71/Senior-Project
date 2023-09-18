@@ -17,7 +17,7 @@ class _SettingsFormState extends State<SettingsForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(children: <Widget>[
+      child: const Column(children: <Widget>[
         Text(
           'Update your Settings',
           style: TextStyle(fontSize: 18.0),

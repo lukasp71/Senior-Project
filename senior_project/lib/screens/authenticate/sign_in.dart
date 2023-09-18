@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:senior_project/screens/authenticate/register.dart';
 import 'package:senior_project/services/auth.dart';
-import 'package:senior_project/shared/constants.dart';
+//import 'package:senior_project/shared/constants.dart';
 import '../../shared/loading.dart';
 
 class SignIn extends StatefulWidget {
-  final Function toggleView;
+  
 
-  const SignIn({Key? key, required this.toggleView}) : super(key: key);
+  const SignIn({Key? key, }) : super(key: key);
 
   @override
   _SignInState createState() => _SignInState();
@@ -41,7 +42,7 @@ class _SignInState extends State<SignIn> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           'Welcome Back!',
                           style: TextStyle(
                             color: Colors.blue,
@@ -49,7 +50,7 @@ class _SignInState extends State<SignIn> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Container(
                           padding: const EdgeInsets.all(20.0),
                           decoration: BoxDecoration(
@@ -61,7 +62,7 @@ class _SignInState extends State<SignIn> {
                             child: Column(
                               children: <Widget>[
                                 TextFormField(
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: 'Email',
                                     prefixIcon: Icon(Icons.email),
                                   ),
@@ -71,11 +72,11 @@ class _SignInState extends State<SignIn> {
                                     setState(() => email = val);
                                   },
                                 ),
-                                SizedBox(height: 20.0),
+                                const SizedBox(height: 20.0),
                                 TextFormField(
                                   decoration: InputDecoration(
                                     labelText: 'Password',
-                                    prefixIcon: Icon(Icons.lock),
+                                    prefixIcon: const Icon(Icons.lock),
                                     suffixIcon: IconButton(
                                       icon: Icon(
                                         _passwordVisible
@@ -97,7 +98,7 @@ class _SignInState extends State<SignIn> {
                                     setState(() => password = val);
                                   },
                                 ),
-                                SizedBox(height: 30),
+                                const SizedBox(height: 30),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     primary: Colors
@@ -118,7 +119,7 @@ class _SignInState extends State<SignIn> {
                                       }
                                     }
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Sign In',
                                     style: TextStyle(
                                       color: Colors.white,
@@ -126,10 +127,10 @@ class _SignInState extends State<SignIn> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 12.0),
+                                const SizedBox(height: 12.0),
                                 Text(
                                   error,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.red,
                                     fontSize: 14.0,
                                   ),
@@ -138,12 +139,12 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         TextButton(
                           onPressed: () {
                             // Add Forgot Password functionality here
                           },
-                          child: Text(
+                          child: const Text(
                             'Forgot Password?',
                             style: TextStyle(
                               color:
@@ -151,16 +152,21 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text('Don\'t have an account?'),
+                            const Text('Don\'t have an account?'),
                             TextButton(
                               onPressed: () {
-                                widget.toggleView();
+                                Navigator.push(
+                                  context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Register(),
+                        )
+                      );
                               },
-                              child: Text(
+                              child: const Text(
                                 'Sign Up',
                                 style: TextStyle(
                                   color: Colors

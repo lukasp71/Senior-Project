@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:senior_project/services/auth.dart';
 import 'package:senior_project/shared/constants.dart';
 import '../../shared/loading.dart';
+import "package:senior_project/screens/authenticate/sign_in.dart";
 
 class Register extends StatefulWidget {
-  final Function toggleView;
+  
 
-  const Register({Key? key, required this.toggleView}) : super(key: key);
+  const Register({Key? key, }) : super(key: key);
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -34,20 +35,20 @@ class _RegisterState extends State<Register> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       'Create an Account',
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Form(
                       key: _formKey,
                       child: Column(
                         children: <Widget>[
                           TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Email',
                               prefixIcon: Icon(Icons.email),
                             ),
@@ -57,9 +58,9 @@ class _RegisterState extends State<Register> {
                               setState(() => email = val);
                             },
                           ),
-                          SizedBox(height: 20.0),
+                          const SizedBox(height: 20.0),
                           TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               labelText: 'Password',
                               prefixIcon: Icon(Icons.lock),
                             ),
@@ -71,7 +72,7 @@ class _RegisterState extends State<Register> {
                               setState(() => password = val);
                             },
                           ),
-                          SizedBox(height: 30),
+                          const SizedBox(height: 30),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: Colors
@@ -91,7 +92,7 @@ class _RegisterState extends State<Register> {
                                 }
                               }
                             },
-                            child: Text(
+                            child: const Text(
                               'Register',
                               style: TextStyle(
                                 color: Colors.white,
@@ -99,10 +100,10 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 12.0),
+                          const SizedBox(height: 12.0),
                           Text(
                             error,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.red,
                               fontSize: 14.0,
                             ),
@@ -110,16 +111,21 @@ class _RegisterState extends State<Register> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('Already have an account?'),
+                        const Text('Already have an account?'),
                         TextButton(
                           onPressed: () {
-                            widget.toggleView();
+                            Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignIn(),
+                        )
+                      );
                           },
-                          child: Text(
+                          child: const Text(
                             'Sign In',
                             style: TextStyle(
                               color:
