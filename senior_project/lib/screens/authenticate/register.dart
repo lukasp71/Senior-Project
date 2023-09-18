@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/services/auth.dart';
-import 'package:senior_project/shared/constants.dart';
 import '../../shared/loading.dart';
-import "package:senior_project/screens/authenticate/sign_in.dart";
 
 class Register extends StatefulWidget {
-  
+  final Function toggleView;
 
-  const Register({Key? key, }) : super(key: key);
+  const Register({Key? key, required this.toggleView}) : super(key: key);
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -19,6 +17,7 @@ class _RegisterState extends State<Register> {
   bool loading = false;
   String email = '';
   String password = '';
+  String username = '';
   String error = '';
 
   @override
@@ -28,10 +27,11 @@ class _RegisterState extends State<Register> {
         : Scaffold(
             backgroundColor:
                 Colors.white, // Use your preferred background color
-            body: SingleChildScrollView(
+            body: Center(
               child: Container(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 80),
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+                width: 300, // Set the desired width
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -47,6 +47,18 @@ class _RegisterState extends State<Register> {
                       key: _formKey,
                       child: Column(
                         children: <Widget>[
+                          TextFormField(
+                            decoration: const InputDecoration(
+                              labelText: 'Username',
+                              prefixIcon: Icon(Icons.person),
+                            ),
+                            validator: (val) =>
+                                val!.isEmpty ? 'Enter a username' : null,
+                            onChanged: (val) {
+                              setState(() => username = val);
+                            },
+                          ),
+                          const SizedBox(height: 20.0),
                           TextFormField(
                             decoration: const InputDecoration(
                               labelText: 'Email',
@@ -83,7 +95,7 @@ class _RegisterState extends State<Register> {
                                 setState(() => loading = true);
                                 dynamic result =
                                     await _auth.registerWithEmailAndPassword(
-                                        email, password);
+                                        email, password, username);
                                 if (result == null) {
                                   setState(() {
                                     error = 'Please supply a valid email';
@@ -118,12 +130,7 @@ class _RegisterState extends State<Register> {
                         const Text('Already have an account?'),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignIn(),
-                        )
-                      );
+                            widget.toggleView();
                           },
                           child: const Text(
                             'Sign In',
