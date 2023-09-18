@@ -2,6 +2,7 @@
 // Base code for implementation comes from https://nabendu82.medium.com/flutter-news-app-using-newsapi-2294c2dcf673.
 
 import 'source_model.dart';
+
 class Article {
   Source source;
   String author;
@@ -11,7 +12,7 @@ class Article {
   String urlToImage;
   String publishedAt;
   String content;
-Article(
+  Article(
       {required this.source,
       required this.author,
       required this.title,
@@ -20,7 +21,7 @@ Article(
       required this.urlToImage,
       required this.publishedAt,
       required this.content});
-factory Article.fromJson(Map<String, dynamic> json) {
+  factory Article.fromJson(Map<String, dynamic> json) {
     return Article(
       source: Source.fromJson(json['source']),
       author: json['author'] as String,
