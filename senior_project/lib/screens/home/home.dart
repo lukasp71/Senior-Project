@@ -1,47 +1,146 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/screens/info/education_section.dart'; // Import your Cyber News screen
-import 'package:senior_project/screens/info/cyber_news.dart'; // Import your Recent Threats screen
-import 'package:senior_project/screens/info/recent_threats.dart'; // Import your Education Sections screen
-import 'package:senior_project/services/auth.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
 
-class Home extends StatelessWidget {
-  final AuthService _auth = AuthService();
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  dynamic selectedArticle; // Article to display
+
+  @override
+  void initState() {
+    super.initState();
+    fetchNews();
+  }
+
+  Future<void> fetchNews() async {
+    final apiKey =
+        'ee8499f0e2a249f2a58e02a35a679c90'; // Replace with your News API key
+    final url = 'https://newsapi.org/v2/everything?q=cyber&apiKey=$apiKey';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        setState(() {
+          selectedArticle =
+              jsonData['articles'][0]; // Display the first article
+        });
+      } else {
+        print('Failed to load news');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<void> _launchURL(String url) async {
+    // ignore: deprecated_member_use
+    if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3, // Number of tabs
-      child: Scaffold(
-        backgroundColor: Colors.brown[50],
-        appBar: AppBar(
-          title: Text('Home'),
-          backgroundColor: Colors.brown[400],
-          elevation: 0.0,
-          actions: <Widget>[
-            TextButton.icon(
-              icon: Icon(Icons.person),
-              onPressed: () async {
-                await _auth.signOut();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Cyber News'),
+        centerTitle: true,
+        actions: [
+          Center(
+            child: DropdownButton(
+              onChanged: (value) {
+                // Handle dropdown menu item selection here
               },
-              label: Text('Log Out'),
+              items: [
+                DropdownMenuItem(
+                  value: 'vulnerabilities',
+                  child: Text('Vulnerabilities'),
+                ),
+                DropdownMenuItem(
+                  value: 'education',
+                  child: Text('Education'),
+                ),
+              ],
             ),
-          ],
-          bottom: TabBar(
-            tabs: [
-              Tab(text: 'Cyber News'),
-              Tab(text: 'Recent Threats'),
-              Tab(text: 'Education Sections'),
-            ],
           ),
-        ),
-        body: TabBarView(
+        ],
+      ),
+      body: Center(
+        child: selectedArticle != null
+            ? buildArticle(selectedArticle)
+            : CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  Widget buildArticle(dynamic article) {
+    return InkWell(
+      onTap: () {
+        _launchURL(article['url']);
+      },
+      child: Card(
+        elevation: 4.0,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            CyberNewsScreen(), // Your Cyber News screen widget
-            RecentThreatsScreen(), // Your Recent Threats screen widget
-            EducationSectionsScreen(), // Your Education Sections screen widget
+            if (article['urlToImage'] != null)
+              Container(
+                height: 200.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      article['urlToImage'],
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    article['title'] ?? 'No Title',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    article['description'] ?? 'No Description',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    'Source: ${article['source']['name']}',
+                    style: TextStyle(fontSize: 14.0),
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    'Published: ${article['publishedAt']}',
+                    style: TextStyle(fontSize: 14.0),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(home: Home()));
 }
