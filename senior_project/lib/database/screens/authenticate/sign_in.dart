@@ -1,8 +1,6 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
-import 'package:senior_project/services/auth.dart';
-import '../../shared/loading.dart';
+import 'package:senior_project/database/services/auth.dart';
+import '../../../shared/loading.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;

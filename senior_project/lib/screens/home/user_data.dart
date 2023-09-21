@@ -1,7 +1,7 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
-import "package:senior_project/models/userinfo.dart";
+import 'package:senior_project/database/models/userinfo.dart';
 import "package:senior_project/screens/home/user_title.dart";
 
 class UserData extends StatefulWidget {

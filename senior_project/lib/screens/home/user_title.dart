@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:senior_project/models/userinfo.dart';
+import 'package:senior_project/database/models/userinfo.dart';
 
 class UserTitle extends StatelessWidget {
   late final UserInformation title;

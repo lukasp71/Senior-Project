@@ -1,5 +1,5 @@
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:senior_project/models/userinfo.dart';
+import 'package:senior_project/database/models/userinfo.dart';
 import "package:senior_project/screens/home/user_data.dart";
 
 class DatabaseService {
