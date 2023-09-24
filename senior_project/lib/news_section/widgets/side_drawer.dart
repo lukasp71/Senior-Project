@@ -4,129 +4,45 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/utils/utils.dart';
-import 'package:senior_project/news_section/widgets/dropdown_list.dart';
 
 Drawer sideDrawer(NewsController newsController) {
   return Drawer(
     backgroundColor: AppColors.lightGrey,
     child: ListView(
       children: <Widget>[
-        GetBuilder<NewsController>(
-          builder: (controller) {
-            return Container(
-              decoration: const BoxDecoration(
-                  color: AppColors.burgundy,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(Sizes.dimen_10),
-                    bottomRight: Radius.circular(Sizes.dimen_10),
-                  )),
-              padding: const EdgeInsets.symmetric(
-                  horizontal: Sizes.dimen_18, vertical: Sizes.dimen_18),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  controller.cName.isNotEmpty
-                      ? Text(
-                          "Country: ${controller.cName.value.toUpperCase()}",
-                          style: const TextStyle(
-                              color: AppColors.white, fontSize: Sizes.dimen_18),
-                        )
-                      : const SizedBox.shrink(),
-                  vertical15,
-                  controller.category.isNotEmpty
-                      ? Text(
-                          "Category: ${controller.category.value.capitalizeFirst}",
-                          style: const TextStyle(
-                              color: AppColors.white, fontSize: Sizes.dimen_18),
-                        )
-                      : const SizedBox.shrink(),
-                  vertical15,
-                  controller.channel.isNotEmpty
-                      ? Text(
-                          "Category: ${controller.channel.value.capitalizeFirst}",
-                          style: const TextStyle(
-                              color: AppColors.white, fontSize: Sizes.dimen_18),
-                        )
-                      : const SizedBox.shrink(),
-                ],
-              ),
-            );
-          },
-          init: NewsController(),
-        ),
+        // Existing code for country, category, and channel selection
 
-        /// For Selecting the Country
-        ExpansionTile(
-          collapsedTextColor: AppColors.burgundy,
-          collapsedIconColor: AppColors.burgundy,
-          iconColor: AppColors.burgundy,
-          textColor: AppColors.burgundy,
-          title: const Text("Select Country"),
-          children: <Widget>[
-            for (int i = 0; i < listOfCountry.length; i++)
-              drawerDropDown(
-                onCalled: () {
-                  newsController.country.value = listOfCountry[i]['code']!;
-                  newsController.cName.value =
-                      listOfCountry[i]['name']!.toUpperCase();
-                  newsController.getAllNews();
-                  newsController.getBreakingNews();
-                },
-                name: listOfCountry[i]['name']!.toUpperCase(),
-              ),
-          ],
-        ),
-
-        /// For Selecting the Category
-        ExpansionTile(
-          collapsedTextColor: AppColors.burgundy,
-          collapsedIconColor: AppColors.burgundy,
-          iconColor: AppColors.burgundy,
-          textColor: AppColors.burgundy,
-          title: const Text("Select Category"),
-          children: [
-            for (int i = 0; i < listOfCategory.length; i++)
-              drawerDropDown(
-                  onCalled: () {
-                    newsController.category.value = listOfCategory[i]['code']!;
-                    newsController.getAllNews();
-                  },
-                  name: listOfCategory[i]['name']!.toUpperCase())
-          ],
-        ),
-
-        /// For Selecting the Channel
-        ExpansionTile(
-          collapsedTextColor: AppColors.burgundy,
-          collapsedIconColor: AppColors.burgundy,
-          iconColor: AppColors.burgundy,
-          textColor: AppColors.burgundy,
-          title: const Text("Select Channel"),
-          children: [
-            for (int i = 0; i < listOfNewsChannel.length; i++)
-              drawerDropDown(
-                onCalled: () {
-                  newsController.channel.value = listOfNewsChannel[i]['code']!;
-                  newsController.cName.value = '';
-                  newsController.category.value = '';
-                  newsController.update();
-                },
-                name: listOfNewsChannel[i]['name']!.toUpperCase(),
-              ),
-          ],
-        ),
-        const Divider(),
+        /// Link to Education Section
         ListTile(
-            trailing: const Icon(
-              Icons.done_sharp,
-              size: Sizes.dimen_28,
-              color: Colors.black,
-            ),
-            title: const Text(
-              "Done",
-              style: TextStyle(fontSize: Sizes.dimen_16, color: Colors.black),
-            ),
-            onTap: () => Get.back()),
+          title: const Text("Education Section"),
+          onTap: () {
+            // Navigate to the education section
+            // Replace '/education' with the appropriate route for the education section
+            Get.offAllNamed('/education');
+          },
+        ),
+
+        /// Link to Vulnerability Section
+        ListTile(
+          title: const Text("Vulnerability Section"),
+          onTap: () {
+            // Navigate to the vulnerability section
+            // Replace '/vulnerability' with the appropriate route for the vulnerability section
+            Get.offAllNamed('/vulnerability');
+          },
+        ),
+
+        const Divider(),
+
+        /// Sign-In Button
+        ListTile(
+          title: const Text("Sign In"),
+          onTap: () {
+            // Navigate to the sign-in screen
+            // Replace '/sign-in' with the appropriate route for the sign-in screen
+            Get.offAllNamed('/sign-in');
+          },
+        ),
       ],
     ),
   );

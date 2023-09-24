@@ -8,10 +8,10 @@ class Register extends StatefulWidget {
   const Register({Key? key, required this.toggleView}) : super(key: key);
 
   @override
-  _RegisterState createState() => _RegisterState();
+  _RegisterPopupState createState() => _RegisterPopupState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterPopupState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
@@ -24,14 +24,15 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return loading
         ? Loading()
-        : Scaffold(
-            backgroundColor:
-                Colors.white, // Use your preferred background color
-            body: Center(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
-                width: 300, // Set the desired width
+        : Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -101,6 +102,8 @@ class _RegisterState extends State<Register> {
                                     error = 'Please supply a valid email';
                                     loading = false;
                                   });
+                                } else {
+                                  Navigator.pop(context); // Close the popup
                                 }
                               }
                             },
