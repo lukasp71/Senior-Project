@@ -13,7 +13,7 @@ class Wrapper extends StatelessWidget {
     //return either home or authenticate widget
     final user = Provider.of<Users?>(context);
     if (user == null) {
-      return Authenticate();
+      return const Authenticate();
     } else {
       return Home();
     }

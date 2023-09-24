@@ -52,10 +52,10 @@ class NewsRepository {
     String url = '';
     if (query.isEmpty) {
       url =
-          'https://newsapi.org/v2/everything?q=biden&from=2022-07-12&sortBy=popularity&apiKey=c3c8e3a211ed419c8da525aedac6625f';
+          'https://newsapi.org/v2/everything?q=biden&from=2023-08-22&sortBy=popularity&apiKey=c3c8e3a211ed419c8da525aedac6625f';
     } else {
       url =
-          "https://newsapi.org/v2/everything?q=$query&from=2022-07-12&sortBy=popularity&apiKey=${NewsApiConstants.newsApiKey}";
+          "https://newsapi.org/v2/everything?q=$query&from=2023-09-01&sortBy=popularity&apiKey=${NewsApiConstants.newsApiKey}";
     }
 
     var response = await http.get(Uri.parse(url));
