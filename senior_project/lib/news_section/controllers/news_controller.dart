@@ -14,17 +14,18 @@ class NewsController extends GetxController {
   RxBool articleNotFound = false.obs;
   RxBool isLoading = false.obs;
   RxString cName = ''.obs;
-  RxString country = ''.obs;
   RxString category = ''.obs;
   RxString channel = ''.obs;
   RxString searchNews = ''.obs;
   RxInt pageNum = 1.obs;
   RxInt pageSize = 10.obs;
-  String baseUrl = "https://newsapi.org/v2/top-headlines?";
+  String baseUrl =
+      "https://newsapi.org/v2/everything?q=cybersecurity&apiKey"; // Updated baseUrl
 
   @override
   void onInit() {
     scrollController = ScrollController()..addListener(_scrollListener);
+    getAllNews();
     getBreakingNews();
     super.onInit();
   }
@@ -33,12 +34,14 @@ class NewsController extends GetxController {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       isLoading.value = true;
-      getBreakingNews();
+      getAllNews();
     }
   }
 
-  getBreakingNews() async {
+  getBreakingNews({reload = false}) async {
     articleNotFound.value = false;
+
+    if (!reload && isLoading.value == false) {}
 
     if (isLoading.value == true) {
       pageNum++;
@@ -47,15 +50,17 @@ class NewsController extends GetxController {
       pageNum.value = 1;
     }
 
+    // Update the baseUrl to include the query for cybersecurity
     baseUrl =
-        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=10&page=$pageNum&";
-    baseUrl += 'apiKey=${Constants.NewsApiConstants.newsApiKey}';
+        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=10&page=$pageNum&apiKey=${Constants.NewsApiConstants.newsApiKey}";
 
     getBreakingNewsFromApi(baseUrl);
   }
 
-  getAllNews() async {
+  getAllNews({channel = '', searchKey = '', reload = false}) async {
     articleNotFound.value = false;
+
+    if (!reload && isLoading.value == false) {}
 
     if (isLoading.value == true) {
       pageNum++;
@@ -64,9 +69,9 @@ class NewsController extends GetxController {
       pageNum.value = 1;
     }
 
+    // Update the baseUrl to include the query for cybersecurity
     baseUrl =
-        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=10&page=$pageNum&";
-    baseUrl += 'apiKey=${Constants.NewsApiConstants.newsApiKey}';
+        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=10&page=$pageNum&apiKey=${Constants.NewsApiConstants.newsApiKey}";
 
     getAllNewsFromApi(baseUrl);
   }
