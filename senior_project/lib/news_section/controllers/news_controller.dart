@@ -15,7 +15,6 @@ class NewsController extends GetxController {
   RxBool articleNotFound = false.obs;
   RxBool isLoading = false.obs;
   RxString cName = ''.obs;
-  RxString country = ''.obs;
   RxString category = ''.obs;
   RxString channel = ''.obs;
   RxString searchNews = ''.obs;
@@ -27,6 +26,7 @@ class NewsController extends GetxController {
   void onInit() {
     scrollController = ScrollController()..addListener(_scrollListener);
     getAllNews();
+    getAllNews();
     getBreakingNews();
     super.onInit();
   }
@@ -35,6 +35,7 @@ class NewsController extends GetxController {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       isLoading.value = true;
+      getAllNews();
       getAllNews();
     }
   }
@@ -45,7 +46,7 @@ class NewsController extends GetxController {
 
     if (!reload && isLoading.value == false) {
     } else {
-      country.value = '';
+      
     }
     if (isLoading.value == true) {
       pageNum++;
@@ -69,14 +70,14 @@ class NewsController extends GetxController {
 
     if (!reload && isLoading.value == false) {
     } else {
-      country.value = '';
+      
       category.value = '';
     }
     if (isLoading.value == true) {
       pageNum++;
     } else {
       allNews = [];
-      pageNum.value = 2;
+      pageNum.value = 1;
     }
     // ENDPOINT
     baseUrl = "http://api.mediastack.com/v1/news?access_key=d40f9dc9234a1b84560ac1a3c0a296c6";

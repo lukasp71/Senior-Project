@@ -1,21 +1,20 @@
-/*import 'dart:js_interop';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:senior_project/database/firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:senior_project/database/firebase_options.dart';
 import 'package:senior_project/database/screens/authenticate/sign_in.dart';
+import 'package:senior_project/database/screens/authenticate/register.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const WelcomePge());
+  runApp(const WelcomePage());
 }
 
-class WelcomePge extends StatelessWidget {
-  const WelcomePge({super.key});
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,102 +23,103 @@ class WelcomePge extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
         useMaterial3: true,
       ),
-      home: const WelcomePage(
+      home: const WelcomeScreen(
           title: 'Cybersecurity News and Education Application V2023'),
     );
   }
 }
 
-class WelcomePage extends StatefulWidget {
-  const WelcomePage({super.key, required this.title});
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({Key? key, required this.title});
 
   final String title;
 
   @override
-  State<WelcomePage> createState() => _WelcomePage();
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
 }
 
-class _WelcomePage extends State<WelcomePage> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  bool isSignInSelected = false;
+
+  void toggleView() {
+    setState(() {
+      isSignInSelected = !isSignInSelected;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/cyberimage.jpg'),
-                  fit: BoxFit.cover,
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/flashNews.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    toggleView();
+                  },
+                  child: const Text('Login With Current Account'),
                 ),
-              ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: () {
+                    toggleView();
+                  },
+                  child: const Text('Register a New Account'),
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Login as a Guest'),
+                ),
+              ],
             ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignIn(),
-                          ));
-                    },
-                    child: const Text('Login With Current Account'),
-                  ),
-                  const SizedBox(height: 30),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignIn(),
-                          ));
-                    },
-                    child: const Text('Register a New Account'),
-                  ),
-                  const SizedBox(height: 30),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('Login as a Guest'),
-                  ),
-                ],
-              ),
-            ),
-            const Positioned(
-                top: 190, // Adjust the top value to move the text higher
-                left: 0,
-                right: 0,
-                child: Center(
-                    child: Text(
-                  'Welcome to the Threat Awareness Hub.',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ))),
-            const Positioned(
-                top: 220, // Adjust the top value to move the text higher
-                left: 0,
-                right: 0,
-                child: Center(
-                    child: Text(
-                  'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ))),
-            const Positioned(
-                top: 250, // Adjust the top value to move the text higher
-                left: 0,
-                right: 0,
-                child: Center(
-                    child: Text(
-                  'You can also stay up to date with the latest cybersecurity events going on.',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ))),
-          ],
-        ),
+          ),
+          const Positioned(
+              top: 190,
+              left: 0,
+              right: 0,
+              child: Center(
+                  child: Text(
+                'Welcome to the Threat Awareness Hub.',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ))),
+          const Positioned(
+              top: 220,
+              left: 0,
+              right: 0,
+              child: Center(
+                  child: Text(
+                'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ))),
+          const Positioned(
+              top: 250,
+              left: 0,
+              right: 0,
+              child: Center(
+                  child: Text(
+                'You can also stay up to date with the latest cybersecurity events going on.',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ))),
+        ],
       ),
+      // Display Sign In or Register screen based on selection
+      bottomNavigationBar: isSignInSelected
+          ? SignIn(toggleView: toggleView)
+          : Register(toggleView: toggleView),
     );
   }
 }
-*/
