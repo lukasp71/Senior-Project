@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
-import 'package:senior_project/news_section/utils/utils.dart';
 
 Drawer sideDrawer(NewsController newsController) {
   return Drawer(

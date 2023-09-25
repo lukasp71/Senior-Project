@@ -104,7 +104,7 @@ class _SignInPopupState extends State<SignIn> {
                                 });
                               } else {
                                 Navigator.pop(context);
-                                Navigator.pop(context); // Close the popup
+                                // Close the popup
                               }
                             }
                           },

@@ -104,7 +104,7 @@ class _RegisterPopupState extends State<Register> {
                                   });
                                 } else {
                                   Navigator.pop(context);
-                                  Navigator.pop(context); // Close the popup
+                                  // Close the popup
                                 }
                               }
                             },
