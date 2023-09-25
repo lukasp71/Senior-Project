@@ -20,7 +20,7 @@ class NewsController extends GetxController {
   RxInt pageNum = 1.obs;
   RxInt pageSize = 10.obs;
   String baseUrl =
-      'http://api.mediastack.com/v1/news?access_key=3478d472ea4db82180ad6cec04c78de7';
+      'https://api.thenewsapi.com/v1/news/all?api_token=x3ryy5ubKOIbpmFAVgRKuKfTVajMuz700UuMZSCY&search=usd';
 
   @override
   void onInit() {
