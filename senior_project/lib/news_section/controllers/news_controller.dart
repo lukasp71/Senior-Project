@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:senior_project/news_section/constants/constants.dart'
-    as Constants;
+import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/models/article_model.dart';
 import 'package:senior_project/news_section/models/news_model.dart';
 
@@ -13,14 +12,15 @@ class NewsController extends GetxController {
   ScrollController scrollController = ScrollController();
   RxBool articleNotFound = false.obs;
   RxBool isLoading = false.obs;
-  RxString cName = ''.obs;
+  RxString country = ''.obs;
   RxString category = ''.obs;
-  RxString channel = ''.obs;
   RxString searchNews = ''.obs;
+  RxString channel = ' '.obs;
+  RxString cName = ' '.obs;
   RxInt pageNum = 1.obs;
   RxInt pageSize = 10.obs;
   String baseUrl =
-      "https://newsapi.org/v2/everything?q=cybersecurity&apiKey"; // Updated baseUrl
+      'http://api.mediastack.com/v1/news?access_key=3478d472ea4db82180ad6cec04c78de7';
 
   @override
   void onInit() {
@@ -39,41 +39,21 @@ class NewsController extends GetxController {
   }
 
   getBreakingNews({reload = false}) async {
-    articleNotFound.value = false;
+    String url = baseUrl;
 
-    if (!reload && isLoading.value == false) {}
+    // Add more parameters based on your requirements
+    // For example: url += "&category=${category.value}";
 
-    if (isLoading.value == true) {
-      pageNum++;
-    } else {
-      breakingNews = [];
-      pageNum.value = 1;
-    }
-
-    // Update the baseUrl to include the query for cybersecurity
-    baseUrl =
-        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=10&page=$pageNum&apiKey=${Constants.NewsApiConstants.newsApiKey}";
-
-    getBreakingNewsFromApi(baseUrl);
+    getBreakingNewsFromApi(url);
   }
 
   getAllNews({channel = '', searchKey = '', reload = false}) async {
-    articleNotFound.value = false;
+    String url = baseUrl;
 
-    if (!reload && isLoading.value == false) {}
+    // Add more parameters based on your requirements
+    // For example: url += "&category=${category.value}";
 
-    if (isLoading.value == true) {
-      pageNum++;
-    } else {
-      allNews = [];
-      pageNum.value = 1;
-    }
-
-    // Update the baseUrl to include the query for cybersecurity
-    baseUrl =
-        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=10&page=$pageNum&apiKey=${Constants.NewsApiConstants.newsApiKey}";
-
-    getAllNewsFromApi(baseUrl);
+    getAllNewsFromApi(url);
   }
 
   getBreakingNewsFromApi(url) async {
@@ -109,7 +89,6 @@ class NewsController extends GetxController {
 
   getAllNewsFromApi(url) async {
     http.Response res = await http.get(Uri.parse(url));
-
     if (res.statusCode == 200) {
       NewsModel newsData = NewsModel.fromJson(jsonDecode(res.body));
 

@@ -35,18 +35,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       drawer: sideDrawer(newsController),
-      appBar: customAppBar('Threat Detection Hub', context, actions: [
-        IconButton(
-          onPressed: () {
-            newsController.category.value = '';
-            newsController.searchNews.value = '';
-            newsController.channel.value = '';
-            newsController.cName.value = '';
-            newsController.update();
-          },
-          icon: const Icon(Icons.refresh),
-        ),
-      ]),
+      appBar: customAppBar('Threat Detection Hub', context, actions: []),
       body: Obx(() {
         if (newsController.isLoading.value && newsController.allNews.isEmpty) {
           return Center(child: CircularProgressIndicator());
@@ -211,19 +200,6 @@ class HomePage extends StatelessWidget {
                                         print('Could not launch $articleUrl');
                                       }
                                     },
-                                    child: NewsCard(
-                                      imgUrl: controller
-                                              .allNews[index].urlToImage ??
-                                          '',
-                                      desc: controller
-                                              .allNews[index].description ??
-                                          '',
-                                      title: controller.allNews[index].title,
-                                      content:
-                                          controller.allNews[index].content ??
-                                              '',
-                                      postUrl: controller.allNews[index].url,
-                                    ),
                                   );
                                 },
                               );
