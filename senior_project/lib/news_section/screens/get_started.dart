@@ -24,7 +24,8 @@ class WelcomePage extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const WelcomeScreen(
-          title: 'Cybersecurity News and Education Application V2023'),
+        title: 'Cybersecurity News and Education Application V2023',
+      ),
     );
   }
 }
@@ -47,6 +48,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
   }
 
+  void moveToNextScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => isSignInSelected
+            ? SignIn(toggleView: toggleView)
+            : Register(toggleView: toggleView),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +74,39 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
           ),
+          const Positioned(
+            top: 30,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'Welcome to the Threat Awareness Hub.',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+          ),
+          const Positioned(
+            top: 220,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+          ),
+          const Positioned(
+            top: 250,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Text(
+                'You can also stay up to date with the latest cybersecurity events going on.',
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -69,6 +114,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ElevatedButton(
                   onPressed: () {
                     toggleView();
+                    moveToNextScreen();
                   },
                   child: const Text('Login With Current Account'),
                 ),
@@ -76,50 +122,22 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ElevatedButton(
                   onPressed: () {
                     toggleView();
+                    moveToNextScreen();
                   },
                   child: const Text('Register a New Account'),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    moveToNextScreen();
+                  },
                   child: const Text('Login as a Guest'),
                 ),
               ],
             ),
           ),
-          const Positioned(
-              top: 190,
-              left: 0,
-              right: 0,
-              child: Center(
-                  child: Text(
-                'Welcome to the Threat Awareness Hub.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ))),
-          const Positioned(
-              top: 220,
-              left: 0,
-              right: 0,
-              child: Center(
-                  child: Text(
-                'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ))),
-          const Positioned(
-              top: 250,
-              left: 0,
-              right: 0,
-              child: Center(
-                  child: Text(
-                'You can also stay up to date with the latest cybersecurity events going on.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ))),
         ],
       ),
-      // Display Sign In or Register screen based on selection
-      bottomNavigationBar: isSignInSelected
-          ? SignIn(toggleView: toggleView)
-          : Register(toggleView: toggleView),
     );
   }
 }

@@ -103,6 +103,7 @@ class _SignInPopupState extends State<SignIn> {
                                   loading = false;
                                 });
                               } else {
+                                Navigator.pop(context);
                                 Navigator.pop(context); // Close the popup
                               }
                             }

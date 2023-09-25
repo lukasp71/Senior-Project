@@ -103,6 +103,7 @@ class _RegisterPopupState extends State<Register> {
                                     loading = false;
                                   });
                                 } else {
+                                  Navigator.pop(context);
                                   Navigator.pop(context); // Close the popup
                                 }
                               }

@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:get/get.dart';
 
 class Home extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _NewsPageState createState() => _NewsPageState();
 }
 
-class _HomeState extends State<Home> {
-  dynamic selectedArticle; // Article to display
+class _NewsPageState extends State<Home> {
+  List<dynamic> articles = [];
 
   @override
   void initState() {
@@ -19,16 +18,15 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> fetchNews() async {
-    // Replace with your News API key
-    final url = 'http://api.mediastack.com/v1/news?access_key=d40f9dc9234a1b84560ac1a3c0a296c6';
+    final url =
+        'https://api.thenewsapi.com/v1/news/all?api_token=x3ryy5ubKOIbpmFAVgRKuKfTVajMuz700UuMZSCY&search=forex + (usd | gbp) -cad&language=en&categories=business,tech&exclude_categories=travel&published_after=2023-09-18';
 
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         setState(() {
-          selectedArticle =
-              jsonData['articles'][0]; // Display the first article
+          articles = jsonData['data'];
         });
       } else {
         print('Failed to load news');
@@ -39,12 +37,10 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _launchURL(String url) async {
-    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
-      await launch(url);
+      await launch(url, forceSafariVC: false, forceWebView: false);
     } else {
-      throw 'Could not launch $url';
+      print('Could not launch $url');
     }
   }
 
@@ -52,95 +48,28 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cyber News'),
-        centerTitle: true,
-        actions: [
-          Center(
-            child: DropdownButton(
-              onChanged: (value) {
-                // Handle dropdown menu item selection here
-              },
-              items: [
-                DropdownMenuItem(
-                  value: 'vulnerabilities',
-                  child: Text('Vulnerabilities'),
-                ),
-                DropdownMenuItem(
-                  value: 'education',
-                  child: Text('Education'),
-                ),
-              ],
-            ),
-          ),
-        ],
+        title: Text('News'),
       ),
-      body: Center(
-        child: selectedArticle != null
-            ? buildArticle(selectedArticle)
-            : CircularProgressIndicator(),
-      ),
-    );
-  }
-
-  Widget buildArticle(dynamic article) {
-    return InkWell(
-      onTap: () {
-        _launchURL(article['url']);
-      },
-      child: Card(
-        elevation: 4.0,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (article['urlToImage'] != null)
-              Container(
-                height: 200.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      article['urlToImage'],
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    article['title'] ?? 'No Title',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                    ),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    article['description'] ?? 'No Description',
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'Source: ${article['source']['name']}',
-                    style: TextStyle(fontSize: 14.0),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'Published: ${article['publishedAt']}',
-                    style: TextStyle(fontSize: 14.0),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemCount: articles.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(articles[index]['title'] ?? 'No Title'),
+            subtitle: Text(articles[index]['description'] ?? 'No Description'),
+            onTap: () {
+              _launchURL(articles[index]['url']);
+              // Handle tapping on a news article
+              // You can navigate to a detailed view or launch a URL, etc.
+            },
+          );
+        },
       ),
     );
   }
 }
 
 void main() {
-  runApp(MaterialApp(home: Home()));
+  runApp(MaterialApp(
+    home: Home(),
+  ));
 }

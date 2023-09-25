@@ -12,7 +12,7 @@ import 'package:senior_project/news_section/utils/app_themes.dart';
 import 'database/firebase_options.dart';
 //import 'package:senior_project/screens/home/get_started.dart';
 
-/*class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,8 @@ void main() async {
     home: Home(),
   ));
 }
-*/
+
+/*
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -58,3 +59,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+*/
