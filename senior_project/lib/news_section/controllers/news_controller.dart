@@ -20,7 +20,7 @@ class NewsController extends GetxController {
   RxInt pageNum = 1.obs;
   RxInt pageSize = 10.obs;
   String baseUrl =
-      'https://api.thenewsapi.com/v1/news/all?api_token=x3ryy5ubKOIbpmFAVgRKuKfTVajMuz700UuMZSCY&search=usd';
+      'https://api.thenewsapi.com/v1/news/all?api_token=x3ryy5ubKOIbpmFAVgRKuKfTVajMuz700UuMZSCY&search=forex + (usd | gbp) -cad&language=en&categories=business,tech&exclude_categories=travel&published_after=2023-09-18';
 
   @override
   void onInit() {

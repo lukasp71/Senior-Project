@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
+import 'package:senior_project/education_section/screens/education_home_page.dart';
 import 'package:senior_project/news_section/screens/get_started.dart';
 import 'package:senior_project/news_section/screens/home.dart';
 import 'package:senior_project/database/screens/wrapper.dart';
@@ -32,7 +33,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MaterialApp(
-    home: Home(),
+    home: EducationPage(),
   ));
 }
 
