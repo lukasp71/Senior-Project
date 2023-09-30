@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:senior_project/database/screens/authenticate/authenticate.dart';
+import 'package:senior_project/database/screens/authenticate/sign_in.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/screens/get_started.dart';
 import 'package:senior_project/news_section/widgets/custom_appBar.dart';
-import 'package:senior_project/news_section/widgets/news_card.dart';
 import 'package:senior_project/news_section/widgets/side_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return Dialog(
+        return const Dialog(
           child: WelcomePage(),
         );
       },
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget {
       appBar: customAppBar('Threat Detection Hub', context, actions: []),
       body: Obx(() {
         if (newsController.isLoading.value && newsController.allNews.isEmpty) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else {
           return SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -180,7 +181,6 @@ class HomePage extends StatelessWidget {
                         : controller.allNews.isEmpty
                             ? const Center(child: CircularProgressIndicator())
                             : ListView.builder(
-                                controller: controller.scrollController,
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: controller.allNews.length,

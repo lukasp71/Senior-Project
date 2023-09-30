@@ -47,6 +47,7 @@ dependencies:
   carousel_slider: ^4.2.1
   get: ^4.6.6
   google_fonts: ^4.0.4
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,7 @@ flutter:
     - images/cyber_background.jpg
     - assets/cyber_background.jpg
     - assets/flashNews.jpg
+    - assets/SeniorProjectLogo.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

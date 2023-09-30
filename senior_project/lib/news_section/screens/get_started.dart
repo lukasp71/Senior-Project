@@ -1,19 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/firebase_options.dart';
+import 'package:senior_project/database/screens/authenticate/authenticate.dart';
 import 'package:senior_project/database/screens/authenticate/sign_in.dart';
 import 'package:senior_project/database/screens/authenticate/register.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const WelcomePage());
-}
-
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key});
+  const WelcomePage({Key? key, required}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +17,13 @@ class WelcomePage extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const WelcomeScreen(
-        title: 'Cybersecurity News and Education Application V2023',
-      ),
+          title: 'Cybersecurity News and Education Application V2023'),
     );
   }
 }
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key, required this.title});
+  const WelcomeScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -40,22 +32,19 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  bool isSignInSelected = false;
-
-  void toggleView() {
-    setState(() {
-      isSignInSelected = !isSignInSelected;
-    });
+  void showSignIn() {
+    Navigator.of(context).pop(); // Close the get_started popup
+    showDialog(
+      context: context,
+      builder: (context) => Authenticate(),
+    );
   }
 
-  void moveToNextScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => isSignInSelected
-            ? SignIn(toggleView: toggleView)
-            : Register(toggleView: toggleView),
-      ),
+  void showRegister() {
+    Navigator.of(context).pop(); // Close the get_started popup
+    showDialog(
+      context: context,
+      builder: (context) => Authenticate(),
     );
   }
 
@@ -112,24 +101,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ElevatedButton(
-                  onPressed: () {
-                    toggleView();
-                    moveToNextScreen();
-                  },
+                  onPressed: showSignIn,
                   child: const Text('Login With Current Account'),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {
-                    toggleView();
-                    moveToNextScreen();
-                  },
+                  onPressed: showRegister,
                   child: const Text('Register a New Account'),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
-                    moveToNextScreen();
+                    Navigator.of(context).pop(); // Close the popup
                   },
                   child: const Text('Login as a Guest'),
                 ),

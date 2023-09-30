@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/services/auth.dart';
 import '../../../shared/loading.dart';
+import 'package:senior_project/database/screens/authenticate/register.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -24,7 +25,7 @@ class _SignInPopupState extends State<SignIn> {
   Widget build(BuildContext context) {
     return loading
         ? Loading()
-        : Center(
+        : Dialog(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Card(
@@ -37,6 +38,7 @@ class _SignInPopupState extends State<SignIn> {
                   child: Form(
                     key: _formKey,
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         const Text(
@@ -88,8 +90,7 @@ class _SignInPopupState extends State<SignIn> {
                         const SizedBox(height: 30),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Colors.blue, // Use your preferred button color
+                            backgroundColor: Colors.blue,
                           ),
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
@@ -103,8 +104,8 @@ class _SignInPopupState extends State<SignIn> {
                                   loading = false;
                                 });
                               } else {
-                                Navigator.pop(context);
-                                Navigator.pop(context); // Close the popup
+                                Navigator.pop(context); // Close SignIn
+                                Navigator.pop(context); // Close WelcomeScreen
                               }
                             }
                           },
@@ -131,10 +132,7 @@ class _SignInPopupState extends State<SignIn> {
                           },
                           child: const Text(
                             'Forgot Password?',
-                            style: TextStyle(
-                              color:
-                                  Colors.blue, // Use your preferred link color
-                            ),
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -144,13 +142,18 @@ class _SignInPopupState extends State<SignIn> {
                             const Text('Don\'t have an account?'),
                             TextButton(
                               onPressed: () {
-                                widget.toggleView();
+                                Navigator.pop(context); // Close SignIn
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => Register(
+                                    toggleView: widget.toggleView,
+                                  ),
+                                );
                               },
                               child: const Text(
                                 'Sign Up',
                                 style: TextStyle(
-                                  color: Colors
-                                      .blue, // Use your preferred link color
+                                  color: Colors.blue,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

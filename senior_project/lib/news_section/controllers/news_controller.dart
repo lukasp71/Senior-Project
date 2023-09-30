@@ -1,119 +1,40 @@
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:senior_project/news_section/constants/constants.dart';
-import 'package:senior_project/news_section/models/article_model.dart';
-import 'package:senior_project/news_section/models/news_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:senior_project/news_section/controllers/news_article.dart';
 
 class NewsController extends GetxController {
-  List<ArticleModel> allNews = <ArticleModel>[];
-  List<ArticleModel> breakingNews = <ArticleModel>[];
-  ScrollController scrollController = ScrollController();
-  RxBool articleNotFound = false.obs;
-  RxBool isLoading = false.obs;
-  RxString country = ''.obs;
-  RxString category = ''.obs;
-  RxString searchNews = ''.obs;
-  RxString channel = ' '.obs;
-  RxString cName = ' '.obs;
-  RxInt pageNum = 1.obs;
-  RxInt pageSize = 10.obs;
-  String baseUrl =
-      'https://api.thenewsapi.com/v1/news/all?api_token=x3ryy5ubKOIbpmFAVgRKuKfTVajMuz700UuMZSCY&search=forex + (usd | gbp) -cad&language=en&categories=business,tech&exclude_categories=travel&published_after=2023-09-18';
+  var isLoading = true.obs;
+  var allNews = <NewsArticle>[].obs;
+  var breakingNews = <NewsArticle>[].obs;
+  var articleNotFound = false.obs;
 
   @override
   void onInit() {
-    scrollController = ScrollController()..addListener(_scrollListener);
-    getAllNews();
-    getBreakingNews();
+    fetchNews();
     super.onInit();
   }
 
-  _scrollListener() {
-    if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
-      isLoading.value = true;
-      getAllNews();
-    }
-  }
-
-  getBreakingNews({reload = false}) async {
-    String url = baseUrl;
-
-    // Add more parameters based on your requirements
-    // For example: url += "&category=${category.value}";
-
-    getBreakingNewsFromApi(url);
-  }
-
-  getAllNews({channel = '', searchKey = '', reload = false}) async {
-    String url = baseUrl;
-
-    // Add more parameters based on your requirements
-    // For example: url += "&category=${category.value}";
-
-    getAllNewsFromApi(url);
-  }
-
-  getBreakingNewsFromApi(url) async {
-    http.Response res = await http.get(Uri.parse(url));
-
-    if (res.statusCode == 200) {
-      NewsModel newsData = NewsModel.fromJson(jsonDecode(res.body));
-
-      if (newsData.articles.isEmpty && newsData.totalResults == 0) {
-        articleNotFound.value = isLoading.value == true ? false : true;
-        isLoading.value = false;
-        update();
+  Future<void> fetchNews() async {
+    try {
+      var response = await http.get(
+          'https://api.thenewsapi.com/v1/news?api_token=x3ryy5ubKOIbpmFAVgRKuKfTVajMuz700UuMZSCY'
+              as Uri);
+      if (response.statusCode == 200) {
+        var jsonData = json.decode(response.body);
+        allNews.value = jsonData['data']
+            .map<NewsArticle>((json) => NewsArticle.fromJson(json))
+            .toList();
+        breakingNews.value = allNews
+            .take(5)
+            .toList(); // Assuming you want the first 5 articles as breaking news
       } else {
-        if (isLoading.value == true) {
-          breakingNews = [...breakingNews, ...newsData.articles];
-          update();
-        } else {
-          if (newsData.articles.isNotEmpty) {
-            breakingNews = newsData.articles;
-            if (scrollController.hasClients) scrollController.jumpTo(0.0);
-            update();
-          }
-        }
-        articleNotFound.value = false;
-        isLoading.value = false;
-        update();
+        articleNotFound.value = true;
       }
-    } else {
+    } catch (error) {
       articleNotFound.value = true;
-      update();
     }
-  }
-
-  getAllNewsFromApi(url) async {
-    http.Response res = await http.get(Uri.parse(url));
-    if (res.statusCode == 200) {
-      NewsModel newsData = NewsModel.fromJson(jsonDecode(res.body));
-
-      if (newsData.articles.isEmpty && newsData.totalResults == 0) {
-        articleNotFound.value = isLoading.value == true ? false : true;
-        isLoading.value = false;
-        update();
-      } else {
-        if (isLoading.value == true) {
-          allNews = [...allNews, ...newsData.articles];
-          update();
-        } else {
-          if (newsData.articles.isNotEmpty) {
-            allNews = newsData.articles;
-            if (scrollController.hasClients) scrollController.jumpTo(0.0);
-            update();
-          }
-        }
-        articleNotFound.value = false;
-        isLoading.value = false;
-        update();
-      }
-    } else {
-      articleNotFound.value = true;
-      update();
-    }
+    isLoading.value = false;
   }
 }

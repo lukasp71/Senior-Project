@@ -1,34 +1,82 @@
-var listOfCountry = [
-  {"name": "INDIA", "code": "in"},
-  {"name": "USA", "code": "us"},
-  {"name": "UK", "code": "gb"},
-  {"name": "MEXICO", "code": "mx"},
-  {"name": "United Arab Emirates", "code": "ae"},
-  {"name": "New Zealand", "code": "nz"},
-  {"name": "Australia", "code": "au"},
-  {"name": "Canada", "code": "ca"},
-];
+import 'package:flutter/material.dart';
+import 'dart:ui';
+import 'package:google_fonts/google_fonts.dart';
 
-var listOfCategory = [
-  {"name": "Science", "code": "science"},
-  {"name": "Business", "code": "business"},
-  {"name": "Technology", "code": "technology"},
-  {"name": "Sports", "code": "sports"},
-  {"name": "Health", "code": "health"},
-  {"name": "General", "code": "general"},
-  {"name": "Entertainment", "code": "entertainment"},
-  {"name": "ALL", "code": null},
-];
-var listOfNewsChannel = [
-  {"name": "BBC News", "code": "bbc-news"},
-  {"name": "ABC News", "code": "abc-news"},
-  {"name": "The Times of India", "code": "the-times-of-india"},
-  {"name": "ESPN Cricket", "code": "espn-cric-info"},
-  {"code": "politico", "name": "Politico"},
-  {"code": "the-washington-post", "name": "The Washington Post"},
-  {"code": "reuters", "name": "Reuters"},
-  {"code": "cnn", "name": "cnn"},
-  {"code": "nbc-news", "name": "NBC news"},
-  {"code": "the-hill", "name": "The Hill"},
-  {"code": "fox-news", "name": "Fox News"},
-];
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
+}
+
+TextStyle SafeGoogleFont(
+  String fontFamily, {
+  TextStyle? textStyle,
+  Color? color,
+  Color? backgroundColor,
+  double? fontSize,
+  FontWeight? fontWeight,
+  FontStyle? fontStyle,
+  double? letterSpacing,
+  double? wordSpacing,
+  TextBaseline? textBaseline,
+  double? height,
+  Locale? locale,
+  Paint? foreground,
+  Paint? background,
+  List<Shadow>? shadows,
+  List<FontFeature>? fontFeatures,
+  TextDecoration? decoration,
+  Color? decorationColor,
+  TextDecorationStyle? decorationStyle,
+  double? decorationThickness,
+}) {
+  try {
+    return GoogleFonts.getFont(
+      fontFamily,
+      textStyle: textStyle,
+      color: color,
+      backgroundColor: backgroundColor,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontStyle: fontStyle,
+      letterSpacing: letterSpacing,
+      wordSpacing: wordSpacing,
+      textBaseline: textBaseline,
+      height: height,
+      locale: locale,
+      foreground: foreground,
+      background: background,
+      shadows: shadows,
+      fontFeatures: fontFeatures,
+      decoration: decoration,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+      decorationThickness: decorationThickness,
+    );
+  } catch (ex) {
+    return GoogleFonts.getFont(
+      "Source Sans Pro",
+      textStyle: textStyle,
+      color: color,
+      backgroundColor: backgroundColor,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontStyle: fontStyle,
+      letterSpacing: letterSpacing,
+      wordSpacing: wordSpacing,
+      textBaseline: textBaseline,
+      height: height,
+      locale: locale,
+      foreground: foreground,
+      background: background,
+      shadows: shadows,
+      fontFeatures: fontFeatures,
+      decoration: decoration,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+      decorationThickness: decorationThickness,
+    );
+  }
+}

@@ -1,107 +1,71 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(EducationPage());
+void main() => runApp(MyApp());
 
-class EducationPage extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        hintColor: Colors.blueAccent,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Cybersecurity Education'),
-        ),
-        body: HomeScreen(),
-      ),
+      home: NICCSPage(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class NICCSPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Text(
-              'Welcome to Cybersecurity Education',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Text(
-            'Explore a wide range of cybersecurity topics and enhance your knowledge in this ever-evolving field.',
-            style: TextStyle(fontSize: 16.0, color: Colors.black54),
-          ),
-          SizedBox(height: 32.0),
-          Text(
-            'Categories',
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 16.0),
-          CategoryCard(
-            title: 'Introduction to Cybersecurity',
-            description:
-                'Foundational concepts and principles of cybersecurity.',
-          ),
-          SizedBox(height: 16.0),
-          CategoryCard(
-            title: 'Network Security',
-            description:
-                'Learn about securing computer networks and data transmission.',
-          ),
-          SizedBox(height: 16.0),
-          CategoryCard(
-            title: 'Application Security',
-            description:
-                'Understanding security measures for applications and software.',
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Threat Detection Hub',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          TextButton(onPressed: () {}, child: Text('About NICCS')),
+          TextButton(
+              onPressed: () {}, child: Text('Become a Training Provider')),
+          TextButton(
+              onPressed: () {}, child: Text('Cybersecurity News & Events')),
+          IconButton(icon: Icon(Icons.mail), onPressed: () {}),
+          IconButton(icon: Icon(Icons.search), onPressed: () {}),
         ],
       ),
-    );
-  }
-}
-
-class CategoryCard extends StatelessWidget {
-  final String title;
-  final String description;
-
-  CategoryCard({required this.title, required this.description});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 2.0,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/flashNews.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  '',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            SizedBox(height: 8.0),
-            Text(
-              description,
-              style: TextStyle(fontSize: 14.0, color: Colors.black54),
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                      onPressed: () {},
+                      child: Text('LEARN MORE ABOUT THE NICE FRAMEWORK')),
+                  TextButton(
+                      onPressed: () {},
+                      child:
+                          Text('FIND 12,000+ CYBERSECURITY TRAINING COURSES')),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                          'PLAN YOUR NEXT CAREER MOVE USING THE CYBER CAREER PATHWAYS TOOL')),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
