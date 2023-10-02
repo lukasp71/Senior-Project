@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:path/path.dart';
+import 'package:senior_project/database/screens/authenticate/authenticate.dart';
+import 'package:senior_project/education_section/screens/education_home_page.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/utils/utils.dart';
 
-Drawer sideDrawer(NewsController newsController) {
+Drawer sideDrawer(BuildContext context, NewsController newsController) {
   return Drawer(
     backgroundColor: AppColors.lightGrey,
     child: ListView(
@@ -15,11 +17,10 @@ Drawer sideDrawer(NewsController newsController) {
         /// Link to Education Section
         ListTile(
           title: const Text("Education Section"),
-          onTap: () {
-            // Navigate to the education section
-            // Replace '/education' with the appropriate route for the education section
-            Get.offAllNamed('/education');
-          },
+          onTap: () => Navigator.push(
+            context as BuildContext,
+            MaterialPageRoute(builder: (context) => EducationHomePage()),
+          ),
         ),
 
         /// Link to Vulnerability Section
@@ -33,16 +34,13 @@ Drawer sideDrawer(NewsController newsController) {
         ),
 
         const Divider(),
-
-        /// Sign-In Button
         ListTile(
-          title: const Text("Sign In"),
+          title: const Text("Sign in"),
           onTap: () {
-            // Navigate to the sign-in screen
-            // Replace '/sign-in' with the appropriate route for the sign-in screen
-            Get.offAllNamed('/sign-in');
+            // Navigate to the Authenticate screen
+            Get.to(() => Authenticate());
           },
-        ),
+        )
       ],
     ),
   );

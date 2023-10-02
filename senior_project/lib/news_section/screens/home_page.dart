@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/src/context.dart';
 import 'package:senior_project/database/screens/authenticate/authenticate.dart';
 import 'package:senior_project/database/screens/authenticate/sign_in.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
@@ -20,7 +21,7 @@ class HomePage extends StatelessWidget {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return const Dialog(
+        return Dialog(
           child: WelcomePage(),
         );
       },
@@ -35,7 +36,7 @@ class HomePage extends StatelessWidget {
     });
 
     return Scaffold(
-      drawer: sideDrawer(newsController),
+      drawer: sideDrawer(context, newsController),
       appBar: customAppBar('Threat Detection Hub', context, actions: []),
       body: Obx(() {
         if (newsController.isLoading.value && newsController.allNews.isEmpty) {

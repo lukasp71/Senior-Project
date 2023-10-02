@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import 'package:senior_project/database/screens/authenticate/authenticate.dart';
 import 'package:senior_project/database/models/user.dart';
-import 'package:senior_project/news_section/screens/home.dart';
+import 'package:senior_project/screens/News/newssection.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
@@ -15,7 +15,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return const Authenticate();
     } else {
-      return Home();
+      return HomePage();
     }
   }
 }
