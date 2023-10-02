@@ -101,11 +101,13 @@ class _RegisterPopupState extends State<Register> {
                                           email, password, username);
                                   if (result == null) {
                                     setState(() {
-                                      error = 'Please supply a valid email';
+                                      error = 'Could not authenticate user';
                                       loading = false;
                                     });
                                   } else {
+                                    // ignore: use_build_context_synchronously
                                     Navigator.pop(context); // Close Register
+                                    // ignore: use_build_context_synchronously
                                     Navigator.pop(
                                         context); // Close WelcomeScreen
                                   }

@@ -63,36 +63,28 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 30,
             left: 0,
             right: 0,
             child: Center(
-              child: Text(
-                'Welcome to the Threat Awareness Hub.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-            ),
-          ),
-          const Positioned(
-            top: 220,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Text(
-                'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-            ),
-          ),
-          const Positioned(
-            top: 250,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Text(
-                'You can also stay up to date with the latest cybersecurity events going on.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+              child: Column(
+                children: [
+                  const Text(
+                    'Welcome to the Threat Awareness Hub.',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'You can also stay up to date with the latest cybersecurity events going on.',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ],
               ),
             ),
           ),

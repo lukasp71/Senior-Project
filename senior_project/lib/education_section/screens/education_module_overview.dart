@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/education_modules/encryption_module.dart';
 import 'package:senior_project/education_section/education_modules/intro_module.dart';
-import 'package:senior_project/education_section/education_modules/malware_module.dart';
+import 'package:senior_project/education_section/education_modules/malware.dart';
 import 'package:senior_project/education_section/education_modules/network_security.dart';
 import 'package:senior_project/education_section/education_modules/threats_attacks_module.dart';
 

@@ -1,101 +1,90 @@
+// Copyright 2013 The Flutter Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// ignore_for_file: public_member_api_docs
+
+import 'dart:async';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 import 'package:webview_flutter_web/webview_flutter_web.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-// Import necessary libraries for thenewsapi integration
 
 void main() {
   WebViewPlatform.instance = WebWebViewPlatform();
-  runApp(const MaterialApp(home: WebViewExample()));
+  runApp(const MaterialApp(home: _WebViewExample()));
 }
 
-class WebViewExample extends StatefulWidget {
-  const WebViewExample();
+class _WebViewExample extends StatefulWidget {
+  const _WebViewExample();
 
   @override
   _WebViewExampleState createState() => _WebViewExampleState();
 }
 
-class _WebViewExampleState extends State<WebViewExample> {
-  late YoutubePlayerController _youtubeController;
-
-  // TODO: Integrate the fetching of articles from thenewsapi
-
-  @override
-  void initState() {
-    super.initState();
-    _youtubeController = YoutubePlayerController(
-      initialVideoId: 'inWWhr5tnEA',
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
+class _WebViewExampleState extends State<_WebViewExample> {
+  final PlatformWebViewController _controller = PlatformWebViewController(
+    const PlatformWebViewControllerCreationParams(),
+  )..loadRequest(
+      LoadRequestParams(
+        uri: Uri.parse('https://flutter.dev'),
       ),
     );
-
-    // TODO: Fetch articles on initialization
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cybersecurity News and Resources'),
-      ),
-      body: Column(
-        children: [
-          // Carousel Slider containing WebView with different cybersecurity news websites
-          CarouselSlider(
-            items: [
-              // _buildWebViewItem('https://www.cyberscoop.com/'),
-              _buildWebViewItem('https://threatpost.com/'),
-              //_buildWebViewItem('https://www.darkreading.com/'),
-              // Add more websites as needed
-            ],
-            options: CarouselOptions(
-              height: 200,
-              viewportFraction: 0.8,
-              enlargeCenterPage: true,
-              //autoPlay: true,
-              //autoPlayInterval: Duration(seconds: 5),
-              onPageChanged: (index, reason) {
-                setState(() {});
-              },
-            ),
-          ),
-          // Display articles from thenewsapi
-          Expanded(
-            child: ListView.builder(
-              itemCount: 10, // Replace with your articles length
-              itemBuilder: (context, index) {
-                // TODO: Replace with actual articles content
-                return ListTile(title: Text('Article $index'));
-              },
-            ),
-          ),
+        title: const Text('Flutter WebView example'),
+        actions: <Widget>[
+          _SampleMenu(_controller),
         ],
       ),
-    );
-  }
-
-  Widget _buildWebViewItem(String url) {
-    final controller = PlatformWebViewController(
-      const PlatformWebViewControllerCreationParams(),
-    )..loadRequest(
-        LoadRequestParams(uri: Uri.parse(url)),
-      );
-
-    return Container(
-      height: 200,
-      child: PlatformWebViewWidget(
-        PlatformWebViewWidgetCreationParams(controller: controller),
+      body: PlatformWebViewWidget(
+        PlatformWebViewWidgetCreationParams(controller: _controller),
       ).build(context),
     );
   }
+}
+
+enum _MenuOptions {
+  doPostRequest,
+}
+
+class _SampleMenu extends StatelessWidget {
+  const _SampleMenu(this.controller);
+
+  final PlatformWebViewController controller;
 
   @override
-  void dispose() {
-    super.dispose();
-    _youtubeController.dispose();
+  Widget build(BuildContext context) {
+    return PopupMenuButton<_MenuOptions>(
+      onSelected: (_MenuOptions value) {
+        switch (value) {
+          case _MenuOptions.doPostRequest:
+            _onDoPostRequest(controller);
+            break;
+        }
+      },
+      itemBuilder: (BuildContext context) => <PopupMenuItem<_MenuOptions>>[
+        const PopupMenuItem<_MenuOptions>(
+          value: _MenuOptions.doPostRequest,
+          child: Text('Post Request'),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _onDoPostRequest(PlatformWebViewController controller) async {
+    final LoadRequestParams params = LoadRequestParams(
+      uri: Uri.parse('https://httpbin.org/post'),
+      method: LoadRequestMethod.post,
+      headers: const <String, String>{
+        'foo': 'bar',
+        'Content-Type': 'text/plain'
+      },
+      body: Uint8List.fromList('Test Body'.codeUnits),
+    );
+    await controller.loadRequest(params);
   }
 }
