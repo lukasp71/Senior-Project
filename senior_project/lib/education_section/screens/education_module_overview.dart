@@ -1,59 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/encryption_module.dart';
-import 'package:senior_project/education_section/education_modules/intro_module.dart';
-import 'package:senior_project/education_section/education_modules/malware.dart';
-import 'package:senior_project/education_section/education_modules/network_security.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module.dart';
 
-class ModuleOverview extends StatelessWidget {
+void main() => runApp(MaterialApp(
+      home: ModulePage(),
+    ));
+
+class ModulePage extends StatefulWidget {
+  @override
+  _ModulePageState createState() => _ModulePageState();
+}
+
+class _ModulePageState extends State<ModulePage> {
+  final Map<String, List<String>> modules = {
+    'Introduction to Cybersecurity': [
+      'Definition and Importance',
+      'History and Evolution of Cyber Threats',
+      'Types of Cyber Threats',
+    ],
+    'Cyber Threats and Attacks': [
+      'Phishing and Spear Phishing',
+      'Man-in-the-Middle Attacks',
+      'Distributed Denial of Service (DDoS) Attacks',
+      'Drive-by Downloads',
+      'Zero-day Exploits',
+      'Cybersecurity Best Practices',
+    ],
+    'Malware': [
+      'Two-factor Authentication (2FA)',
+      'Regular Software Updates',
+      'Safe Browsing Habits',
+      'Avoiding Suspicious Emails and Attachments',
+      'Secure Networking',
+    ],
+    'Social Engineering': [
+      'Encryption (End-to-end Encryption, SSL/TLS)',
+      'Cookies and Trackers',
+      'Browsing Anonymously',
+      'Mobile Security',
+      'Secure Online Shopping',
+      'Recognizing Secure Websites',
+      'Protecting Financial Data',
+      'Cybersecurity for Businesses',
+    ],
+    'Encryption': ['Insert subsections here']
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Cybersecurity Modules'),
       ),
-      body: ListView(
-        children: ListTile.divideTiles(
-          context: context,
-          tiles: [
-            ListTile(
-              title: Text('Basic Concepts of Cybersecurity'),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => IntroToCybersecurity()),
-              ),
-            ),
-            ListTile(
-              title: Text('Threats and Attacks'),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => TypesOfThreatsAndAttacks()),
-              ),
-            ),
-            ListTile(
-              title: Text('Network Security'),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NetworkSecurity()),
-              ),
-            ),
-            ListTile(
-              title: Text('Malware'),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Malware()),
-              ),
-            ),
-            ListTile(
-              title: Text('Encryption'),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Encryption()),
-              ),
-            ),
-          ],
-        ).toList(),
+      body: ListView.separated(
+        itemCount: modules.keys.length,
+        separatorBuilder: (context, index) => Divider(),
+        itemBuilder: (context, index) {
+          final module = modules.keys.elementAt(index);
+          return ExpansionTile(
+            title: Text(module),
+            children: modules[module]!
+                .map((section) => Padding(
+                      padding: const EdgeInsets.only(left: 40.0),
+                      child: ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: Text(section),
+                      ),
+                    ))
+                .toList(),
+          );
+        },
       ),
     );
   }
