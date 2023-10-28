@@ -19,8 +19,8 @@ class AppColors {
 
 class NewsApiConstants {
   NewsApiConstants._();
-  static const newsApiKey = 'd40f9dc9234a1b84560ac1a3c0a296c6';
-  static const mediaStackApi = 'ee8499f0e2a249f2a58e02a35a679c90';
+  static const newsApiKey = 'ee8499f0e2a249f2a58e02a35a679c90';
+  static const mediaStackApi = '3478d472ea4db82180ad6cec04c78de7';
   static const articles = 'articles';
   static const mediaStackData = 'data';
   static const id = 'id';

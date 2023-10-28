@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/src/context.dart';
+import 'package:senior_project/database/screens/authenticate/authenticate.dart';
+import 'package:senior_project/database/screens/authenticate/sign_in.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/screens/get_started.dart';
 import 'package:senior_project/news_section/widgets/custom_appBar.dart';
-import 'package:senior_project/news_section/widgets/news_card.dart';
 import 'package:senior_project/news_section/widgets/side_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -29,27 +31,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Show the welcome popup when the HomePage first loads up
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       showWelcomePopup(context);
     });
 
     return Scaffold(
-      drawer: sideDrawer(newsController),
-      appBar: customAppBar('Threat Detection Hub', context, actions: [
-        IconButton(
-          onPressed: () {
-            newsController.category.value = '';
-            newsController.searchNews.value = '';
-            newsController.channel.value = '';
-            newsController.cName.value = '';
-            newsController.update();
-          },
-          icon: const Icon(Icons.refresh),
-        ),
-      ]),
+      drawer: sideDrawer(context, newsController),
+      appBar: customAppBar('Threat Detection Hub', context, actions: []),
       body: Obx(() {
         if (newsController.isLoading.value && newsController.allNews.isEmpty) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else {
           return SingleChildScrollView(
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -191,7 +182,6 @@ class HomePage extends StatelessWidget {
                         : controller.allNews.isEmpty
                             ? const Center(child: CircularProgressIndicator())
                             : ListView.builder(
-                                controller: controller.scrollController,
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: controller.allNews.length,
@@ -211,19 +201,6 @@ class HomePage extends StatelessWidget {
                                         print('Could not launch $articleUrl');
                                       }
                                     },
-                                    child: NewsCard(
-                                      imgUrl: controller
-                                              .allNews[index].urlToImage ??
-                                          '',
-                                      desc: controller
-                                              .allNews[index].description ??
-                                          '',
-                                      title: controller.allNews[index].title,
-                                      content:
-                                          controller.allNews[index].content ??
-                                              '',
-                                      postUrl: controller.allNews[index].url,
-                                    ),
                                   );
                                 },
                               );

@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:path/path.dart';
+import 'package:senior_project/database/models/user.dart';
+import 'package:senior_project/database/screens/authenticate/authenticate.dart';
+import 'package:senior_project/database/services/auth.dart';
+import 'package:senior_project/education_section/screens/education_home_page.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/utils/utils.dart';
 
-Drawer sideDrawer(NewsController newsController) {
+Drawer sideDrawer(BuildContext context, NewsController newsController) {
+  final AuthService _authService = AuthService(); // Initialize your AuthService
+
   return Drawer(
     backgroundColor: AppColors.lightGrey,
     child: ListView(
       children: <Widget>[
-        // Existing code for country, category, and channel selection
-
         /// Link to Education Section
         ListTile(
           title: const Text("Education Section"),
-          onTap: () {
-            // Navigate to the education section
-            // Replace '/education' with the appropriate route for the education section
-            Get.offAllNamed('/education');
-          },
+          onTap: () => Navigator.push(
+            context as BuildContext,
+            MaterialPageRoute(builder: (context) => EducationHomePage()),
+          ),
         ),
 
         /// Link to Vulnerability Section
@@ -34,13 +37,29 @@ Drawer sideDrawer(NewsController newsController) {
 
         const Divider(),
 
-        /// Sign-In Button
-        ListTile(
-          title: const Text("Sign In"),
-          onTap: () {
-            // Navigate to the sign-in screen
-            // Replace '/sign-in' with the appropriate route for the sign-in screen
-            Get.offAllNamed('/sign-in');
+        // Using StreamBuilder to listen to authentication state
+        StreamBuilder(
+          stream: _authService.user, // listening to the user stream
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data != null) {
+              // This means the user is authenticated
+              Users user = snapshot.data as Users;
+              return ListTile(
+                title: Text(user.uid ?? 'User'), // Display the username
+                onTap: () {
+                  // You can navigate the user to their profile page or any other action
+                },
+              );
+            } else {
+              // This means the user is not authenticated
+              return ListTile(
+                title: const Text("Sign in"),
+                onTap: () => Navigator.push(
+                  context as BuildContext,
+                  MaterialPageRoute(builder: (context) => Authenticate()),
+                ),
+              );
+            }
           },
         ),
       ],

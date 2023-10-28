@@ -1,19 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/firebase_options.dart';
+import 'package:senior_project/database/screens/authenticate/authenticate.dart';
 import 'package:senior_project/database/screens/authenticate/sign_in.dart';
 import 'package:senior_project/database/screens/authenticate/register.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const WelcomePage());
-}
-
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key});
+  const WelcomePage({Key? key, required}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +23,7 @@ class WelcomePage extends StatelessWidget {
 }
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key, required this.title});
+  const WelcomeScreen({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -39,12 +32,20 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  bool isSignInSelected = false;
+  void showSignIn() {
+    Navigator.of(context).pop(); // Close the get_started popup
+    showDialog(
+      context: context,
+      builder: (context) => Authenticate(),
+    );
+  }
 
-  void toggleView() {
-    setState(() {
-      isSignInSelected = !isSignInSelected;
-    });
+  void showRegister() {
+    Navigator.of(context).pop(); // Close the get_started popup
+    showDialog(
+      context: context,
+      builder: (context) => Authenticate(),
+    );
   }
 
   @override
@@ -62,64 +63,56 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
           ),
+          Positioned(
+            top: 30,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Column(
+                children: [
+                  const Text(
+                    'Welcome to the Threat Awareness Hub.',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'You can also stay up to date with the latest cybersecurity events going on.',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 ElevatedButton(
-                  onPressed: () {
-                    toggleView();
-                  },
+                  onPressed: showSignIn,
                   child: const Text('Login With Current Account'),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {
-                    toggleView();
-                  },
+                  onPressed: showRegister,
                   child: const Text('Register a New Account'),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close the popup
+                  },
                   child: const Text('Login as a Guest'),
                 ),
               ],
             ),
           ),
-          const Positioned(
-              top: 190,
-              left: 0,
-              right: 0,
-              child: Center(
-                  child: Text(
-                'Welcome to the Threat Awareness Hub.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ))),
-          const Positioned(
-              top: 220,
-              left: 0,
-              right: 0,
-              child: Center(
-                  child: Text(
-                'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ))),
-          const Positioned(
-              top: 250,
-              left: 0,
-              right: 0,
-              child: Center(
-                  child: Text(
-                'You can also stay up to date with the latest cybersecurity events going on.',
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ))),
         ],
       ),
-      // Display Sign In or Register screen based on selection
-      bottomNavigationBar: isSignInSelected
-          ? SignIn(toggleView: toggleView)
-          : Register(toggleView: toggleView),
     );
   }
 }
