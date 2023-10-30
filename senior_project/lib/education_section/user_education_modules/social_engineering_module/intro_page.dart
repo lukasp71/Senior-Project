@@ -1,7 +1,6 @@
 // File: lib/education_section/education_modules/social_engineering/social_engineering_intro_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
 import 'package:senior_project/education_section/layouts/educational_module_page.dart';
 import 'package:senior_project/education_section/screens/education_module_overview.dart';
 
@@ -26,10 +25,6 @@ In the subsequent sections, we will delve deeper into the various social enginee
 ''';
 
 class SocialEngineeringIntroPage extends StatelessWidget {
-  final Module module;
-
-  SocialEngineeringIntroPage(this.module);
-
   @override
   Widget build(BuildContext context) {
     return ModuleIntroPage(

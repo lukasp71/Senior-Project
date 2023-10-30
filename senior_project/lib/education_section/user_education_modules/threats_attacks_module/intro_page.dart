@@ -1,7 +1,7 @@
 // File: lib/education_section/education_modules/threats_and_attacks/intro_to_threats_and_attacks_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module/common_threats_page.dart';
+import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/common_threats_page.dart';
 import 'package:senior_project/education_section/layouts/educational_module_page.dart';
 
 final String introText = '''

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/intro_module/intro_module_start.dart';
-import 'package:senior_project/education_section/education_modules/intro_module/key_concepts_page.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/intro_module_start.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/key_concepts_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Definition and Importance';

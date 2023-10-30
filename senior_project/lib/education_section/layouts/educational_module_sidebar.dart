@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/intro_module/career_opportunity_page.dart';
-import 'package:senior_project/education_section/education_modules/intro_module/def_importance_page.dart';
-import 'package:senior_project/education_section/education_modules/intro_module/historical_content_page.dart';
-import 'package:senior_project/education_section/education_modules/intro_module/key_concepts_page.dart';
-import 'package:senior_project/education_section/education_modules/malware_module/intro_page.dart';
-import 'package:senior_project/education_section/education_modules/malware_module/malware_impact_page.dart';
-import 'package:senior_project/education_section/education_modules/malware_module/malware_spread_page.dart';
-import 'package:senior_project/education_section/education_modules/malware_module/prevention_remidiation_page.dart';
-import 'package:senior_project/education_section/education_modules/malware_module/types_definition_page.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module/attack_methodology_page.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module/common_threats_page.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module/incident_response_page.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module/intro_page.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module/prevention_methods_page.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/career_opportunity_page.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/def_importance_page.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/historical_content_page.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/key_concepts_page.dart';
+import 'package:senior_project/education_section/user_education_modules/malware_module/intro_page.dart';
+import 'package:senior_project/education_section/user_education_modules/malware_module/malware_impact_page.dart';
+import 'package:senior_project/education_section/user_education_modules/malware_module/malware_spread_page.dart';
+import 'package:senior_project/education_section/user_education_modules/malware_module/prevention_remidiation_page.dart';
+import 'package:senior_project/education_section/user_education_modules/malware_module/types_definition_page.dart';
+import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/attack_methodology_page.dart';
+import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/common_threats_page.dart';
+import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
+import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/intro_page.dart';
+import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/prevention_methods_page.dart';
 
 class Modules {
   final String title;

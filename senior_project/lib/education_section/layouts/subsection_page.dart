@@ -20,7 +20,7 @@ class SubsectionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(subsectionTitle),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[

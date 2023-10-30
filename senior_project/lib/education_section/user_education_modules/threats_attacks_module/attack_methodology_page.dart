@@ -1,9 +1,8 @@
 // File: lib/education_section/education_modules/threats_and_attacks/attack_methodology_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module/common_threats_page.dart';
-import 'package:senior_project/education_section/education_modules/threats_attacks_module/incident_response_page.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/common_threats_page.dart';
+import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'Attack Methodology';
@@ -49,14 +48,14 @@ class AttackMethodologyPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CommonCyberThreatsPage()),
+          MaterialPageRoute(
+              builder: (context) => IncidentResponseRecoveryPage()),
         );
       },
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => IncidentResponseRecoveryPage()),
+          MaterialPageRoute(builder: (context) => CommonCyberThreatsPage()),
         );
       },
     );
