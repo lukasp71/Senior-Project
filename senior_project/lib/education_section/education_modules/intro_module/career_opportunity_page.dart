@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/Module.dart';
-import 'package:senior_project/education_section/education_modules/subsection_page.dart';
+import 'package:senior_project/education_section/education_modules/intro_module/historical_content_page.dart';
+import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/education_module_overview.dart';
 
 final String subsectionTitle = 'Careers in Cybersecurity';
 final String content = '''
@@ -31,18 +32,23 @@ final String content = '''
 ''';
 
 class CareersInCybersecurityPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  CareersInCybersecurityPage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ModulePage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HistoricalContextPage()),
+        );
+      },
     );
   }
 }

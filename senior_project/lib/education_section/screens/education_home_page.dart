@@ -42,7 +42,7 @@ class MyHomePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ModuleOverview()),
+                  MaterialPageRoute(builder: (context) => ModulePage()),
                 );
               },
               child: SizedBox(

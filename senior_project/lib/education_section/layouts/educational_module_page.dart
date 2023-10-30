@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/Module.dart';
-import 'package:senior_project/education_section/education_modules/subsection_page.dart';
+import 'package:senior_project/education_section/layouts/educational_module_sidebar.dart';
 
 class ModuleIntroPage extends StatelessWidget {
-  final Module module;
+  final String moduleTitle;
+  final String introText;
+  final VoidCallback onStart;
 
-  ModuleIntroPage(this.module);
+  ModuleIntroPage({
+    required this.moduleTitle,
+    required this.introText,
+    required this.onStart,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(module.title),
+        title: Text(moduleTitle),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -22,32 +27,17 @@ class ModuleIntroPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headline4,
             ),
             SizedBox(height: 16.0),
-            Text(module.introText),
+            Text(introText),
             // ... any other content, such as images
             Spacer(),
             ElevatedButton(
-              onPressed: () {
-                // Navigate to the first subsection page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SubsectionPage(
-                      module.subsections[0], // Title of the first subsection
-                      'Content for ' +
-                          module.subsections[
-                              0], // Content for the first subsection
-                      module, // The current module
-                      0, // The index of the first subsection
-                    ),
-                  ),
-                );
-              },
+              onPressed: onStart,
               child: Text('Start'),
             ),
           ],
         ),
       ),
-      drawer: Drawer(
+      drawer: SidebarMenu(
           // ... your sidebar menu code here, or import the SidebarMenu widget
           ),
     );

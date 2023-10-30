@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/Module.dart';
-import 'package:senior_project/education_section/education_modules/educational_module_sidebar.dart';
-import 'package:senior_project/education_section/education_modules/subsection_page.dart';
+import 'package:senior_project/education_section/education_modules/intro_module/career_opportunity_page.dart';
+import 'package:senior_project/education_section/education_modules/intro_module/key_concepts_page.dart';
+import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'Historical Context of Cybersecurity';
 final String content = '''
@@ -30,18 +31,23 @@ The historical narrative highlights the evolution of cybersecurity from a niche 
 ''';
 
 class HistoricalContextPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  HistoricalContextPage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CareersInCybersecurityPage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => KeyConceptsPage()),
+        );
+      },
     );
   }
 }

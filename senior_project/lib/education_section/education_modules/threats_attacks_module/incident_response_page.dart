@@ -1,8 +1,10 @@
 // File: lib/education_section/education_modules/threats_and_attacks/incident_response_recovery_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/layouts/Module.dart';
-import 'package:senior_project/education_section/education_modules/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/education_modules/threats_attacks_module/attack_methodology_page.dart';
+import 'package:senior_project/education_section/education_modules/threats_attacks_module/prevention_methods_page.dart';
+import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'Incident Response and Recovery';
 final String content = '''
@@ -37,18 +39,23 @@ final String content = '''
 ''';
 
 class IncidentResponseRecoveryPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  IncidentResponseRecoveryPage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AttackMethodologyPage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PreventionMeasuresPage()),
+        );
+      },
     );
   }
 }
