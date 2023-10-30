@@ -33,7 +33,7 @@ class _QuizPageState extends State<QuizPage> {
       appBar: AppBar(
         title: Text('Quiz'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: List.generate(
