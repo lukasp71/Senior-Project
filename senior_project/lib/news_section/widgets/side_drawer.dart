@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
-import 'package:senior_project/database/models/user.dart';
-import 'package:senior_project/database/screens/authenticate/authenticate.dart';
 import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/education_section/screens/education_home_page.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
-import 'package:senior_project/news_section/utils/utils.dart';
+import 'package:senior_project/news_section/screens/home_page.dart';
 
 Drawer sideDrawer(BuildContext context, NewsController newsController) {
   final AuthService _authService = AuthService(); // Initialize your AuthService
@@ -24,6 +21,11 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
             MaterialPageRoute(builder: (context) => EducationHomePage()),
           ),
         ),
+        ListTile(
+          title: const Text("News Section"),
+          onTap: () => Navigator.push(
+              context as BuildContext, HomePage() as Route<Object?>),
+        ),
 
         /// Link to Vulnerability Section
         ListTile(
@@ -38,30 +40,6 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
         const Divider(),
 
         // Using StreamBuilder to listen to authentication state
-        StreamBuilder(
-          stream: _authService.user, // listening to the user stream
-          builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              // This means the user is authenticated
-              Users user = snapshot.data as Users;
-              return ListTile(
-                title: Text(user.uid ?? 'User'), // Display the username
-                onTap: () {
-                  // You can navigate the user to their profile page or any other action
-                },
-              );
-            } else {
-              // This means the user is not authenticated
-              return ListTile(
-                title: const Text("Sign in"),
-                onTap: () => Navigator.push(
-                  context as BuildContext,
-                  MaterialPageRoute(builder: (context) => Authenticate()),
-                ),
-              );
-            }
-          },
-        ),
       ],
     ),
   );

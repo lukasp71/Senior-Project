@@ -1,12 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/src/context.dart';
-import 'package:senior_project/database/screens/authenticate/authenticate.dart';
-import 'package:senior_project/database/screens/authenticate/sign_in.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
-import 'package:senior_project/news_section/screens/get_started.dart';
 import 'package:senior_project/news_section/widgets/custom_appBar.dart';
 import 'package:senior_project/news_section/widgets/side_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -17,24 +13,9 @@ class HomePage extends StatelessWidget {
   NewsController newsController = Get.put(NewsController());
 
   // Function to show the WelcomePage as a popup
-  Future<void> showWelcomePopup(BuildContext context) async {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          child: WelcomePage(),
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    // Show the welcome popup when the HomePage first loads up
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      showWelcomePopup(context);
-    });
-
     return Scaffold(
       drawer: sideDrawer(context, newsController),
       appBar: customAppBar('Threat Detection Hub', context, actions: []),

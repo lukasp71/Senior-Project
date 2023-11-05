@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         catchError: (_, __) {},
         initialData: null,
         child: MaterialApp(
-          home: HomePage(),
+          home: Wrapper(),
         ));
   }
 }
