@@ -9,75 +9,68 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   final List<String> questions = [
-    'What is malware?',
-    'What type of malware encrypts files and demands payment for the decryption key?',
-    'Which malware spreads by copying itself onto other programs?',
-    'What type of malware disguises itself as legitimate software?',
-    'Which of the following malware types collects sensitive information from a user without their knowledge?',
-    'What is a possible long-term effect of malware attacks on a business?',
-    'Which of the following can be a direct financial impact of malware?',
-    'What term is used to describe malicious advertisements that spread malware?',
-    'Which of the following is a common way for malware to spread on social networks?',
-    'What is a common recommendation for preventing malware infections?',
-    'In the event of a malware infection, what is the first step in remediation?'
+    'What is cybersecurity?',
+    'Why is cybersecurity important?',
+    'What can be a consequence of inadequate cybersecurity for a company?',
+    'Which of the following is a key concept in cybersecurity?',
+    'Which historical event significantly impacted the evolution of cybersecurity?',
+    'Which of the following is an entry-level job in cybersecurity?',
+    'Which career path in cybersecurity focuses on identifying vulnerabilities in systems and networks?',
   ];
 
   final List<List<String>> choices = [
     [
-      'A type of software designed to harm or exploit any device',
-      'A beneficial software tool',
-      'A programming language',
-      'A type of hardware device'
-    ],
-    ['Virus', 'Worm', 'Trojan', 'Ransomware'],
-    ['Worm', 'Trojan', 'Spyware', 'Adware'],
-    ['Worm', 'Trojan', 'Ransomware', 'Adware'],
-    ['Spyware', 'Adware', 'Virus', 'Worm'],
-    [
-      'Loss of customer trust',
-      'Increased website traffic',
-      'Improved system performance',
-      'Faster internet connection'
+      'The protection of internet-connected systems from cyber-attacks',
+      'The study of computer programming',
+      'The process of building networks',
+      'The act of hacking into systems',
     ],
     [
-      'Cost of remediation',
-      'Increased sales',
-      'Lower operational costs',
-      'Better investment returns'
-    ],
-    ['Adware', 'Malvertising', 'Spam', 'Phishing'],
-    [
-      'Through friend requests',
-      'Through shared photos',
-      'Through malicious links',
-      'Through profile updates'
+      'To protect sensitive data from unauthorized access',
+      'To ensure uninterrupted business operations',
+      'To comply with legal and regulatory requirements',
+      'All of the above',
     ],
     [
-      'Use of strong, unique passwords',
-      'Regularly updating software and systems',
-      'Avoiding suspicious links and attachments',
-      'All of the above'
+      'Financial losses',
+      'Damage to reputation',
+      'Legal penalties',
+      'All of the above',
     ],
     [
-      'Disconnecting affected systems from the network',
-      'Paying any requested ransom',
-      'Deleting all files on the system',
-      'Ignoring the problem and hoping it resolves itself'
-    ]
+      'Confidentiality',
+      'Integrity',
+      'Availability',
+      'All of the above',
+    ],
+    [
+      'The Morris Worm',
+      'The invention of the internet',
+      'The Y2K bug',
+      'The creation of the first antivirus software',
+    ],
+    [
+      'Information Security Analyst',
+      'Cybersecurity Consultant',
+      'Penetration Tester',
+      'Cybersecurity Manager',
+    ],
+    [
+      'Engineering',
+      'Incident Response',
+      'Management',
+      'Testing and Hacking (Ethical Hacking)',
+    ],
   ];
 
   final List<int> correctAnswers = [
     0,
     3,
-    0,
-    1,
-    0,
-    0,
-    0,
-    1,
-    2,
     3,
-    0
+    3,
+    0,
+    0,
+    3
   ]; // 0-based index of the correct answer
   late List<int?> userAnswers; // User's selected answers
   bool isSubmitted = false;
