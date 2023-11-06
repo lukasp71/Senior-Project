@@ -54,10 +54,6 @@ This information is provided by Fortinet, Inc.
 For more information, see https://www.fortinet.com/resources/cyberglossary/iot-security
 ''';
 
-
-
-
-
 class EmployeeTrainingPage extends StatelessWidget {
   final Module module;
   final int subsectionIndex;
