@@ -1,54 +1,68 @@
-// File: lib/education_section/education_modules/threats_and_attacks/incident_response_recovery_page.dart
+// File: lib/education_section/education_modules/malware/prevention_and_remediation_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/user_education_modules/malware_module/malware_spread_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/education_module_overview.dart';
 
-final String subsectionTitle = 'Incident Response and Recovery';
+final String subsectionTitle = 'Prevention and Remediation';
 final String content = '''
-### Incident Response and Recovery:
+### Prevention:
 
-#### 1. **Introduction to Incident Response**:
-   - Definition: Incident response entails a structured approach employed by organizations to address and manage the aftermath of a security breach or cyber attack, also known as an incident. The objective is to handle the situation in a manner that limits damage and reduces recovery time and costs.
-   - Importance: A well-designed incident response plan can significantly mitigate the damage from an incident and accelerate the recovery of normal business operations.
+1. **Traditional Antivirus Limitations**: 
+   - Traditional antivirus solutions have limitations as they may be blind to certain malware formats like zip and may fail to catch advanced threats involving social engineering tactics.
 
-#### 2. **Incident Response Life Cycle**:
-   - **Preparation**: Establishing and training your incident response team, as well as equipping them with the necessary tools and resources.
-   - **Identification**: Detecting and acknowledging the incident.
-   - **Containment**: Short-term and long-term actions taken to prevent further damage.
-   - **Eradication**: Finding and eliminating the root cause of the incident.
-   - **Recovery**: Validating system functionality for business operations, and monitoring the systems for signs of weaknesses that could be exploited again.
-   - **Lessons Learned**: Documenting the incident, discussing it, and learning from it to better prepare for the future.
+2. **Anti-Malware Solutions**:
+   - Deploy an anti-malware solution on workstations to prevent spyware, adware, and malware as part of the OS security baseline.
+   - Ensure that the anti-malware solution remains up-to-date and monitor antivirus scan results on a regular basis.
+   - Create a secure system baseline image and deploy it to all servers.
 
-#### 3. **Effective Practices for Cyber Incident Response and Recovery**:
-   - Governance, planning and preparation, analysis, mitigation, restoration and recovery, coordination and communication, and improvement are key components to consider when developing practices for effective cyber incident response and recovery.
+3. **Safe Browsing Habits**:
+   - Be cautious with email attachments and links from unknown sources.
+   - Avoid visiting suspicious websites.
+   - Keep your operating system and software updated to the latest versions.
 
-#### 4. **Cybersecurity Incident Recovery**:
-   - Organizations are provided with strategic guidance for planning, playbook developing, testing, and improvements of recovery planning following a cybersecurity event.
+4. **Safe Mode Operation**:
+   - In case of a suspected malware infection, restart the computer in Safe Mode with Networking to operate with a minimal set of drivers and services, making it easier to remove malicious software.
 
-#### 5. **Creating an Incident Response Plan**:
-   - Step 1: Create a Policy: Establish a clear policy that defines the scope of your incident response plan.
-   - Step 2: Form a Response Team: Assemble a group of individuals who will be responsible for handling incidents.
-   - Step 3: Define and Classify Incidents: Establish what constitutes an incident and categorize them based on severity.
-   - Step 4: Establish Notification and Escalation Procedures: Determine how incidents will be reported and who will be notified.
-   - Step 5: Develop Response Procedures: Outline the steps to be taken during an incident.
-   - Step 6: Training and Awareness: Ensure that all stakeholders are educated and aware of their roles and responsibilities.
-   - Step 7: Testing and Maintenance: Regularly test and update the incident response plan to ensure its effectiveness.
+### Remediation:
+
+1. **Reporting and Detection**:
+   - Report suspected malware and related vulnerabilities.
+   - Employ scanning and detection mechanisms to identify malware.
+
+2. **Containment and Eradication**:
+   - Contain and eradicate malware to prevent further spread and damage.
+
+3. **System Restoration**:
+   - Correct system changes caused by malware, for instance, removing threats from an infected system.
+   - The goal is to remediate threats before they cause any further damage.
+
+4. **Regular Monitoring**:
+   - Regular monitoring of network and system activities to spot and address anomalies that could be indicative of malware infections.
+
+5. **Education and Training**:
+   - Educate users and employees on recognizing phishing attempts and other malicious activities to prevent malware infections.
 ''';
 
-class IncidentResponseRecoveryPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  IncidentResponseRecoveryPage(this.module, this.subsectionIndex);
-
+class PreventionAndRemediationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ModulePage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HowMalwareSpreadsPage()),
+        );
+      },
     );
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/intro_module_start.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/key_concepts_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Definition and Importance';
-final String content = '''
+const String subsectionTitle = 'Definition and Importance';
+const String content = '''
 Definition:
 Cybersecurity is about protecting digital assets, encompassing the safeguard of data and 
 information systems from unauthorized access, theft, and loss. It aims to protect individuals' 
@@ -34,18 +35,23 @@ maintaining effective cybersecurity.
 ''';
 
 class DefinitionAndImportancePage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  DefinitionAndImportancePage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => KeyConceptsPage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => IntroToCybersecurityPage()),
+        );
+      },
     );
   }
 }

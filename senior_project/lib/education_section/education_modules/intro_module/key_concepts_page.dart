@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/def_importance_page.dart';
+import 'package:senior_project/education_section/user_education_modules/intro_module/historical_content_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+
 final String subsectionTitle = 'Key Concepts of Cybersecurity';
 final String content = '''
 1. The CIA Triad:
@@ -37,18 +39,24 @@ final String content = '''
 ''';
 
 class KeyConceptsPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  KeyConceptsPage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HistoricalContextPage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => DefinitionAndImportancePage()),
+        );
+      },
     );
   }
 }
