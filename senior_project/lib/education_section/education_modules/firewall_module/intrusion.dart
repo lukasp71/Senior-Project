@@ -43,15 +43,20 @@ and more.
 
 4. Host based intrusion prevention system. 
 
-This system is deployed in a single host, and are servers that have extrmeley important data on them. This system monitors
+This system is deployed in a single host, and are servers that have extremely important data on them. This system monitors
 all traffic going in and out of that host, and monitors it in any way possible, including logs, processes, and configuration changes. 
 
+
+Information provided by Spiceworks.com
+
+For more information, visit: https://www.spiceworks.com/it-security/vulnerability-management/articles/what-is-idps/
+
 ''';
-class LawPage extends StatelessWidget {
+class IDSPage extends StatelessWidget {
   final Module module;
   final int subsectionIndex;
 
-  LawPage(this.module, this.subsectionIndex);
+  IDSPage(this.module, this.subsectionIndex);
 
   @override
   Widget build(BuildContext context) {

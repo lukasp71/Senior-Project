@@ -1,8 +1,8 @@
 // File: lib/education_section/education_modules/threats_and_attacks/incident_response_recovery_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/layouts/Module.dart';
-import 'package:senior_project/education_section/education_modules/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'Incident Response and Recovery';
 final String content = '''

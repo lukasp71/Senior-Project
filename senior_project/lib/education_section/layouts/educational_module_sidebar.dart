@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/education_modules/Module.dart';
-import 'package:senior_project/education_section/education_modules/educational_module_page.dart';
+import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/layouts/educational_module_page.dart';
 
 class Modules {
   final String title;
