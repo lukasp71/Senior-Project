@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 import 'package:senior_project/database/screens/authenticate/authenticate.dart';
 import 'package:senior_project/database/models/user.dart';
-import 'package:senior_project/screens/News/newssection.dart';
+import 'package:senior_project/news_section/screens/home_page.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
