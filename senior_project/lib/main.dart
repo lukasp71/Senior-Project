@@ -26,8 +26,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: MyApp(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 

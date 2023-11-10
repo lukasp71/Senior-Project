@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:senior_project/education_section/layouts/educational_module_sidebar.dart';
+import 'package:senior_project/main.dart';
+
+
 
 class SubsectionPage extends StatelessWidget {
   final String subsectionTitle;
@@ -21,25 +23,61 @@ class SubsectionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           subsectionTitle,
-          style: GoogleFonts.montserrat(),
+          style: GoogleFonts.poppins(
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+        backgroundColor: Colors.blue,
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'returnToMain') {
+                // Use Navigator to pop back to the main page (MainPage)
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => MyApp(),
+                  ),
+                  (Route<dynamic> route) => false,
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return <PopupMenuEntry<String>>[
+                const PopupMenuItem<String>(
+                  value: 'returnToMain',
+                  child: Text('Home Page'),
+                ),
+                // Add more menu items as needed
+              ];
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              content,
-              style: GoogleFonts.montserrat(
-                fontSize: 18.0,
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    content,
+                    style: GoogleFonts.poppins(
+                      fontSize: 18.0,
+                    ),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(
-                height: 20.0), // Add spacing between text and the next widget
-            SizedBox(
-                height: 20.0), // Add spacing between button and the next widget
-            // ... other UI elements for the subsection page
-          ],
+              SizedBox(height: 20.0),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -62,7 +100,6 @@ class SubsectionPage extends StatelessWidget {
           ),
         ),
       ),
-      drawer: SidebarMenu(),
     );
   }
 }
