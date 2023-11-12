@@ -21,38 +21,60 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.purple[100], // You can adjust this color
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Interested about Learning More on CyberSecurity and keeping yourself safe? We have a set of modules ready for you to learn and study.',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
-            const Text(
-              'Pick the Category that best fits you and/or your clients:',
-              style: TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
-            CyberSecurityCategory("Cybersecurity for You and Business"),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ModulePage()),
-                );
-              },
-              child: SizedBox(
-                height: 20,
-                child: CyberSecurityCategory(
-                    "Cybersecurity for the Tech Savvy Users"),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    'assets/education.jpg'), // Replace with your image path
+                fit: BoxFit.cover,
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'Interested about Learning More on CyberSecurity and keeping yourself safe? We have a set of modules ready for you to learn and study.',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors
+                          .white), // Added white color for better visibility
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 30),
+                const Text(
+                  'Pick the Category that best fits you and/or your clients:',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors
+                          .white), // Added white color for better visibility
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 30),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ModulePage()),
+                    );
+                  },
+                  child: CyberSecurityCategory("Cybersecurity for You"),
+                ),
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    // Add your navigation logic here for the second category
+                  },
+                  child: CyberSecurityCategory("Cybersecurity for Businesses"),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -68,7 +90,7 @@ class CyberSecurityCategory extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white.withOpacity(0.8), // Slightly transparent
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -79,7 +101,11 @@ class CyberSecurityCategory extends StatelessWidget {
           ),
         ],
       ),
-      child: Text(title),
+      child: Text(
+        title,
+        style: TextStyle(
+            color: Colors.black), // Set text color to black for visibility
+      ),
     );
   }
 }
