@@ -4,6 +4,7 @@ import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/education_section/screens/education_home_page.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/screens/home_page.dart';
+import 'package:senior_project/vulnerability_section/vulnerability_page.dart';
 
 Drawer sideDrawer(BuildContext context, NewsController newsController) {
   final AuthService _authService = AuthService(); // Initialize your AuthService
@@ -14,7 +15,8 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
       children: <Widget>[
         UserAccountsDrawerHeader(
           accountName: Text("John Doe"), // Replace with the user's name
-          accountEmail: Text("john.doe@example.com"), // Replace with the user's email
+          accountEmail:
+              Text("john.doe@example.com"), // Replace with the user's email
           currentAccountPicture: CircleAvatar(
             backgroundColor: Colors.white,
             child: Icon(
@@ -24,7 +26,6 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
             ),
           ),
         ),
-
         ListTile(
           title: const Text("Education Section"),
           onTap: () {
@@ -34,7 +35,6 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
             );
           },
         ),
-
         ListTile(
           title: const Text("News Section"),
           onTap: () {
@@ -44,18 +44,16 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
             );
           },
         ),
-
         ListTile(
           title: const Text("Vulnerability Section"),
           onTap: () {
-            // Navigate to the vulnerability section
-            // Replace '/vulnerability' with the appropriate route for the vulnerability section
-            Get.offAllNamed('/vulnerability');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VulnerabilityPage()),
+            );
           },
         ),
-
         const Divider(),
-
         ListTile(
           title: const Text("Sign Out"),
           onTap: () {

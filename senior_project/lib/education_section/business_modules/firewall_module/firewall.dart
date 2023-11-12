@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'All About Firewalls';
@@ -50,18 +49,24 @@ For more information about firewalls, go to: https://www.cisco.com/c/en/us/produ
 ''';
 
 class FirewallPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  FirewallPage(this.module, this.subsectionIndex);
 
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ()),
+        );
+      },
     );
   }
 }

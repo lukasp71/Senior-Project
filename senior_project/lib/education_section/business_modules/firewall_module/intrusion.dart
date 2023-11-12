@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'Anonymous Browsing';
@@ -48,18 +47,24 @@ all traffic going in and out of that host, and monitors it in any way possible, 
 
 ''';
 class LawPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  LawPage(this.module, this.subsectionIndex);
 
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ()),
+        );
+      },
     );
   }
 }

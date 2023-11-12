@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'Anonymous Browsing';
@@ -43,18 +42,24 @@ encrypt all communication between you and that website.
 ''';
 
 class FirewallPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  FirewallPage(this.module, this.subsectionIndex);
 
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ()),
+        );
+      },
     );
   }
 }

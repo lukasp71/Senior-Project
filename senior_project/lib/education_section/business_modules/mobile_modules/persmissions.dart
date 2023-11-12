@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'Historical Context of Cybersecurity';
@@ -60,18 +59,24 @@ For more details on App Permissions, visit: https://developer.android.com/guide/
 ''';
 
 class AppPermissionPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  AppPermissionPage(this.module, this.subsectionIndex);
 
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ()),
+        );
+      },
     );
   }
 }
