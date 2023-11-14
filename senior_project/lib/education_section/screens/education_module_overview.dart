@@ -44,8 +44,8 @@ class _ModulePageState extends State<ModulePage> {
       'Intro to Malware',
       'Types of Malware',
       'How Malware Spreads',
-      'The Impact of Malware'
-          'Prevention and Remidiation'
+      'The Impact of Malware',
+      'Prevention and Remidiation'
     ],
     'Social Engineering': [],
     'Encryption': ['Insert subsections here']
