@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'All About Firewalls';
-final String content = '''
+const String subsectionTitle = 'All About Firewalls';
+const String content = '''
 
 
 '### Virtual Private Neworks

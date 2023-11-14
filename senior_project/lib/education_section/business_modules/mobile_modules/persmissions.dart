@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Historical Context of Cybersecurity';
-final String content = '''
+const String subsectionTitle = 'Historical Context of Cybersecurity';
+const String content = '''
 
 ### App Permissions on Mobile Operating Systems.
 

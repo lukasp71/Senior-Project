@@ -13,14 +13,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Threat Detection Hub',
+        title: const Text(
+          'Threat Awareness Hub',
           style: TextStyle(
             fontSize: 24.0,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
       ),
       drawer: sideDrawer(context, newsController),
       body: SingleChildScrollView(
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: controller.breakingNews.length,
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     final instance = controller.breakingNews[index];
                     return InkWell(
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                         }
                       },
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(maxWidth: 150), // Maximum width for the Card
+                        constraints: const BoxConstraints(maxWidth: 150), // Maximum width for the Card
                         child: Card(
                           elevation: 5,
                           shape: RoundedRectangleBorder(
@@ -78,7 +78,7 @@ class HomePage extends StatelessWidget {
                                   padding: const EdgeInsets.all(8),
                                   child: Text(
                                     instance.title,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -95,18 +95,18 @@ class HomePage extends StatelessWidget {
                 );
               },
             ),
-            Divider(),
+            const Divider(),
             GetBuilder<NewsController>(
               init: NewsController(),
               builder: (controller) {
                 return controller.articleNotFound.value
-                    ? Center(child: Text('Nothing Found'))
+                    ? const Center(child: Text('Nothing Found'))
                     : controller.allNews.isEmpty
-                        ? Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator())
                         : ListView.builder(
                             itemCount: controller.allNews.length,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               final instance = controller.allNews[index];
                               return InkWell(
@@ -119,7 +119,7 @@ class HomePage extends StatelessWidget {
                                   }
                                 },
                                 child: ConstrainedBox(
-                                  constraints: BoxConstraints(maxWidth: 150), // Maximum width for the Card
+                                  constraints: const BoxConstraints(maxWidth: 150), // Maximum width for the Card
                                   child: Card(
                                     elevation: 5,
                                     shape: RoundedRectangleBorder(
@@ -132,15 +132,15 @@ class HomePage extends StatelessWidget {
                                         children: [
                                           Text(
                                             instance.title,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                          SizedBox(height: 8),
+                                          const SizedBox(height: 8),
                                           Text(
                                             instance.description ?? '',
-                                            style: TextStyle(fontSize: 14),
+                                            style: const TextStyle(fontSize: 14),
                                           ),
                                         ],
                                       ),

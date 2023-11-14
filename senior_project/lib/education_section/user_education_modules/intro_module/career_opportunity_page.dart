@@ -3,8 +3,8 @@ import 'package:senior_project/education_section/user_education_modules/intro_mo
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 import 'package:senior_project/education_section/screens/education_module_overview.dart';
 
-final String subsectionTitle = 'Careers in Cybersecurity';
-final String content = '''
+const String subsectionTitle = 'Careers in Cybersecurity';
+const String content = '''
 ### Entry-Level Jobs
 - **Information Security Analyst:** Help protect an organization's computer networks and systems by investigating, documenting, and reporting security breaches.
 

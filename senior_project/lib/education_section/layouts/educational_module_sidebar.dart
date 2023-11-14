@@ -83,10 +83,10 @@ class SidebarMenu extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
+          const DrawerHeader(
             child: Text('Modules'),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color:  Color.fromARGB(255, 0, 94, 172),
             ),
           ),
           ...modules

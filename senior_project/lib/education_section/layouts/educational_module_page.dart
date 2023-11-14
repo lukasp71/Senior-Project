@@ -17,22 +17,23 @@ class ModuleIntroPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(moduleTitle),
+        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             Text(
               'Introduction',
               style: Theme.of(context).textTheme.headline4,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(introText),
             // ... any other content, such as images
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               onPressed: onStart,
-              child: Text('Start'),
+              child: const Text('Start'),
             ),
           ],
         ),

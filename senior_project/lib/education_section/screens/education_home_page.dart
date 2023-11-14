@@ -62,14 +62,14 @@ class MyHomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => ModulePage()),
                     );
                   },
-                  child: CyberSecurityCategory("Cybersecurity for You"),
+                  child: const CyberSecurityCategory("Cybersecurity for You"),
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
                     // Add your navigation logic here for the second category
                   },
-                  child: CyberSecurityCategory("Cybersecurity for Businesses"),
+                  child: const CyberSecurityCategory("Cybersecurity for Businesses"),
                 ),
               ],
             ),
@@ -83,7 +83,7 @@ class MyHomePage extends StatelessWidget {
 class CyberSecurityCategory extends StatelessWidget {
   final String title;
 
-  CyberSecurityCategory(this.title);
+  const CyberSecurityCategory(this.title);
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class CyberSecurityCategory extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.black), // Set text color to black for visibility
       ),
     );

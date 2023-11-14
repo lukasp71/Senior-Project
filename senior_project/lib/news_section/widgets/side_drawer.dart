@@ -10,10 +10,10 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
   final AuthService _authService = AuthService(); // Initialize your AuthService
 
   return Drawer(
-    backgroundColor: Colors.blue, // Change the background color
+    backgroundColor: const Color.fromARGB(255, 0, 94, 172), // Change the background color
     child: ListView(
       children: <Widget>[
-        UserAccountsDrawerHeader(
+        const UserAccountsDrawerHeader(
           accountName: Text("John Doe"), // Replace with the user's name
           accountEmail:
               Text("john.doe@example.com"), // Replace with the user's email
@@ -21,7 +21,7 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
             backgroundColor: Colors.white,
             child: Icon(
               Icons.person,
-              color: Colors.blue,
+            color: Color.fromARGB(255, 0, 94, 172),
               size: 40,
             ),
           ),

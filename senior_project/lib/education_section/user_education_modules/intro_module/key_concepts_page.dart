@@ -3,8 +3,8 @@ import 'package:senior_project/education_section/user_education_modules/intro_mo
 import 'package:senior_project/education_section/user_education_modules/intro_module/historical_content_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Key Concepts of Cybersecurity';
-final String content = '''
+const String subsectionTitle = 'Key Concepts of Cybersecurity';
+const String content = '''
 1. The CIA Triad:
 - Confidentiality: Ensures that information is accessible only to those authorized to have access.
 - Integrity: Safeguards the accuracy and completeness of information and processing methods.
