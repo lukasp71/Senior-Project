@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:senior_project/education_section/business_modules/firewall_module/firewall.dart';
+import 'package:senior_project/education_section/business_modules/firewall_module/vpn.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 final String subsectionTitle = 'Anonymous Browsing';
@@ -46,8 +48,8 @@ This system is deployed in a single host, and are servers that have extrmeley im
 all traffic going in and out of that host, and monitors it in any way possible, including logs, processes, and configuration changes. 
 
 ''';
-class LawPage extends StatelessWidget {
 
+class IntrusionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -56,13 +58,13 @@ class LawPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => VPNPage()),
         );
       },
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => FirewallPage()),
         );
       },
     );

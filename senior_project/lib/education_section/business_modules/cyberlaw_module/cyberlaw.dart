@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:senior_project/education_section/business_modules/cyberlaw_module/ethicalhacking.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
 final String subsectionTitle = 'Anonymous Browsing';
 final String content = '''
@@ -32,8 +34,6 @@ https://www.knowledgehut.com/blog/security/cyber-security-laws
 ''';
 
 class LawPage extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -42,13 +42,13 @@ class LawPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => EthicalHacking()),
         );
       },
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
         );
       },
     );

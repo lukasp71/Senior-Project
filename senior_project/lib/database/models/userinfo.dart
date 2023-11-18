@@ -1,6 +1,8 @@
 class UserInformation {
-  late final String name;
-  late final int progress;
+  final String name;
+  final Map<String, dynamic> moduleProgress;
+  final String? email;
 
-  UserInformation({required this.name, required this.progress});
+  UserInformation(
+      {required this.name, required this.moduleProgress, required this.email});
 }

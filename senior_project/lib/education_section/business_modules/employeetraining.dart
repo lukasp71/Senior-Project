@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
 final String subsectionTitle = 'Anonymous Browsing';
 final String content = '''
@@ -54,7 +55,6 @@ For more details, see https://www.nationwide.com/business/solutions-center/cyber
 ''';
 
 class EmployeeTrainingPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -63,13 +63,13 @@ class EmployeeTrainingPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
         );
       },
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
         );
       },
     );
