@@ -3,8 +3,8 @@ import 'package:senior_project/education_section/business_modules/firewall_modul
 import 'package:senior_project/education_section/business_modules/firewall_module/vpn.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Anonymous Browsing';
-final String content = '''
+const String subsectionTitle = 'Anonymous Browsing';
+const String content = '''
 
 
 ## Intrusion Detection and Prevention System

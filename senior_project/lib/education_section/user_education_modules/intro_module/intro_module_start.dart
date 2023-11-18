@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/user_education_modules/intro_module/def_importance_page.dart';
 import 'package:senior_project/education_section/layouts/educational_module_page.dart';
 
-final String moduleTitle = 'Introduction to Cybersecurity';
-final String introText = '''
+const String moduleTitle = 'Introduction to Cybersecurity';
+const String introText = '''
     Learn the basics of cybersecurity. Cybersecurity is crucial for safeguarding the integrity, 
     confidentiality, and availability of information in the digital world. It encompasses measures 
     taken to protect systems, networks, and programs from digital attacks aimed at accessing, changing, 

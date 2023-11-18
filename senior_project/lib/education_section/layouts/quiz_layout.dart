@@ -93,7 +93,7 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz'),
+        title: const Text('Quiz'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -142,7 +142,7 @@ class _QuizPageState extends State<QuizPage> {
             isSubmitted = true;
           });
         },
-        child: Text('Submit'),
+        child: const Text('Submit'),
       ),
     );
   }

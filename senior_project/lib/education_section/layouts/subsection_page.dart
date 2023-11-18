@@ -28,7 +28,8 @@ class SubsectionPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
+  
         actions: <Widget>[
           PopupMenuButton<String>(
             onSelected: (value) {
@@ -36,7 +37,7 @@ class SubsectionPage extends StatelessWidget {
                 // Use Navigator to pop back to the main page (MainPage)
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
-                    builder: (context) => MyApp(),
+                    builder: (context) => const MyApp(),
                   ),
                   (Route<dynamic> route) => false,
                 );
@@ -56,7 +57,7 @@ class SubsectionPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -75,7 +76,7 @@ class SubsectionPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
             ],
           ),
         ),
@@ -87,12 +88,12 @@ class SubsectionPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
                 onPressed: onBackward,
                 iconSize: 30.0,
               ),
               IconButton(
-                icon: Icon(Icons.arrow_forward),
+                icon: const Icon(Icons.arrow_forward),
                 onPressed: onForward,
                 iconSize: 30.0,
               ),

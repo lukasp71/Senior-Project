@@ -3,8 +3,8 @@ import 'package:senior_project/education_section/business_modules/aiandiot_modul
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
-final String subsectionTitle = 'Anonymous Browsing';
-final String content = '''
+const String subsectionTitle = 'Anonymous Browsing';
+const String content = '''
 
 AI and Machine Learning in Cybersecurity
 

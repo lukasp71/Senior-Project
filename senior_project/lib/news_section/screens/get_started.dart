@@ -36,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Navigator.of(context).pop(); // Close the get_started popup
     showDialog(
       context: context,
-      builder: (context) => Authenticate(),
+      builder: (context) => const Authenticate(),
     );
   }
 
@@ -44,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Navigator.of(context).pop(); // Close the get_started popup
     showDialog(
       context: context,
-      builder: (context) => Authenticate(),
+      builder: (context) => const Authenticate(),
     );
   }
 
@@ -63,24 +63,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 30,
             left: 0,
             right: 0,
             child: Center(
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     'Welcome to the Threat Awareness Hub.',
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
-                  const SizedBox(height: 20),
-                  const Text(
+                  SizedBox(height: 20),
+                  Text(
                     'This is a new application designed to help everyone learn and improve their cybersecurity knowledge.',
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
-                  const SizedBox(height: 20),
-                  const Text(
+                  SizedBox(height: 20),
+                  Text(
                     'You can also stay up to date with the latest cybersecurity events going on.',
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),

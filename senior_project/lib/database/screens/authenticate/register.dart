@@ -25,126 +25,147 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
-            backgroundColor:
-                Colors.white, // Use your preferred background color
             body: Center(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
-                width: 300, // Set the desired width
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Create an Account',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/flashNews.jpg'),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Username',
-                              prefixIcon: Icon(Icons.person),
-                            ),
-                            validator: (val) =>
-                                val!.isEmpty ? 'Enter a username' : null,
-                            onChanged: (val) {
-                              setState(() => username = val);
-                            },
+                  ),
+                  Center(
+                    child: SizedBox(
+                      height: 400, // Set the desired height for the registration box
+                      child: SingleChildScrollView(
+                        child: Container(
+                          width: 300, // Set the desired width for the registration box
+                          padding: const EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                          SizedBox(height: 20.0),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Email',
-                              prefixIcon: Icon(Icons.email),
-                            ),
-                            validator: (val) =>
-                                val!.isEmpty ? 'Enter an email' : null,
-                            onChanged: (val) {
-                              setState(() => email = val);
-                            },
-                          ),
-                          SizedBox(height: 20.0),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock),
-                            ),
-                            validator: (val) => val!.length < 6
-                                ? 'Password must be at least 6 characters long'
-                                : null,
-                            obscureText: true,
-                            onChanged: (val) {
-                              setState(() => password = val);
-                            },
-                          ),
-                          SizedBox(height: 30),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors
-                                  .blue, // Use your preferred button color
-                            ),
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                setState(() => loading = true);
-                                dynamic result =
-                                    await _auth.registerWithEmailAndPassword(
-                                        email, password, username);
-                                if (result == null) {
-                                  setState(() {
-                                    error = 'Please supply a valid email';
-                                    loading = false;
-                                  });
-                                }
-                              }
-                            },
-                            child: Text(
-                              'Register',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              const Text(
+                                'Create an Account',
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ),
-                          SizedBox(height: 12.0),
-                          Text(
-                            error,
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 14.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('Already have an account?'),
-                        TextButton(
-                          onPressed: () {
-                            widget.toggleView();
-                          },
-                          child: Text(
-                            'Sign In',
-                            style: TextStyle(
-                              color:
-                                  Colors.blue, // Use your preferred link color
-                              fontWeight: FontWeight.bold,
-                            ),
+                              const SizedBox(height: 20),
+                              Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: <Widget>[
+                                    TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: 'Username',
+                                        prefixIcon: Icon(Icons.person),
+                                      ),
+                                      validator: (val) =>
+                                          val!.isEmpty ? 'Enter a username' : null,
+                                      onChanged: (val) {
+                                        setState(() => username = val);
+                                      },
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: 'Email',
+                                        prefixIcon: Icon(Icons.email),
+                                      ),
+                                      validator: (val) =>
+                                          val!.isEmpty ? 'Enter an email' : null,
+                                      onChanged: (val) {
+                                        setState(() => email = val);
+                                      },
+                                    ),
+                                    const SizedBox(height: 20.0),
+                                    TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: 'Password',
+                                        prefixIcon: Icon(Icons.lock),
+                                      ),
+                                      validator: (val) => val!.length < 6
+                                          ? 'Password must be at least 6 characters long'
+                                          : null,
+                                      obscureText: true,
+                                      onChanged: (val) {
+                                        setState(() => password = val);
+                                      },
+                                    ),
+                                    const SizedBox(height: 30),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.blue,
+                                      ),
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          setState(() => loading = true);
+                                          dynamic result =
+                                              await _auth.registerWithEmailAndPassword(
+                                                  email, password, username);
+                                          if (result == null) {
+                                            setState(() {
+                                              error = 'Please supply a valid email';
+                                              loading = false;
+                                            });
+                                          }
+                                        }
+                                      },
+                                      child: const Text(
+                                        'Register',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 12.0),
+                                    Text(
+                                      error,
+                                      style: const TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 14.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  const Text('Already have an account?'),
+                                  TextButton(
+                                    onPressed: () {
+                                      widget.toggleView();
+                                    },
+                                    child: const Text(
+                                      'Sign In',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );
