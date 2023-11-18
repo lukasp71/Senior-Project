@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:senior_project/education_section/business_modules/firewall_module/firewall.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
 const String subsectionTitle = 'Anonymous Browsing';
 const String content = '''
@@ -41,8 +43,7 @@ encrypt all communication between you and that website.
   Make sure the apps you are using only use the features of your device it REALLY needs. 
 ''';
 
-class FirewallPage extends StatelessWidget {
-
+class AnonymousBrowsing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -51,13 +52,13 @@ class FirewallPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => FirewallPage()),
         );
       },
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
         );
       },
     );

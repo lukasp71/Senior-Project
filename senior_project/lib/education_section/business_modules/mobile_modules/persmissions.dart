@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
 const String subsectionTitle = 'Historical Context of Cybersecurity';
 const String content = '''
@@ -59,7 +60,6 @@ For more details on App Permissions, visit: https://developer.android.com/guide/
 ''';
 
 class AppPermissionPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -68,13 +68,13 @@ class AppPermissionPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
         );
       },
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ()),
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
         );
       },
     );

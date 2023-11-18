@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 import 'package:senior_project/education_section/screens/education_module_overview.dart';
 
 void main() => runApp(EducationHomePage());
@@ -67,6 +68,11 @@ class MyHomePage extends StatelessWidget {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BusinessModulePage()),
+                    );
                     // Add your navigation logic here for the second category
                   },
                   child: const CyberSecurityCategory("Cybersecurity for Businesses"),
