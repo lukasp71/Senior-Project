@@ -14,6 +14,9 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/intro_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/prevention_methods_page.dart';
+import 'package:senior_project/education_section/user_education_quizzes/intro_module_quiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/malware_module_quiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/threat_attack_module_quiz.dart';
 
 void main() => runApp(MaterialApp(
       home: ModulePage(),
@@ -32,20 +35,23 @@ class _ModulePageState extends State<ModulePage> {
       'Section 1.3: Key Concepts',
       'Section 1.4: History and Evolution of Cyber Threats',
       'Section 1.5: Career Opportunities',
+      'Quiz 1',
     ],
     'Chapter 2: Cyber Threats and Attacks': [
       'Section 2.1: Intro to Threats and Attacks',
       'Section 2.2: Common Threats',
       'Section 2.3: Attack Methodology',
       'Section 2.4: Incident Response',
-      'Section 2.5: Prevention Methods'
+      'Section 2.5: Prevention Methods',
+      'Quiz 2',
     ],
     'Chapter 3: Malware': [
       'Section 3.1: Intro to Malware',
       'Section 3.2: Types of Malware',
       'Section 3.3: How Malware Spreads',
       'Section 3.4: The Impact of Malware',
-      'Section 3.5: Prevention and Remediation'
+      'Section 3.5: Prevention and Remediation',
+      'Quiz 3',
     ],
     'Chapter 4: Social Engineering': [],
     'Encryption': ['Insert subsections here']
@@ -67,6 +73,9 @@ class _ModulePageState extends State<ModulePage> {
     'Section 3.3: How Malware Spreads': () => HowMalwareSpreadsPage(),
     'Section 3.4: The Impact of Malware': () => ImpactOfMalwarePage(),
     'Section 3.5: Prevention and Remediation': () => PreventionAndRemediationPage(),
+    'Quiz 1': () => IntroQuizPage(),
+    'Quiz 2': () => MalwareQuizPage(),
+    'Quiz 3': () => ThreatAttackQuizPage()
   };
 
   void navigateToSection(String sectionTitle) {

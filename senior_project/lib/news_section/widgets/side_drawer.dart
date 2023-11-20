@@ -9,6 +9,7 @@ import 'package:senior_project/database/services/databse.dart';
 import 'package:senior_project/education_section/screens/education_home_page.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/screens/home_page.dart';
+import 'package:senior_project/news_section/widgets/user_profile_page.dart';
 import 'package:senior_project/vulnerability_section/vulnerability_page.dart';
 import 'package:senior_project/database/models/userinfo.dart';
 
@@ -23,34 +24,65 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
           stream: _authService.user, // listening to the user stream
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
-              // This means the user is authenticated
+              // User is authenticated
               Users user = snapshot.data as Users;
-              String? uid = user.uid;
-              String uidString = "";
-              if (uid != null) {
-                uidString = uid;
-              }
+              String uidString = user.uid ?? "";
               DatabaseService service = DatabaseService(uid: uidString);
-              //List<UserInformation> userinfo = service
-              //    .userDatafromSnapshot(snapshot as QuerySnapshot<Object?>);
-              return UserAccountsDrawerHeader(
-                accountName:
-                    Text(uidString ?? "User"), // Replace with the user's name
-                accountEmail: Text(uidString ??
-                    "email@example.com"), // Replace with the user's email
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.blue,
-                    size: 40,
-                  ),
-                ),
+
+              return FutureBuilder<List<String>>(
+                future: Future.wait([
+                  service.getUserUsername(),
+                  service.getUserEmail(),
+                ]),
+                builder: (context, asyncSnapshot) {
+                  if (asyncSnapshot.hasData) {
+                    String username = asyncSnapshot.data![0];
+                    String email = asyncSnapshot.data![1];
+                    return UserAccountsDrawerHeader(
+                      accountName: Text(username), // Display the user's name
+                      accountEmail: Text(email), // Display the user's email
+                      currentAccountPicture: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserProfilePage(
+                                  parentContext: context, snapshot: snapshot),
+                            ),
+                          );
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.blue,
+                            size: 40,
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    // Display loading or default content while the data is being fetched
+                    return UserAccountsDrawerHeader(
+                      accountName: const Text("Loading..."),
+                      accountEmail: const Text("Loading..."),
+                      currentAccountPicture: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.blue,
+                          size: 40,
+                        ),
+                      ),
+                    );
+                  }
+                },
               );
             } else {
+              // User is not authenticated
               return const UserAccountsDrawerHeader(
-                accountName: Text('username'), // Replace with the user's name
-                accountEmail: Text('email'), // Replace with the user's email
+                accountName: Text('username'), // Default name
+                accountEmail: Text('email'), // Default email
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(
@@ -60,7 +92,6 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
                   ),
                 ),
               );
-              // This means the user is not authenticated
             }
           },
         ),

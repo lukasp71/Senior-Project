@@ -46,7 +46,8 @@ class HomePage extends StatelessWidget {
                         }
                       },
                       child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 150), // Maximum width for the Card
+                        constraints: const BoxConstraints(
+                            maxWidth: 150), // Maximum width for the Card
                         child: Card(
                           elevation: 5,
                           shape: RoundedRectangleBorder(
@@ -119,7 +120,9 @@ class HomePage extends StatelessWidget {
                                   }
                                 },
                                 child: ConstrainedBox(
-                                  constraints: const BoxConstraints(maxWidth: 150), // Maximum width for the Card
+                                  constraints: const BoxConstraints(
+                                      maxWidth:
+                                          150), // Maximum width for the Card
                                   child: Card(
                                     elevation: 5,
                                     shape: RoundedRectangleBorder(
@@ -128,7 +131,8 @@ class HomePage extends StatelessWidget {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             instance.title,
@@ -140,7 +144,8 @@ class HomePage extends StatelessWidget {
                                           const SizedBox(height: 8),
                                           Text(
                                             instance.description ?? '',
-                                            style: const TextStyle(fontSize: 14),
+                                            style:
+                                                const TextStyle(fontSize: 14),
                                           ),
                                         ],
                                       ),

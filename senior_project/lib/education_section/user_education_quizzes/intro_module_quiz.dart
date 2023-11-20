@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(home: QuizPage()));
+void main() => runApp(MaterialApp(home: IntroQuizPage()));
 
-class QuizPage extends StatefulWidget {
+class IntroQuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
-class _QuizPageState extends State<QuizPage> {
+class _QuizPageState extends State<IntroQuizPage> {
   final List<String> questions = [
     'What is cybersecurity?',
     'Why is cybersecurity important?',
