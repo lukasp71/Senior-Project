@@ -14,6 +14,9 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/intro_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/prevention_methods_page.dart';
+import 'package:senior_project/education_section/user_education_quizzes/intro_module_quiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/malware_module_quiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/threat_attack_module_quiz.dart';
 
 void main() => runApp(MaterialApp(
       home: ModulePage(),
@@ -32,20 +35,23 @@ class _ModulePageState extends State<ModulePage> {
       'Key Concepts',
       'History and Evolution of Cyber Threats',
       'Career Opportunities',
+      'Quiz 1'
     ],
     'Cyber Threats and Attacks': [
       'Intro to Threats and Attacks',
       'Common Threats',
       'Attack Methodology',
       'Incident Response',
-      'Prevention Methods'
+      'Prevention Methods',
+      'Quiz 2'
     ],
     'Malware': [
       'Intro to Malware',
       'Types of Malware',
       'How Malware Spreads',
       'The Impact of Malware',
-      'Prevention and Remidiation'
+      'Prevention and Remidiation',
+      'Quiz 3'
     ],
     'Social Engineering': [],
     'Encryption': ['Insert subsections here']
@@ -67,6 +73,9 @@ class _ModulePageState extends State<ModulePage> {
     'How Malware Spreads': () => HowMalwareSpreadsPage(),
     'The Impact of Malware': () => ImpactOfMalwarePage(),
     'Prevention and Remidiation': () => PreventionAndRemediationPage(),
+    'Quiz 1': () => IntroQuizPage(),
+    'Quiz 2': () => MalwareQuizPage(),
+    'Quiz 3': () => ThreatAttackQuizPage()
   };
 
   void navigateToSection(String sectionTitle) {
