@@ -29,50 +29,50 @@ class ModulePage extends StatefulWidget {
 
 class _ModulePageState extends State<ModulePage> {
   final Map<String, List<String>> modules = {
-    'Introduction to Cybersecurity': [
-      'Intro to Cybersecurity',
-      'Definition and Importance',
-      'Key Concepts',
-      'History and Evolution of Cyber Threats',
-      'Career Opportunities',
-      'Quiz 1'
+    'Chapter 1: Introduction to Cybersecurity': [
+      'Section 1.1: Intro to Cybersecurity',
+      'Section 1.2: Definition and Importance',
+      'Section 1.3: Key Concepts',
+      'Section 1.4: History and Evolution of Cyber Threats',
+      'Section 1.5: Career Opportunities',
+      'Quiz 1',
     ],
-    'Cyber Threats and Attacks': [
-      'Intro to Threats and Attacks',
-      'Common Threats',
-      'Attack Methodology',
-      'Incident Response',
-      'Prevention Methods',
-      'Quiz 2'
+    'Chapter 2: Cyber Threats and Attacks': [
+      'Section 2.1: Intro to Threats and Attacks',
+      'Section 2.2: Common Threats',
+      'Section 2.3: Attack Methodology',
+      'Section 2.4: Incident Response',
+      'Section 2.5: Prevention Methods',
+      'Quiz 2',
     ],
-    'Malware': [
-      'Intro to Malware',
-      'Types of Malware',
-      'How Malware Spreads',
-      'The Impact of Malware',
-      'Prevention and Remidiation',
-      'Quiz 3'
+    'Chapter 3: Malware': [
+      'Section 3.1: Intro to Malware',
+      'Section 3.2: Types of Malware',
+      'Section 3.3: How Malware Spreads',
+      'Section 3.4: The Impact of Malware',
+      'Section 3.5: Prevention and Remediation',
+      'Quiz 3',
     ],
-    'Social Engineering': [],
+    'Chapter 4: Social Engineering': [],
     'Encryption': ['Insert subsections here']
   };
 
   final Map<String, Widget Function()> sectionPages = {
-    'Intro to Cybersecurity': () => IntroToCybersecurityPage(),
-    'Definition and Importance': () => DefinitionAndImportancePage(),
-    'Key Concepts': () => KeyConceptsPage(),
-    'History and Evolution of Cyber Threats': () => HistoricalContextPage(),
-    'Career Opportunities': () => CareersInCybersecurityPage(),
-    'Intro to Threats and Attacks': () => IntroToThreatsAndAttacksPage(),
-    'Common Threats': () => CommonCyberThreatsPage(),
-    'Attack Methodology': () => AttackMethodologyPage(),
-    'Incident Response': () => IncidentResponseRecoveryPage(),
-    'Prevention Methods': () => PreventionMeasuresPage(),
-    'Intro to Malware': () => MalwareIntroPage(),
-    'Types of Malware': () => DefinitionAndTypesOfMalwarePage(),
-    'How Malware Spreads': () => HowMalwareSpreadsPage(),
-    'The Impact of Malware': () => ImpactOfMalwarePage(),
-    'Prevention and Remidiation': () => PreventionAndRemediationPage(),
+    'Section 1.1: Intro to Cybersecurity': () => IntroToCybersecurityPage(),
+    'Section 1.2: Definition and Importance': () => DefinitionAndImportancePage(),
+    'Section 1.3: Key Concepts': () => KeyConceptsPage(),
+    'Section 1.4: History and Evolution of Cyber Threats': () => HistoricalContextPage(),
+    'Section 1.5: Career Opportunities': () => CareersInCybersecurityPage(),
+    'Section 2.1: Intro to Threats and Attacks': () => IntroToThreatsAndAttacksPage(),
+    'Section 2.2: Common Threats': () => CommonCyberThreatsPage(),
+    'Section 2.3: Attack Methodology': () => AttackMethodologyPage(),
+    'Section 2.4: Incident Response': () => IncidentResponseRecoveryPage(),
+    'Section 2.5: Prevention Methods': () => PreventionMeasuresPage(),
+    'Section 3.1: Intro to Malware': () => MalwareIntroPage(),
+    'Section 3.2: Types of Malware': () => DefinitionAndTypesOfMalwarePage(),
+    'Section 3.3: How Malware Spreads': () => HowMalwareSpreadsPage(),
+    'Section 3.4: The Impact of Malware': () => ImpactOfMalwarePage(),
+    'Section 3.5: Prevention and Remediation': () => PreventionAndRemediationPage(),
     'Quiz 1': () => IntroQuizPage(),
     'Quiz 2': () => MalwareQuizPage(),
     'Quiz 3': () => ThreatAttackQuizPage()
@@ -94,24 +94,31 @@ class _ModulePageState extends State<ModulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cybersecurity Modules'),
+        centerTitle: true,
+        title:  Text('Cybersecurity Learning Modules for Everyday Users'),
         backgroundColor: const Color.fromARGB(255, 0, 94, 172),
       ),
       body: ListView.separated(
         itemCount: modules.keys.length,
-        separatorBuilder: (context, index) => const Divider(),
+        separatorBuilder: (context, index) => const Divider(thickness: 20, height: 30),
         itemBuilder: (context, index) {
           final moduleTitle = modules.keys.elementAt(index);
           return ExpansionTile(
-            title: Text(moduleTitle),
+            title: Text(
+              moduleTitle,
+              style: TextStyle(fontSize: 30.0), 
+            ),
             children: modules[moduleTitle]!
                 .map((sectionTitle) => Padding(
-                      padding: const EdgeInsets.only(left: 40.0),
+                      padding: const EdgeInsets.only(left: 0.0),
                       child: ElevatedButton(
                         onPressed: () => navigateToSection(sectionTitle),
                         child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(sectionTitle),
+                          alignment: Alignment.center,
+                          child: Text(
+                            sectionTitle,
+                            style: TextStyle(fontSize: 30.0), 
+                          ),
                         ),
                       ),
                     ))
