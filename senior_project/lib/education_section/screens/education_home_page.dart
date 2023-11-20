@@ -75,7 +75,8 @@ class MyHomePage extends StatelessWidget {
                     );
                     // Add your navigation logic here for the second category
                   },
-                  child: const CyberSecurityCategory("Cybersecurity for Businesses"),
+                  child: const CyberSecurityCategory(
+                      "Cybersecurity for Businesses"),
                 ),
               ],
             ),
