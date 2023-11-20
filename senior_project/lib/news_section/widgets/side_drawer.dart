@@ -9,6 +9,7 @@ import 'package:senior_project/database/services/databse.dart';
 import 'package:senior_project/education_section/screens/education_home_page.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/screens/home_page.dart';
+import 'package:senior_project/news_section/widgets/user_profile_page.dart';
 import 'package:senior_project/vulnerability_section/vulnerability_page.dart';
 import 'package:senior_project/database/models/userinfo.dart';
 
@@ -40,12 +41,23 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
                     return UserAccountsDrawerHeader(
                       accountName: Text(username), // Display the user's name
                       accountEmail: Text(email), // Display the user's email
-                      currentAccountPicture: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        child: Icon(
-                          Icons.person,
-                          color: Colors.blue,
-                          size: 40,
+                      currentAccountPicture: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserProfilePage(
+                                  parentContext: context, snapshot: snapshot),
+                            ),
+                          );
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.blue,
+                            size: 40,
+                          ),
                         ),
                       ),
                     );
