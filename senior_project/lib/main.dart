@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         value: AuthService().user,
         catchError: (_, __) {},
         initialData: null,
-        child: MaterialApp(
+        child: const MaterialApp(
           home: Wrapper(),
         ));
   }
@@ -26,9 +26,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
+  runApp(const MyApp());
 }
 
 /*

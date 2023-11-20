@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/business_modules/firewall_module/intrusion.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
-final String subsectionTitle = 'All About Firewalls';
-final String content = '''
+const String subsectionTitle = 'All About Firewalls';
+const String content = '''
 
 
 '### Virtual Private Neworks
@@ -38,18 +39,23 @@ a VPN, especially if on a public network.
 ''';
 
 class VPNPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  VPNPage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => IntrusionPage()),
+        );
+      },
     );
   }
 }

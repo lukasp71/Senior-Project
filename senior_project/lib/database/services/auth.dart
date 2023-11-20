@@ -49,12 +49,12 @@ class AuthService {
   Future registerWithEmailAndPassword(
       String email, String password, String username) async {
     try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      UserCredential result = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
       //create a new doccument for the user with the uid
       if (user != null) {
-        await DatabaseService(uid: user.uid).updateUserData(username, 0);
+        await DatabaseService(uid: user.uid).updateUserData(username, 0, email);
       }
       return _userFromFirebaseUser(user!);
     } catch (e) {

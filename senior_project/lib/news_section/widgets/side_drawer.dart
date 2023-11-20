@@ -1,45 +1,134 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:senior_project/database/models/user.dart';
 import 'package:senior_project/database/services/auth.dart';
+import 'package:senior_project/database/services/databse.dart';
 import 'package:senior_project/education_section/screens/education_home_page.dart';
-import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/screens/home_page.dart';
+import 'package:senior_project/news_section/widgets/user_profile_page.dart';
+import 'package:senior_project/vulnerability_section/vulnerability_page.dart';
+import 'package:senior_project/database/models/userinfo.dart';
 
 Drawer sideDrawer(BuildContext context, NewsController newsController) {
   final AuthService _authService = AuthService(); // Initialize your AuthService
 
   return Drawer(
-    backgroundColor: AppColors.lightGrey,
+    backgroundColor: Colors.blue, // Change the background color
     child: ListView(
       children: <Widget>[
-        /// Link to Education Section
+        StreamBuilder(
+          stream: _authService.user, // listening to the user stream
+          builder: (context, snapshot) {
+            if (snapshot.hasData && snapshot.data != null) {
+              // User is authenticated
+              Users user = snapshot.data as Users;
+              String uidString = user.uid ?? "";
+              DatabaseService service = DatabaseService(uid: uidString);
+
+              return FutureBuilder<List<String>>(
+                future: Future.wait([
+                  service.getUserUsername(),
+                  service.getUserEmail(),
+                ]),
+                builder: (context, asyncSnapshot) {
+                  if (asyncSnapshot.hasData) {
+                    String username = asyncSnapshot.data![0];
+                    String email = asyncSnapshot.data![1];
+                    return UserAccountsDrawerHeader(
+                      accountName: Text(username), // Display the user's name
+                      accountEmail: Text(email), // Display the user's email
+                      currentAccountPicture: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserProfilePage(
+                                  parentContext: context, snapshot: snapshot),
+                            ),
+                          );
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.blue,
+                            size: 40,
+                          ),
+                        ),
+                      ),
+                    );
+                  } else {
+                    // Display loading or default content while the data is being fetched
+                    return UserAccountsDrawerHeader(
+                      accountName: const Text("Loading..."),
+                      accountEmail: const Text("Loading..."),
+                      currentAccountPicture: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.blue,
+                          size: 40,
+                        ),
+                      ),
+                    );
+                  }
+                },
+              );
+            } else {
+              // User is not authenticated
+              return const UserAccountsDrawerHeader(
+                accountName: Text('username'), // Default name
+                accountEmail: Text('email'), // Default email
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.person,
+                    color: Colors.blue,
+                    size: 40,
+                  ),
+                ),
+              );
+            }
+          },
+        ),
         ListTile(
           title: const Text("Education Section"),
-          onTap: () => Navigator.push(
-            context as BuildContext,
-            MaterialPageRoute(builder: (context) => EducationHomePage()),
-          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => EducationHomePage()),
+            );
+          },
         ),
         ListTile(
           title: const Text("News Section"),
-          onTap: () => Navigator.push(
-              context as BuildContext, HomePage() as Route<Object?>),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+          },
         ),
-
-        /// Link to Vulnerability Section
         ListTile(
           title: const Text("Vulnerability Section"),
           onTap: () {
-            // Navigate to the vulnerability section
-            // Replace '/vulnerability' with the appropriate route for the vulnerability section
-            Get.offAllNamed('/vulnerability');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VulnerabilityPage()),
+            );
           },
         ),
-
         const Divider(),
-
-        // Using StreamBuilder to listen to authentication state
+        ListTile(
+          title: const Text("Sign Out"),
+          onTap: () {
+            _authService.signOut(); // Add sign-out functionality
+          },
+        ),
       ],
     ),
   );

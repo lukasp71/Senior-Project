@@ -5,8 +5,8 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 import 'package:senior_project/education_section/screens/education_module_overview.dart';
 
-final String subsectionTitle = 'Prevention Measures';
-final String content = '''
+const String subsectionTitle = 'Prevention Measures';
+const String content = '''
 ### Prevention Measures:
 
 #### 1. **Cyber Hygiene Basics:**

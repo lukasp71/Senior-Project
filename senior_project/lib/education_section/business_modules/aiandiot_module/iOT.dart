@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/business_modules/aiandiot_module/cyberai.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
-final String subsectionTitle = 'Anonymous Browsing';
-final String content = '''
+const String subsectionTitle = 'Anonymous Browsing';
+const String content = '''
 
 
 ### IoT Device Security
@@ -54,19 +55,24 @@ This information is provided by Fortinet, Inc.
 For more information, see https://www.fortinet.com/resources/cyberglossary/iot-security
 ''';
 
-class EmployeeTrainingPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  EmployeeTrainingPage(this.module, this.subsectionIndex);
-
+class IOT extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AIinCyber()),
+        );
+      },
     );
   }
 }

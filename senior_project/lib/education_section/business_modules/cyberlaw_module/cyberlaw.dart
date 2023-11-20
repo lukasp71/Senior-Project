@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/business_modules/cyberlaw_module/ethicalhacking.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
-final String subsectionTitle = 'Anonymous Browsing';
-final String content = '''
+const String subsectionTitle = 'Anonymous Browsing';
+const String content = '''
 
 ## Cyber Laws and Regulations in the United States
 
@@ -33,18 +34,23 @@ https://www.knowledgehut.com/blog/security/cyber-security-laws
 ''';
 
 class LawPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  LawPage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => EthicalHacking()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
+        );
+      },
     );
   }
 }

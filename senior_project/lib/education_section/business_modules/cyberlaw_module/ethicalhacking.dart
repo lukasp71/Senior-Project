@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/business_modules/cyberlaw_module/cyberlaw.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
-final String subsectionTitle = 'Anonymous Browsing';
-final String content = '''
+const String subsectionTitle = 'Anonymous Browsing';
+const String content = '''
 
 Ethical Hacking
 
@@ -58,18 +59,23 @@ https://usa.kaspersky.com/resource-center/definitions/hacker-hat-types
 ''';
 
 class EthicalHacking extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  EthicalHacking(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LawPage()),
+        );
+      },
     );
   }
 }

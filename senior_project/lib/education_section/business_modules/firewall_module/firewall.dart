@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/business_modules/firewall_module/anonymous.dart';
+import 'package:senior_project/education_section/business_modules/firewall_module/intrusion.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'All About Firewalls';
-final String content = '''
+const String subsectionTitle = 'All About Firewalls';
+const String content = '''
 
 ### What is a Firewall?
 
@@ -50,18 +51,23 @@ For more information about firewalls, go to: https://www.cisco.com/c/en/us/produ
 ''';
 
 class FirewallPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  FirewallPage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => IntrusionPage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AnonymousBrowsing()),
+        );
+      },
     );
   }
 }

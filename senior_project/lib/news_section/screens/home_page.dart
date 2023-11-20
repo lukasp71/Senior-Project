@@ -1,197 +1,165 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
-import 'package:senior_project/news_section/widgets/custom_appBar.dart';
 import 'package:senior_project/news_section/widgets/side_drawer.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
   NewsController newsController = Get.put(NewsController());
 
-  // Function to show the WelcomePage as a popup
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Threat Awareness Hub',
+          style: TextStyle(
+            fontSize: 24.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
+      ),
       drawer: sideDrawer(context, newsController),
-      appBar: customAppBar('Threat Detection Hub', context, actions: []),
-      body: Obx(() {
-        if (newsController.isLoading.value && newsController.allNews.isEmpty) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          return SingleChildScrollView(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GetBuilder<NewsController>(
-                  init: NewsController(),
-                  builder: (controller) {
-                    return CarouselSlider(
-                      options: CarouselOptions(
-                        height: 200,
-                        autoPlay: true,
-                        enlargeCenterPage: true,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            GetBuilder<NewsController>(
+              init: NewsController(),
+              builder: (controller) {
+                return ListView.builder(
+                  itemCount: controller.breakingNews.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final instance = controller.breakingNews[index];
+                    return InkWell(
+                      onTap: () async {
+                        String articleUrl = instance.url;
+                        if (await canLaunch(articleUrl)) {
+                          await launch(articleUrl);
+                        } else {
+                          print('Could not launch $articleUrl');
+                        }
+                      },
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                            maxWidth: 150), // Maximum width for the Card
+                        child: Card(
+                          elevation: 5,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  instance.urlToImage ?? "",
+                                  fit: BoxFit.fill,
+                                  height: 150,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.black12.withOpacity(0),
+                                      Colors.black,
+                                    ],
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Text(
+                                    instance.title,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      items: controller.breakingNews.map((instance) {
-                        return controller.articleNotFound.value
-                            ? const Center(
-                                child: Text("Not Found",
-                                    style: TextStyle(fontSize: 30)),
-                              )
-                            : controller.breakingNews.isEmpty
-                                ? const Center(
-                                    child: CircularProgressIndicator())
-                                : Builder(builder: (BuildContext context) {
-                                    try {
-                                      return Banner(
-                                        location: BannerLocation.topStart,
-                                        message: 'Top Headlines',
-                                        child: InkWell(
-                                          onTap: () async {
-                                            String articleUrl = instance.url;
-                                            if (await canLaunch(articleUrl)) {
-                                              await launch(articleUrl);
-                                            } else {
-                                              print(
-                                                  'Could not launch $articleUrl');
-                                            }
-                                          },
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                child: Image.network(
-                                                  instance.urlToImage ?? " ",
-                                                  fit: BoxFit.fill,
-                                                  height: double.infinity,
-                                                  width: double.infinity,
-                                                  errorBuilder: (BuildContext
-                                                          context,
-                                                      Object exception,
-                                                      StackTrace? stackTrace) {
-                                                    return Card(
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10)),
-                                                      child: const SizedBox(
-                                                        height: 200,
-                                                        width: double.infinity,
-                                                        child: Icon(Icons
-                                                            .broken_image_outlined),
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                              Positioned(
-                                                left: 0,
-                                                right: 0,
-                                                bottom: 0,
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    gradient: LinearGradient(
-                                                      colors: [
-                                                        Colors.black12
-                                                            .withOpacity(0),
-                                                        Colors.black,
-                                                      ],
-                                                      begin:
-                                                          Alignment.topCenter,
-                                                      end: Alignment
-                                                          .bottomCenter,
-                                                    ),
-                                                  ),
-                                                  child: Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                      horizontal: 5,
-                                                      vertical: 10,
-                                                    ),
-                                                    child: Container(
-                                                      margin: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 10),
-                                                      child: Text(
-                                                        instance.title,
-                                                        style: const TextStyle(
-                                                          fontSize:
-                                                              Sizes.dimen_16,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      );
-                                    } catch (e) {
-                                      if (kDebugMode) {
-                                        print(e);
-                                      }
-                                      return Container();
-                                    }
-                                  });
-                      }).toList(),
                     );
                   },
-                ),
-                const Divider(),
-                GetBuilder<NewsController>(
-                  init: NewsController(),
-                  builder: (controller) {
-                    return controller.articleNotFound.value
-                        ? const Center(child: Text('Nothing Found'))
-                        : controller.allNews.isEmpty
-                            ? const Center(child: CircularProgressIndicator())
-                            : ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: controller.allNews.length,
-                                itemBuilder: (context, index) {
-                                  index == controller.allNews.length - 1 &&
-                                          controller.isLoading.isTrue
-                                      ? const Center(
-                                          child: CircularProgressIndicator())
-                                      : const SizedBox();
-                                  return InkWell(
-                                    onTap: () async {
-                                      String articleUrl =
-                                          controller.allNews[index].url;
-                                      if (await canLaunch(articleUrl)) {
-                                        await launch(articleUrl);
-                                      } else {
-                                        print('Could not launch $articleUrl');
-                                      }
-                                    },
-                                  );
-                                },
-                              );
-                  },
-                ),
-              ],
+                );
+              },
             ),
-          );
-        }
-      }),
+            const Divider(),
+            GetBuilder<NewsController>(
+              init: NewsController(),
+              builder: (controller) {
+                return controller.articleNotFound.value
+                    ? const Center(child: Text('Nothing Found'))
+                    : controller.allNews.isEmpty
+                        ? const Center(child: CircularProgressIndicator())
+                        : ListView.builder(
+                            itemCount: controller.allNews.length,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final instance = controller.allNews[index];
+                              return InkWell(
+                                onTap: () async {
+                                  String articleUrl = instance.url;
+                                  if (await canLaunch(articleUrl)) {
+                                    await launch(articleUrl);
+                                  } else {
+                                    print('Could not launch $articleUrl');
+                                  }
+                                },
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                      maxWidth:
+                                          150), // Maximum width for the Card
+                                  child: Card(
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            instance.title,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            instance.description ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 14),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

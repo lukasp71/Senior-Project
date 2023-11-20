@@ -6,6 +6,7 @@
             "request": "launch",
             "cwd": "senior_project",
             "program": "lib\\main.dart",
+            "args": ["--web-renderer", "html"]
         }
     ]
 }

@@ -44,8 +44,8 @@ class _ModulePageState extends State<ModulePage> {
       'Intro to Malware',
       'Types of Malware',
       'How Malware Spreads',
-      'The Impact of Malware'
-          'Prevention and Remidiation'
+      'The Impact of Malware',
+      'Prevention and Remidiation'
     ],
     'Social Engineering': [],
     'Encryption': ['Insert subsections here']
@@ -85,11 +85,12 @@ class _ModulePageState extends State<ModulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cybersecurity Modules'),
+        title: const Text('Cybersecurity Modules'),
+        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
       ),
       body: ListView.separated(
         itemCount: modules.keys.length,
-        separatorBuilder: (context, index) => Divider(),
+        separatorBuilder: (context, index) => const Divider(),
         itemBuilder: (context, index) {
           final moduleTitle = modules.keys.elementAt(index);
           return ExpansionTile(

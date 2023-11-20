@@ -5,8 +5,8 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/prevention_methods_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Incident Response and Recovery';
-final String content = '''
+const String subsectionTitle = 'Incident Response and Recovery';
+const String content = '''
 ### Incident Response and Recovery:
 
 #### 1. **Introduction to Incident Response**:

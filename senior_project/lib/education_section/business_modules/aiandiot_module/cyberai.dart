@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
+import 'package:senior_project/education_section/business_modules/aiandiot_module/iOT.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
-final String subsectionTitle = 'Anonymous Browsing';
-final String content = '''
+const String subsectionTitle = 'Anonymous Browsing';
+const String content = '''
 
 AI and Machine Learning in Cybersecurity
 
@@ -60,18 +61,23 @@ For more information, see: https://usa.kaspersky.com/resource-center/definitions
 ''';
 
 class AIinCyber extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  AIinCyber(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => IOT()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
+        );
+      },
     );
   }
 }

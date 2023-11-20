@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/Module.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
+import 'package:senior_project/education_section/screens/business_module_overview.dart';
 
-final String subsectionTitle = 'Historical Context of Cybersecurity';
-final String content = '''
+const String subsectionTitle = 'Historical Context of Cybersecurity';
+const String content = '''
 
 ### App Permissions on Mobile Operating Systems.
 
@@ -60,18 +60,23 @@ For more details on App Permissions, visit: https://developer.android.com/guide/
 ''';
 
 class AppPermissionPage extends StatelessWidget {
-  final Module module;
-  final int subsectionIndex;
-
-  AppPermissionPage(this.module, this.subsectionIndex);
-
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
-      subsectionTitle,
-      content,
-      module,
-      subsectionIndex,
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
+        );
+      },
+      onBackward: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BusinessModulePage()),
+        );
+      },
     );
   }
 }

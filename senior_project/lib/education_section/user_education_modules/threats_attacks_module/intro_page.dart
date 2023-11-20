@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/common_threats_page.dart';
 import 'package:senior_project/education_section/layouts/educational_module_page.dart';
 
-final String introText = '''
+const String introText = '''
 ### Definition:
 - **Cybersecurity** is aimed at protecting individuals' and organizations' systems, applications, computing devices, sensitive data, and financial assets from various threats.
 - **Cyber threats** are potential dangers associated with cyber activities that can cause harm by way of unauthorized access, data breach, or malicious attack on network systems.
