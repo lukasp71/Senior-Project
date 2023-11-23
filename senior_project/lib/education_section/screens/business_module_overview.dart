@@ -9,10 +9,10 @@ import 'package:senior_project/education_section/business_modules/firewall_modul
 import 'package:senior_project/education_section/business_modules/firewall_module/intrusion.dart';
 import 'package:senior_project/education_section/business_modules/firewall_module/vpn.dart';
 import 'package:senior_project/education_section/business_modules/mobile_modules/persmissions.dart';
+import 'package:senior_project/news_section/widgets/appBar.dart';
 
-void main() => runApp(MaterialApp(
-      home: BusinessModulePage(),
-    ));
+void main() => runApp(
+    MaterialApp(home: BusinessModulePage(), debugShowCheckedModeBanner: false));
 
 class BusinessModulePage extends StatefulWidget {
   @override
@@ -71,9 +71,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cybersecurity Modules'),
-      ),
+      appBar: SectionAppBar(currentSection: 'Education'),
       body: ListView.separated(
         itemCount: modules.keys.length,
         separatorBuilder: (context, index) => Divider(),

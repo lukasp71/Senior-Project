@@ -17,9 +17,11 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_quizzes/intro_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/malware_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/threat_attack_module_quiz.dart';
+import 'package:senior_project/news_section/widgets/appBar.dart';
 
 void main() => runApp(MaterialApp(
       home: ModulePage(),
+      debugShowCheckedModeBanner: false,
     ));
 
 class ModulePage extends StatefulWidget {
@@ -59,11 +61,14 @@ class _ModulePageState extends State<ModulePage> {
 
   final Map<String, Widget Function()> sectionPages = {
     'Section 1.1: Intro to Cybersecurity': () => IntroToCybersecurityPage(),
-    'Section 1.2: Definition and Importance': () => DefinitionAndImportancePage(),
+    'Section 1.2: Definition and Importance': () =>
+        DefinitionAndImportancePage(),
     'Section 1.3: Key Concepts': () => KeyConceptsPage(),
-    'Section 1.4: History and Evolution of Cyber Threats': () => HistoricalContextPage(),
+    'Section 1.4: History and Evolution of Cyber Threats': () =>
+        HistoricalContextPage(),
     'Section 1.5: Career Opportunities': () => CareersInCybersecurityPage(),
-    'Section 2.1: Intro to Threats and Attacks': () => IntroToThreatsAndAttacksPage(),
+    'Section 2.1: Intro to Threats and Attacks': () =>
+        IntroToThreatsAndAttacksPage(),
     'Section 2.2: Common Threats': () => CommonCyberThreatsPage(),
     'Section 2.3: Attack Methodology': () => AttackMethodologyPage(),
     'Section 2.4: Incident Response': () => IncidentResponseRecoveryPage(),
@@ -72,7 +77,8 @@ class _ModulePageState extends State<ModulePage> {
     'Section 3.2: Types of Malware': () => DefinitionAndTypesOfMalwarePage(),
     'Section 3.3: How Malware Spreads': () => HowMalwareSpreadsPage(),
     'Section 3.4: The Impact of Malware': () => ImpactOfMalwarePage(),
-    'Section 3.5: Prevention and Remediation': () => PreventionAndRemediationPage(),
+    'Section 3.5: Prevention and Remediation': () =>
+        PreventionAndRemediationPage(),
     'Quiz 1': () => IntroQuizPage(),
     'Quiz 2': () => MalwareQuizPage(),
     'Quiz 3': () => ThreatAttackQuizPage()
@@ -93,20 +99,17 @@ class _ModulePageState extends State<ModulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title:  Text('Cybersecurity Learning Modules for Everyday Users'),
-        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
-      ),
+      appBar: SectionAppBar(currentSection: 'Education'),
       body: ListView.separated(
         itemCount: modules.keys.length,
-        separatorBuilder: (context, index) => const Divider(thickness: 20, height: 30),
+        separatorBuilder: (context, index) =>
+            const Divider(thickness: 20, height: 30),
         itemBuilder: (context, index) {
           final moduleTitle = modules.keys.elementAt(index);
           return ExpansionTile(
             title: Text(
               moduleTitle,
-              style: TextStyle(fontSize: 30.0), 
+              style: TextStyle(fontSize: 30.0),
             ),
             children: modules[moduleTitle]!
                 .map((sectionTitle) => Padding(
@@ -117,7 +120,7 @@ class _ModulePageState extends State<ModulePage> {
                           alignment: Alignment.center,
                           child: Text(
                             sectionTitle,
-                            style: TextStyle(fontSize: 30.0), 
+                            style: TextStyle(fontSize: 30.0),
                           ),
                         ),
                       ),
