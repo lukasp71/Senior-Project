@@ -1,9 +1,5 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:senior_project/database/firebase_options.dart';
 import 'package:senior_project/database/screens/authenticate/authenticate.dart';
-import 'package:senior_project/database/screens/authenticate/sign_in.dart';
-import 'package:senior_project/database/screens/authenticate/register.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key, required}) : super(key: key);
