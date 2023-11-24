@@ -18,6 +18,7 @@ import 'package:senior_project/education_section/user_education_quizzes/intro_mo
 import 'package:senior_project/education_section/user_education_quizzes/malware_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/threat_attack_module_quiz.dart';
 
+
 void main() => runApp(MaterialApp(
       home: ModulePage(),
     ));
@@ -95,55 +96,56 @@ class _ModulePageState extends State<ModulePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title:  Text('Cybersecurity Learning Modules for Everyday Users'),
+        title: Text(
+          'Cybersecurity Learning Modules for Everyday Users',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         backgroundColor: const Color.fromARGB(255, 0, 94, 172),
       ),
-      body: ListView.separated(
-        itemCount: modules.keys.length,
-        separatorBuilder: (context, index) => const Divider(thickness: 20, height: 30),
-        itemBuilder: (context, index) {
-          final moduleTitle = modules.keys.elementAt(index);
-          return ExpansionTile(
-            title: Text(
-              moduleTitle,
-              style: TextStyle(fontSize: 30.0), 
+      body: Row(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width * 0.4,
+            child: ListView.separated(
+              itemCount: modules.keys.length,
+              separatorBuilder: (context, index) => const Divider(thickness: 20, height: 30),
+              itemBuilder: (context, index) {
+                final moduleTitle = modules.keys.elementAt(index);
+                return ExpansionTile(
+                  title: Text(
+                    moduleTitle,
+                    style: TextStyle(fontSize: 30.0),
+                  ),
+                  children: modules[moduleTitle]!
+                      .map((sectionTitle) => Padding(
+                            padding: const EdgeInsets.only(left: 0.0),
+                            child: ElevatedButton(
+                              onPressed: () => navigateToSection(sectionTitle),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  sectionTitle,
+                                  style: TextStyle(fontSize: 30.0),
+                                ),
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                );
+              },
             ),
-            children: modules[moduleTitle]!
-                .map((sectionTitle) => Padding(
-                      padding: const EdgeInsets.only(left: 0.0),
-                      child: ElevatedButton(
-                        onPressed: () => navigateToSection(sectionTitle),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            sectionTitle,
-                            style: TextStyle(fontSize: 30.0), 
-                          ),
-                        ),
-                      ),
-                    ))
-                .toList(),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class SectionPage extends StatelessWidget {
-  final String moduleTitle;
-  final String sectionTitle;
-
-  SectionPage(this.moduleTitle, this.sectionTitle);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('$moduleTitle: $sectionTitle'),
-      ),
-      body: Center(
-        child: Text('Content for $sectionTitle'),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.6,
+            padding: EdgeInsets.all(16.0),
+            child: Center(
+              child: Text(
+                'Select a section to view its content.',
+                style: TextStyle(fontSize: 20.0),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

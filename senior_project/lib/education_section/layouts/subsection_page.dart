@@ -20,41 +20,7 @@ class SubsectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          subsectionTitle,
-          style: GoogleFonts.poppins(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
-  
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              if (value == 'returnToMain') {
-                // Use Navigator to pop back to the main page (MainPage)
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => const MyApp(),
-                  ),
-                  (Route<dynamic> route) => false,
-                );
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return <PopupMenuEntry<String>>[
-                const PopupMenuItem<String>(
-                  value: 'returnToMain',
-                  child: Text('Home Page'),
-                ),
-                // Add more menu items as needed
-              ];
-            },
-          ),
-        ],
-      ),
+     
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -81,26 +47,7 @@ class SubsectionPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: onBackward,
-                iconSize: 30.0,
-              ),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward),
-                onPressed: onForward,
-                iconSize: 30.0,
-              ),
-            ],
-          ),
-        ),
-      ),
+      
     );
   }
 }
