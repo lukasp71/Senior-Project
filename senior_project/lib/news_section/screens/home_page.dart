@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:senior_project/news_section/constants/constants.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
-import 'package:senior_project/news_section/widgets/side_drawer.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
   NewsController newsController = Get.put(NewsController());
@@ -12,17 +12,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Threat Awareness Hub',
-          style: TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
-      ),
-      drawer: sideDrawer(context, newsController),
+      appBar: SectionAppBar(currentSection: 'News'),
+      //drawer: sideDrawer(context, newsController),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

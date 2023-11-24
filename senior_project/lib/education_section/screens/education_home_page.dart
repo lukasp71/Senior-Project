@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/screens/business_module_overview.dart';
 import 'package:senior_project/education_section/screens/education_module_overview.dart';
+import 'package:senior_project/news_section/widgets/appBar.dart';
 
 void main() => runApp(EducationHomePage());
 
@@ -8,12 +9,12 @@ class EducationHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cybersecurity Homepage',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
+        title: 'Cybersecurity Homepage',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: MyHomePage(),
+        debugShowCheckedModeBanner: false);
   }
 }
 
@@ -21,6 +22,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: SectionAppBar(currentSection: 'Education'),
       backgroundColor: Colors.purple[100], // You can adjust this color
       body: Stack(
         children: [

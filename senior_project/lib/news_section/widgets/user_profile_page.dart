@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/models/user.dart';
-import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/database/services/databse.dart';
 
 class UserProfilePage extends StatefulWidget {
