@@ -46,7 +46,7 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
                             ),
                           );
                         },
-                        child: CircleAvatar(
+                        child: const CircleAvatar(
                           backgroundColor: Colors.white,
                           child: Icon(
                             Icons.person,
@@ -58,9 +58,9 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
                     );
                   } else {
                     // Display loading or default content while the data is being fetched
-                    return UserAccountsDrawerHeader(
-                      accountName: const Text("Loading..."),
-                      accountEmail: const Text("Loading..."),
+                    return const UserAccountsDrawerHeader(
+                      accountName: Text("Loading..."),
+                      accountEmail: Text("Loading..."),
                       currentAccountPicture: CircleAvatar(
                         backgroundColor: Colors.white,
                         child: Icon(

@@ -21,10 +21,10 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: const Color.fromARGB(255, 0, 94, 172), // Dark blue color
       elevation: 0,
-      title: Text(
+      title: const Text(
         'Threat Awareness Hub',
         style:
-            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
       actions: <Widget>[
         _buildSectionButton(context, 'News', currentSection == 'News'),
@@ -46,7 +46,7 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Text('Sign Out'),
             ),
           ],
-          icon: Icon(Icons.person, color: Colors.white), // User profile icon
+          icon: const Icon(Icons.person, color: Colors.white), // User profile icon
         ),
       ],
     );
@@ -79,7 +79,7 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Text(
         title,
         style: TextStyle(
-          color: isSelected ? Color.fromARGB(255, 177, 138, 206) : Colors.white,
+          color: isSelected ? const Color.fromARGB(255, 177, 138, 206) : Colors.white,
           fontWeight: FontWeight.bold,
         ),
       ),

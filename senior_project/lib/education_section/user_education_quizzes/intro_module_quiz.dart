@@ -132,7 +132,7 @@ class _QuizPageState extends State<IntroQuizPage> {
             isSubmitted = true;
           });
         },
-        child: Text('Submit'),
+        child: const Text('Submit'),
       ),
     );
   }

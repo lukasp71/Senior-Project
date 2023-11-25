@@ -50,11 +50,11 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("User Profile"),
+        title: const Text("User Profile"),
         centerTitle: true,
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -62,18 +62,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   _buildProfileField(usernameController, "Username"),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildProfileField(emailController, "Email"),
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: _updateProfile,
                     style: ElevatedButton.styleFrom(
                       primary: Theme.of(context).primaryColor,
                       onPrimary: Colors.white,
-                      padding: EdgeInsets.symmetric(vertical: 15),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                     ),
                     child:
-                        Text("Update Profile", style: TextStyle(fontSize: 18)),
+                        const Text("Update Profile", style: TextStyle(fontSize: 18)),
                   ),
                 ],
               ),
@@ -86,7 +86,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
       controller: controller,
       decoration: InputDecoration(
         labelText: label,
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {

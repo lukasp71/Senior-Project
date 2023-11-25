@@ -70,7 +70,7 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz'),
+        title: const Text('Chapter 1 Quiz'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

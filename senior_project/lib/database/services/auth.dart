@@ -1,6 +1,5 @@
-import "package:firebase_core/firebase_core.dart";
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:senior_project/database/models/user.dart';
 import 'package:senior_project/database/services/databse.dart';
 
@@ -27,7 +26,6 @@ class AuthService {
       User? user = result.user;
       return _userFromFirebaseUser(user!);
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
@@ -40,7 +38,6 @@ class AuthService {
       User? user = result.user;
       return _userFromFirebaseUser(user!);
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
@@ -58,7 +55,6 @@ class AuthService {
       }
       return _userFromFirebaseUser(user!);
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }
@@ -68,7 +64,6 @@ class AuthService {
     try {
       return await _auth.signOut();
     } catch (e) {
-      print(e.toString());
       return null;
     }
   }

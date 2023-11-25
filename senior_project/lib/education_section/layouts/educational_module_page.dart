@@ -6,7 +6,7 @@ class ModuleIntroPage extends StatelessWidget {
   final String introText;
   final VoidCallback onStart;
 
-  ModuleIntroPage({
+  const ModuleIntroPage({
     required this.moduleTitle,
     required this.introText,
     required this.onStart,
@@ -38,7 +38,7 @@ class ModuleIntroPage extends StatelessWidget {
           ],
         ),
       ),
-      drawer: SidebarMenu(
+      drawer: const SidebarMenu(
           // ... your sidebar menu code here, or import the SidebarMenu widget
           ),
     );

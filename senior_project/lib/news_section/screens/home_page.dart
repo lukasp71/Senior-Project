@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SectionAppBar(currentSection: 'News'),
-      //drawer: sideDrawer(context, newsController),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,10 +20,13 @@ class HomePage extends StatelessWidget {
             GetBuilder<NewsController>(
               init: NewsController(),
               builder: (controller) {
-                return ListView.builder(
-                  itemCount: controller.breakingNews.length,
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                  ),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.breakingNews.length,
                   itemBuilder: (context, index) {
                     final instance = controller.breakingNews[index];
                     return InkWell(
@@ -36,50 +38,47 @@ class HomePage extends StatelessWidget {
                           print('Could not launch $articleUrl');
                         }
                       },
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                            maxWidth: 150), // Maximum width for the Card
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            children: [
-                              ClipRRect(
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 300,
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
                                   instance.urlToImage ?? "",
-                                  fit: BoxFit.fill,
-                                  height: 150,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.black12.withOpacity(0),
-                                      Colors.black,
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Text(
+                            ),
+                            const SizedBox(height: 8),
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
                                     instance.title,
                                     style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
+                                      fontSize: 30,
                                       fontWeight: FontWeight.bold,
                                     ),
+                                    
                                   ),
-                                ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    instance.description ?? '',
+                                    style: const TextStyle(fontSize: 20),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -94,11 +93,14 @@ class HomePage extends StatelessWidget {
                 return controller.articleNotFound.value
                     ? const Center(child: Text('Nothing Found'))
                     : controller.allNews.isEmpty
-                        ? const Center(child: CircularProgressIndicator())
-                        : ListView.builder(
-                            itemCount: controller.allNews.length,
+                        ? const Center()
+                        : GridView.builder(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                            ),
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
+                            itemCount: controller.allNews.length,
                             itemBuilder: (context, index) {
                               final instance = controller.allNews[index];
                               return InkWell(
@@ -110,36 +112,34 @@ class HomePage extends StatelessWidget {
                                     print('Could not launch $articleUrl');
                                   }
                                 },
-                                child: ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                      maxWidth:
-                                          150), // Maximum width for the Card
-                                  child: Card(
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            instance.title,
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                child: Card(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          instance.title,
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          const SizedBox(height: 8),
-                                          Text(
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Container(
+                                          padding: const EdgeInsets.all(8),
+                                          child: Text(
                                             instance.description ?? '',
-                                            style:
-                                                const TextStyle(fontSize: 14),
+                                            style: const TextStyle(fontSize: 12),
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),

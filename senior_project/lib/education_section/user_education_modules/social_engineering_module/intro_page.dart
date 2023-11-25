@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/educational_module_page.dart';
 import 'package:senior_project/education_section/screens/education_module_overview.dart';
 
-final String introTitle = 'Introduction to Social Engineering';
-final String introContent = '''
+const String introTitle = 'Introduction to Social Engineering';
+const String introContent = '''
 ### Introduction to Social Engineering
 
 #### Definition:

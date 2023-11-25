@@ -64,6 +64,8 @@ final Map<String, Widget Function()> sectionPages = {
 };
 
 class SidebarMenu extends StatelessWidget {
+  const SidebarMenu({super.key});
+
   void navigateToSection(BuildContext context, String subsection) {
     final pageBuilder = sectionPages[subsection];
     if (pageBuilder != null) {
@@ -72,8 +74,7 @@ class SidebarMenu extends StatelessWidget {
         MaterialPageRoute(builder: (context) => pageBuilder()),
       );
     } else {
-      // Optionally, handle the case where there is no page for the given subsection title
-      print('No page found for subsection: $subsection');
+    
     }
   }
 

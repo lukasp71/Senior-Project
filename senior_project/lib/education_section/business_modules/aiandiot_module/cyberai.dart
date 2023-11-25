@@ -61,6 +61,8 @@ For more information, see: https://usa.kaspersky.com/resource-center/definitions
 ''';
 
 class AIinCyber extends StatelessWidget {
+  const AIinCyber({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -69,7 +71,7 @@ class AIinCyber extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IOT()),
+          MaterialPageRoute(builder: (context) => const IOT()),
         );
       },
       onBackward: () {

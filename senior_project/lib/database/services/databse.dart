@@ -1,5 +1,4 @@
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:senior_project/database/models/userinfo.dart';
 
 class DatabaseService {
@@ -40,9 +39,7 @@ class DatabaseService {
         return 'Unknown'; // Return 'Unknown' if document does not exist
       }
     } catch (e) {
-      // Handle any errors here
-      print('Error getting user data: $e');
-      return 'Error'; // Return 'Error' or any other appropriate default value
+      return 'Error'; 
     }
   }
 
@@ -57,9 +54,8 @@ class DatabaseService {
         return 'Unknown'; // Return 'Unknown' if document does not exist
       }
     } catch (e) {
-      // Handle any errors here
-      print('Error getting user data: $e');
-      return 'Error'; // Return 'Error' or any other appropriate default value
+     
+      return 'Error';
     }
   }
 

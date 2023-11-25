@@ -56,6 +56,8 @@ For more information, see https://www.fortinet.com/resources/cyberglossary/iot-s
 ''';
 
 class IOT extends StatelessWidget {
+  const IOT({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -70,7 +72,7 @@ class IOT extends StatelessWidget {
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AIinCyber()),
+          MaterialPageRoute(builder: (context) => const AIinCyber()),
         );
       },
     );

@@ -48,7 +48,7 @@ class NewsController extends GetxController {
     }
 
     baseUrl =
-        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=10&page=$pageNum&";
+        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=99&page=$pageNum&";
     baseUrl += 'apiKey=${Constants.NewsApiConstants.newsApiKey}';
 
     getBreakingNewsFromApi(baseUrl);
@@ -65,7 +65,7 @@ class NewsController extends GetxController {
     }
 
     baseUrl =
-        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=10&page=$pageNum&";
+        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=99&page=$pageNum&";
     baseUrl += 'apiKey=${Constants.NewsApiConstants.newsApiKey}';
 
     getAllNewsFromApi(baseUrl);
@@ -133,3 +133,4 @@ class NewsController extends GetxController {
     }
   }
 }
+

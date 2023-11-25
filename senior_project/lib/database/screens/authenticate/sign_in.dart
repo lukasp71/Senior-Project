@@ -23,7 +23,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Loading()
+        ? const Loading()
         : Scaffold(
             body: Center(
               child: Stack(
@@ -47,7 +47,7 @@ class _SignInState extends State<SignIn> {
                         color: Colors.black.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Threat Awareness Hub: Your One Stop for Cybersecurity Knowledge',
                         style: TextStyle(
                           color: Colors.white,
@@ -66,7 +66,7 @@ class _SignInState extends State<SignIn> {
                         color: Colors.black.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'The Latest Cybersecurity-related News Articles at your disposal',
                         style: TextStyle(
                           color: Colors.white,
@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
                         color: Colors.black.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Cybersecurity Education Modules available for Personal Users and Businesses',
                         style: TextStyle(
                           color: Colors.white,
@@ -104,7 +104,7 @@ class _SignInState extends State<SignIn> {
                         color: Colors.black.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Quizzes to Assess Your Knowledge',
                         style: TextStyle(
                           color: Colors.white,
@@ -123,7 +123,7 @@ class _SignInState extends State<SignIn> {
                         color: Colors.black.withOpacity(0.5),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Access the Latest information about Vulnerabilities',
                         style: TextStyle(
                           color: Colors.white,

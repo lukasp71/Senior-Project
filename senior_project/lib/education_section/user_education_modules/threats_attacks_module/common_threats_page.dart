@@ -5,8 +5,8 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/intro_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Common Cyber Threats';
-final String content = '''
+const String subsectionTitle = 'Common Cyber Threats';
+const String content = '''
 ### Definition and Types of Common Cyber Threats:
 - **Malware**:
   - Definition: Malware, short for malicious software, refers to a variety of software types designed to access, damage, or steal information from systems and networks without the owner's consent.

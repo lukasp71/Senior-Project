@@ -46,10 +46,10 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
   };
 
   final Map<String, Widget> sectionPages = {
-    'AI in Cybersecurity': AIinCyber(),
-    'IOT': IOT(),
-    'Intro to Cyber Laws': LawPage(),
-    'Ethical Hacking': EthicalHacking(),
+    'AI in Cybersecurity': const AIinCyber(),
+    'IOT': const IOT(),
+    'Intro to Cyber Laws': const LawPage(),
+    'Ethical Hacking': const EthicalHacking(),
     'Anonymous Browsing': AnonymousBrowsing(),
     'Types of Firewalls': FirewallPage(),
     'Intrusion Prevention Software': IntrusionPage(),
@@ -62,7 +62,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cybersecurity Learning Modules for Businesses and Employees', style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('Cybersecurity Learning Modules for Businesses and Employees', style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: const Color.fromARGB(255, 0, 94, 172),
       ),
       body: Row(
@@ -71,13 +71,13 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
             width: MediaQuery.of(context).size.width * 0.4,
             child: ListView.separated(
               itemCount: modules.keys.length,
-              separatorBuilder: (context, index) => Divider(),
+              separatorBuilder: (context, index) => const Divider(),
               itemBuilder: (context, index) {
                 final moduleTitle = modules.keys.elementAt(index);
                 return ExpansionTile(
                   title: Text(
                     moduleTitle,
-                    style: TextStyle(fontSize: 30.0),
+                    style: const TextStyle(fontSize: 30.0),
                   ),
                   children: modules[moduleTitle]!
                       .map((sectionTitle) => Padding(
@@ -92,7 +92,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   sectionTitle,
-                                  style: TextStyle(fontSize: 30.0),
+                                  style: const TextStyle(fontSize: 30.0),
                                 ),
                               ),
                             ),
@@ -104,10 +104,10 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
           ),
           Container(
             width: MediaQuery.of(context).size.width * 0.6,
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: selectedSection.isNotEmpty
                 ? sectionPages[selectedSection]!
-                : Center(
+                : const Center(
                     child: Text(
                       'Select a section to view its content.',
                       style: TextStyle(fontSize: 20.0),

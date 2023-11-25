@@ -56,8 +56,7 @@ class _ModulePageState extends State<ModulePage> {
   final Map<String, Widget> sectionPages = {
     'Section 1.1: Definition and Importance': DefinitionAndImportancePage(),
     'Section 1.2: Key Concepts': KeyConceptsPage(),
-    'Section 1.3: History and Evolution of Cyber Threats':
-        HistoricalContextPage(),
+    'Section 1.3: History and Evolution of Cyber Threats': HistoricalContextPage(),
     'Section 1.4: Career Opportunities': CareersInCybersecurityPage(),
     'Section 2.1: Common Threats': CommonCyberThreatsPage(),
     'Section 2.2: Attack Methodology': AttackMethodologyPage(),
@@ -75,9 +74,9 @@ class _ModulePageState extends State<ModulePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
             'Cybersecurity Learning Modules for Businesses and Employees',
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+            style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: const Color.fromARGB(255, 0, 94, 172),
       ),
       body: Row(
@@ -86,13 +85,13 @@ class _ModulePageState extends State<ModulePage> {
             width: MediaQuery.of(context).size.width * 0.4,
             child: ListView.separated(
               itemCount: modules.keys.length,
-              separatorBuilder: (context, index) => Divider(),
+              separatorBuilder: (context, index) => const Divider(),
               itemBuilder: (context, index) {
                 final moduleTitle = modules.keys.elementAt(index);
                 return ExpansionTile(
                   title: Text(
                     moduleTitle,
-                    style: TextStyle(fontSize: 30.0),
+                    style: const TextStyle(fontSize: 30.0),
                   ),
                   children: modules[moduleTitle]!
                       .map((sectionTitle) => Padding(
@@ -107,7 +106,7 @@ class _ModulePageState extends State<ModulePage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   sectionTitle,
-                                  style: TextStyle(fontSize: 30.0),
+                                  style: const TextStyle(fontSize: 30.0),
                                 ),
                               ),
                             ),
@@ -119,10 +118,10 @@ class _ModulePageState extends State<ModulePage> {
           ),
           Container(
             width: MediaQuery.of(context).size.width * 0.6,
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: selectedSection.isNotEmpty
                 ? sectionPages[selectedSection]!
-                : Center(
+                : const Center(
                     child: Text(
                       'Select a section to view its content.',
                       style: TextStyle(fontSize: 20.0),
