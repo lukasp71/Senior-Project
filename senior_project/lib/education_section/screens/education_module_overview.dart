@@ -14,6 +14,7 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_quizzes/intro_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/malware_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/threat_attack_module_quiz.dart';
+import 'package:senior_project/news_section/widgets/appBar.dart';
 
 void main() => runApp(MaterialApp(
       home: ModulePage(),
@@ -74,12 +75,7 @@ class _ModulePageState extends State<ModulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-            'Cybersecurity Learning Modules for Businesses and Employees',
-            style: const TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
-      ),
+      appBar: SectionAppBar(currentSection: 'Education'),
       body: Row(
         children: [
           Container(

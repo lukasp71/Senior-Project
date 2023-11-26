@@ -54,7 +54,8 @@ class AuthService {
       User? user = result.user;
       //create a new doccument for the user with the uid
       if (user != null) {
-        await DatabaseService(uid: user.uid).updateUserData(username, 0, email);
+        await DatabaseService(uid: user.uid)
+            .updateUserData(username, email, 0, 0, 0, 0, 0, 0);
       }
       return _userFromFirebaseUser(user!);
     } catch (e) {
