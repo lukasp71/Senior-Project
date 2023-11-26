@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/education_section/screens/education_home_page.dart';
 import 'package:senior_project/news_section/screens/home_page.dart';
+import 'package:senior_project/news_section/widgets/user_profile_page.dart';
 import 'package:senior_project/vulnerability_section/vulnerability_page.dart';
 
 class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -15,6 +17,8 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.currentSection,
   })  : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
+
+  FirebaseAuth user = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +41,21 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
             // Handle the selection
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-            const PopupMenuItem<String>(
-              value: 'Profile',
-              child: Text('Profile'),
-            ),
-            const PopupMenuItem<String>(
+            PopupMenuItem<String>(
+                value: 'Profile',
+                child: Text('Profile'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfilePage()));
+                }),
+            PopupMenuItem<String>(
               value: 'SignOut',
               child: Text('Sign Out'),
+              onTap: () {
+                user.signOut();
+              },
             ),
           ],
           icon: Icon(Icons.person, color: Colors.white), // User profile icon
@@ -73,7 +85,7 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
             MaterialPageRoute(builder: (context) => EducationHomePage()),
           );
         } else {
-          _authService.signOut();
+          ;
         }
       },
       child: Text(

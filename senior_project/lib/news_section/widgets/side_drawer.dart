@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:senior_project/database/models/user.dart';
 import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/database/services/databse.dart';
@@ -128,3 +128,4 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
     ),
   );
 }
+*/

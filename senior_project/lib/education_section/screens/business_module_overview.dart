@@ -9,6 +9,7 @@ import 'package:senior_project/education_section/business_modules/firewall_modul
 import 'package:senior_project/education_section/business_modules/firewall_module/intrusion.dart';
 import 'package:senior_project/education_section/business_modules/firewall_module/vpn.dart';
 import 'package:senior_project/education_section/business_modules/mobile_modules/persmissions.dart';
+import 'package:senior_project/news_section/widgets/appBar.dart';
 
 void main() => runApp(MaterialApp(
       home: BusinessModulePage(),
@@ -61,10 +62,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Cybersecurity Learning Modules for Businesses and Employees', style: const TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: const Color.fromARGB(255, 0, 94, 172),
-      ),
+      appBar: SectionAppBar(currentSection: 'Education'),
       body: Row(
         children: [
           Container(
