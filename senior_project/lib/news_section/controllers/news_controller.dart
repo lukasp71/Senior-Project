@@ -48,7 +48,7 @@ class NewsController extends GetxController {
     }
 
     baseUrl =
-        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=99&page=$pageNum&";
+        "https://newsapi.org/v2/everything?q=cybersecurity&pageSize=100&page=$pageNum&";
     baseUrl += 'apiKey=${Constants.NewsApiConstants.newsApiKey}';
 
     getBreakingNewsFromApi(baseUrl);

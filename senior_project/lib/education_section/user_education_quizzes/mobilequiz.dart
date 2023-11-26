@@ -13,7 +13,7 @@ class _QuizPageState extends State<QuizPage> {
     'What can Machine Learning do for us?',
     'Now that we have AI, what is a potential concern we consider?',
     'What is something that most devices have that IoT devices do not?',
-    'Which historical event significantly impacted the evolution of cybersecurity?',
+    'Which one of these devices is an IoT Device?',
   ];
 
   final List<List<String>> choices = [
@@ -42,10 +42,10 @@ class _QuizPageState extends State<QuizPage> {
       'Encryption',
     ],
     [
-      'The Morris Worm',
-      'The invention of the internet',
-      'The Y2K bug',
-      'The creation of the first antivirus software',
+      'Smart Thermostat',
+      'Electric Car',
+      'iPhone',
+      'Computers',
     ],  
   ];
 
