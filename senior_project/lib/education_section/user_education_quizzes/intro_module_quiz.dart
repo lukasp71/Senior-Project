@@ -147,8 +147,6 @@ class _QuizPageState extends State<IntroQuizPage> {
     String uid = user?.uid ?? "";
     DatabaseService service = DatabaseService(uid: uid);
     service.updateQuizScore('IntroModuleQuizScore', score);
-    // TODO: Call your updateQuizScore function here
-    // Example: DatabaseService(uid: yourUserId).updateQuizScore('yourModuleName', score);
 
     _showScoreDialog(score);
   }

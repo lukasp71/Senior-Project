@@ -7,12 +7,18 @@ import 'package:senior_project/education_section/user_education_modules/malware_
 import 'package:senior_project/education_section/user_education_modules/malware_module/malware_spread_page.dart';
 import 'package:senior_project/education_section/user_education_modules/malware_module/prevention_remidiation_page.dart';
 import 'package:senior_project/education_section/user_education_modules/malware_module/types_definition_page.dart';
+import 'package:senior_project/education_section/user_education_modules/social_engineering_module/case_study_page.dart';
+import 'package:senior_project/education_section/user_education_modules/social_engineering_module/intro_page.dart';
+import 'package:senior_project/education_section/user_education_modules/social_engineering_module/legal_ethical_page.dart';
+import 'package:senior_project/education_section/user_education_modules/social_engineering_module/prevention_strategies_page.dart';
+import 'package:senior_project/education_section/user_education_modules/social_engineering_module/tehcniques_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/attack_methodology_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/common_threats_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/prevention_methods_page.dart';
 import 'package:senior_project/education_section/user_education_quizzes/intro_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/malware_module_quiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/social_engineering_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/threat_attack_module_quiz.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
 
@@ -50,7 +56,14 @@ class _ModulePageState extends State<ModulePage> {
       'Section 3.4: Prevention and Remediation',
       'Quiz 3',
     ],
-    'Chapter 4: Social Engineering': [],
+    'Chapter 4: Social Engineering': [
+      'Section 4.1: Intro to Social Engineering',
+      'Section 4.2: Social Engineering Techniques',
+      'Section 4.3: Case Studies of Social Engineering',
+      'Section 4.4: Prevention Strategies',
+      'Section 4.5: Legal and Ethical Implications',
+      'Quiz 4'
+    ],
     'Encryption': ['Insert subsections here']
   };
 
@@ -70,7 +83,15 @@ class _ModulePageState extends State<ModulePage> {
     'Section 3.4: Prevention and Remediation': PreventionAndRemediationPage(),
     'Quiz 1': IntroQuizPage(),
     'Quiz 2': MalwareQuizPage(),
-    'Quiz 3': ThreatAttackQuizPage()
+    'Quiz 3': ThreatAttackQuizPage(),
+    'Section 4.1: Intro to Social Engineering': IntroToSocialEngineering(),
+    'Section 4.2: Social Engineering Techniques':
+        SocialEngineeringTechniquesPage(),
+    'Section 4.3: Case Studies of Social Engineering': CaseStudiesPage(),
+    'Section 4.4: Prevention Strategies': PreventionStrategiesPage(),
+    'Section 4.5: Legal and Ethical Implications':
+        LegalEthicalConsiderationsPage(),
+    'Quiz 4': SocialEngineeringQuizPage(),
   };
   @override
   Widget build(BuildContext context) {

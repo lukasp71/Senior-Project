@@ -98,4 +98,12 @@ class DatabaseService {
         .then((value) => print("Quiz Score Updated"))
         .catchError((error) => print("Failed to update quiz score: $error"));
   }
+
+  Future<void> updateUserFavorites(List<String> favoriteArticlesUrls) async {
+    return await collection
+        .doc(uid)
+        .set({'favorites': favoriteArticlesUrls}, SetOptions(merge: true))
+        .then((value) => print("Favorites Updated"))
+        .catchError((error) => print("Failed to update favorites: $error"));
+  }
 }
