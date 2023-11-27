@@ -2,14 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/services/databse.dart';
 
-void main() => runApp(MaterialApp(home: IntroQuizPage()));
+void main() => runApp(MaterialApp(home: EncryptionQuizPage()));
 
-class IntroQuizPage extends StatefulWidget {
+class EncryptionQuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
-class _QuizPageState extends State<IntroQuizPage> {
+class _QuizPageState extends State<EncryptionQuizPage> {
   final List<String> questions = [
     'What is the primary purpose of encryption?',
     'Which type of encryption uses the same key for encryption and decryption?',

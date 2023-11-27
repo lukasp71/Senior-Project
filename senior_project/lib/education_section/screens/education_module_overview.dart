@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:senior_project/education_section/user_education_modules/encryption_module/encryption_algorithms_page.dart';
+import 'package:senior_project/education_section/user_education_modules/encryption_module/encryption_future_page.dart';
+import 'package:senior_project/education_section/user_education_modules/encryption_module/encryption_in_practice_page.dart';
+import 'package:senior_project/education_section/user_education_modules/encryption_module/intro_encryption_page.dart';
 import 'package:senior_project/education_section/user_education_modules/intro_module/career_opportunity_page.dart';
 import 'package:senior_project/education_section/user_education_modules/intro_module/def_importance_page.dart';
 import 'package:senior_project/education_section/user_education_modules/intro_module/historical_content_page.dart';
@@ -16,6 +20,7 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/common_threats_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/prevention_methods_page.dart';
+import 'package:senior_project/education_section/user_education_quizzes/encryption_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/intro_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/malware_module_quiz.dart';
 import 'package:senior_project/education_section/user_education_quizzes/social_engineering_quiz.dart';
@@ -64,7 +69,13 @@ class _ModulePageState extends State<ModulePage> {
       'Section 4.5: Legal and Ethical Implications',
       'Quiz 4'
     ],
-    'Encryption': ['Insert subsections here']
+    'Chapter 5: Encryption': [
+      'Section 5.1: Intro to Encrpytion',
+      'Section: 5.2: Encryption Algorithms',
+      'Section 5.3: Encryption in Practice',
+      'Section 5.4: Future of Encryption',
+      'Quiz 5'
+    ]
   };
 
   final Map<String, Widget> sectionPages = {
@@ -92,6 +103,11 @@ class _ModulePageState extends State<ModulePage> {
     'Section 4.5: Legal and Ethical Implications':
         LegalEthicalConsiderationsPage(),
     'Quiz 4': SocialEngineeringQuizPage(),
+    'Section 5.1: Intro to Encrpytion': EncryptionFundamentalsPage(),
+    'Section: 5.2: Encryption Algorithms': EncryptionTypesPage(),
+    'Section 5.3: Encryption in Practice': EncryptionPracticePage(),
+    'Section 5.4: Future of Encryption': EncryptionChallengesFuturePage(),
+    'Quiz 5': EncryptionQuizPage(),
   };
   @override
   Widget build(BuildContext context) {
