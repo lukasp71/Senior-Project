@@ -4,27 +4,26 @@ import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
 
-// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
-  NewsController newsController = Get.put(NewsController());
+  final NewsController newsController = Get.put(NewsController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SectionAppBar(currentSection: 'News'),
-      //drawer: sideDrawer(context, newsController),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             GetBuilder<NewsController>(
-              init: NewsController(),
               builder: (controller) {
-                return ListView.builder(
-                  itemCount: controller.breakingNews.length,
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                  ),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
+                  itemCount: controller.breakingNews.length,
                   itemBuilder: (context, index) {
                     final instance = controller.breakingNews[index];
                     return InkWell(
@@ -36,116 +35,53 @@ class HomePage extends StatelessWidget {
                           print('Could not launch $articleUrl');
                         }
                       },
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(
-                            maxWidth: 150), // Maximum width for the Card
-                        child: Card(
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            children: [
-                              ClipRRect(
+                      child: Card(
+                        elevation: 10,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 300, // Set a fixed height for the Card
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
                                   instance.urlToImage ?? "",
-                                  fit: BoxFit.fill,
-                                  height: 150,
+                                  fit: BoxFit.cover,
+                                  height: double.infinity,
+                                  width: double.infinity,
                                 ),
                               ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Colors.black12.withOpacity(0),
-                                      Colors.black,
-                                    ],
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: Text(
+                            ),
+                            const SizedBox(height: 8),
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
                                     instance.title,
                                     style: const TextStyle(
                                       fontSize: 16,
-                                      color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    instance.description ?? '',
+                                    style: const TextStyle(fontSize: 18),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     );
                   },
                 );
-              },
-            ),
-            const Divider(),
-            GetBuilder<NewsController>(
-              init: NewsController(),
-              builder: (controller) {
-                return controller.articleNotFound.value
-                    ? const Center(child: Text('Nothing Found'))
-                    : controller.allNews.isEmpty
-                        ? const Center(child: CircularProgressIndicator())
-                        : ListView.builder(
-                            itemCount: controller.allNews.length,
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              final instance = controller.allNews[index];
-                              return InkWell(
-                                onTap: () async {
-                                  String articleUrl = instance.url;
-                                  if (await canLaunch(articleUrl)) {
-                                    await launch(articleUrl);
-                                  } else {
-                                    print('Could not launch $articleUrl');
-                                  }
-                                },
-                                child: ConstrainedBox(
-                                  constraints: const BoxConstraints(
-                                      maxWidth:
-                                          150), // Maximum width for the Card
-                                  child: Card(
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            instance.title,
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 8),
-                                          Text(
-                                            instance.description ?? '',
-                                            style:
-                                                const TextStyle(fontSize: 14),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          );
               },
             ),
           ],
