@@ -6,7 +6,9 @@ import 'package:senior_project/news_section/screens/home_page.dart';
 import 'package:senior_project/news_section/widgets/user_profile_page.dart';
 import 'package:senior_project/vulnerability_section/vulnerability_page.dart';
 
+// ignore: must_be_immutable
 class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
+  // ignore: unused_field
   final AuthService _authService = AuthService();
   @override
   final Size preferredSize;

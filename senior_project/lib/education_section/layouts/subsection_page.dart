@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:senior_project/main.dart';
-
-
 
 class SubsectionPage extends StatelessWidget {
   final String subsectionTitle;
@@ -20,7 +17,6 @@ class SubsectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -47,7 +43,6 @@ class SubsectionPage extends StatelessWidget {
           ),
         ),
       ),
-      
     );
   }
 }
