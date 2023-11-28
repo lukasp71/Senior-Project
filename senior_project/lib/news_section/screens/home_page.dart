@@ -35,8 +35,9 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Welcome'),
-          content: Text('This is your first time opening the app!'),
+          title: Text('Welcome to Threat Awareness Hub'),
+          content: Text(
+              'Welcome to Threat Awareness Hub, your one-stop for Cybersecurity News and Education. Take a look at the most recent cybersecurity news and vulnerabilities, as well as learn the basics of various cybersecurity concepts for you or your business.'),
           actions: <Widget>[
             TextButton(
               child: Text('Close'),
