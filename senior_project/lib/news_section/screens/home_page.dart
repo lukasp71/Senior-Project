@@ -3,9 +3,52 @@ import 'package:get/get.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final NewsController newsController = Get.put(NewsController());
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFirstLaunch();
+  }
+
+  Future<void> _checkFirstLaunch() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
+    if (isFirstLaunch) {
+      await prefs.setBool('isFirstLaunch', false);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showWelcomeDialog();
+      });
+    }
+  }
+
+  void _showWelcomeDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Welcome'),
+          content: Text('This is your first time opening the app!'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
