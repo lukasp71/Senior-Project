@@ -13,11 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<Users?>.value(
         value: AuthService().user,
-        catchError: (_, __) {},
+        catchError: (_, __) {
+          return null;
+        },
         initialData: null,
-        child: const MaterialApp(
-          home: Wrapper(),
-        ));
+        child:
+            MaterialApp(home: HomePage(), debugShowCheckedModeBanner: false));
   }
 }
 

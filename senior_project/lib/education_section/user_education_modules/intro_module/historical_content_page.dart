@@ -3,7 +3,7 @@ import 'package:senior_project/education_section/user_education_modules/intro_mo
 import 'package:senior_project/education_section/user_education_modules/intro_module/key_concepts_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-const String subsectionTitle = 'Historical Context of Cybersecurity';
+const String subsectionTitle = 'Section 1.3: Historical Context of Cybersecurity';
 const String content = '''
 ### Origins
 - The term "hacker" initially referred to individuals tinkering with technology or finding new ways of sharing information. One early instance of hacking occurred in 1963 when a phone system was hacked to make long-distance calls for free.

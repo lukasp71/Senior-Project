@@ -1,13 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:senior_project/database/services/databse.dart';
 
-void main() => runApp(MaterialApp(home: QuizPage()));
+void main() => runApp(MaterialApp(home: IntroQuizPage()));
 
-class QuizPage extends StatefulWidget {
+class IntroQuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
-class _QuizPageState extends State<QuizPage> {
+class _QuizPageState extends State<IntroQuizPage> {
   final List<String> questions = [
     'What is cybersecurity?',
     'Why is cybersecurity important?',
@@ -85,57 +87,82 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Quiz'),
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: List.generate(
             questions.length,
-            (index) {
-              return Card(
-                child: Column(
-                  children: [
-                    Text(questions[index]),
-                    ...List.generate(
-                      choices[index].length,
-                      (choiceIndex) {
-                        return RadioListTile<int>(
-                          value: choiceIndex,
-                          groupValue: userAnswers[index],
-                          onChanged: isSubmitted
-                              ? null
-                              : (value) {
-                                  setState(() {
-                                    userAnswers[index] = value;
-                                  });
-                                },
-                          title: Text(choices[index][choiceIndex]),
-                          activeColor: isSubmitted
-                              ? (choiceIndex == correctAnswers[index]
-                                  ? Colors.green
-                                  : (userAnswers[index] == choiceIndex
-                                      ? Colors.red
-                                      : null))
-                              : null,
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
+            (index) => _buildQuestionCard(index),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            isSubmitted = true;
-          });
-        },
-        child: Text('Submit'),
+        onPressed: _submitQuiz,
+        child: const Text('Submit'),
+      ),
+    );
+  }
+
+  Widget _buildQuestionCard(int index) {
+    return Card(
+      child: Column(
+        children: [
+          Text(questions[index]),
+          ...List.generate(
+            choices[index].length,
+            (choiceIndex) => RadioListTile<int>(
+              value: choiceIndex,
+              groupValue: userAnswers[index],
+              onChanged: isSubmitted
+                  ? null
+                  : (value) => setState(() => userAnswers[index] = value),
+              title: Text(choices[index][choiceIndex]),
+              activeColor: _getAnswerColor(index, choiceIndex),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Color? _getAnswerColor(int index, int choiceIndex) {
+    if (!isSubmitted) return null;
+    return choiceIndex == correctAnswers[index]
+        ? Colors.green
+        : (userAnswers[index] == choiceIndex ? Colors.red : null);
+  }
+
+  void _submitQuiz() {
+    if (isSubmitted) return; // Prevent re-submitting
+
+    int score = 0;
+    for (int i = 0; i < correctAnswers.length; i++) {
+      if (userAnswers[i] == correctAnswers[i]) {
+        score++;
+      }
+    }
+
+    setState(() => isSubmitted = true);
+    User? user = FirebaseAuth.instance.currentUser;
+    String uid = user?.uid ?? "";
+    DatabaseService service = DatabaseService(uid: uid);
+    service.updateQuizScore('IntroModuleQuizScore', score);
+
+    _showScoreDialog(score);
+  }
+
+  void _showScoreDialog(int score) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Quiz Results'),
+        content: Text('Your score: $score/${questions.length}'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
       ),
     );
   }

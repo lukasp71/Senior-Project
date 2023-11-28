@@ -1,40 +1,34 @@
-// File: lib/education_section/education_modules/social_engineering/social_engineering_intro_page.dart
-
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/layouts/educational_module_page.dart';
-import 'package:senior_project/education_section/screens/education_module_overview.dart';
+import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String introTitle = 'Introduction to Social Engineering';
-final String introContent = '''
-### Introduction to Social Engineering
+const String subsectionTitle = 'Introduction to Social Engineering Attacks';
+const String content =
+    'Social engineering is a type of cybersecurity attack that '
+    'uses deception and manipulation to convince unsuspecting users to reveal confidential '
+    'information about themselves, such as social account credentials, personal information, '
+    'banking credentials, credit card details, and more. It can occur over thxe phone, through '
+    'direct contact, or via the Internet, potentially targeting individuals or their workplaces. '
+    'Many social engineering attacks aim to deceive a victim into installing malicious software '
+    'on their device, thereby gaining full control over the targeted computer and using it to '
+    'spread the infection further within the network. Adversaries often find it easier to exploit '
+    'human errors than system vulnerabilities, making these attacks particularly devastating due '
+    'to the unpredictable nature of human behavior against such deceptive tactics. There are primarily '
+    'two deployment methods for social engineering attacks: via the Internet, with email being the most '
+    'common, and through phone or in-person deception. Attackers may use both methods to gain useful '
+    'insight into their target before launching a full-scale attack.'
+    'For more information on this topic, visit: https://digitalskills.miami.edu/related-resources/index.html';
 
-#### Definition:
-Social Engineering encompasses a variety of malicious activities conducted to deceive individuals into revealing sensitive information. Unlike direct attacks on hardware or software, social engineering targets the human element of cybersecurity. Here are some insights into what social engineering entails:
-- **Nature of Social Engineering**: At its core, social engineering is not a typical cyber attack, but rather revolves around the psychology of persuasion, targeting the mind similar to the tactics employed by traditional con men.
-- **Access Mechanism**: It's a pathway for cybercriminals to access digital networks, devices, and accounts without the need for technical expertise in bypassing security controls like firewalls and antivirus software.
-- **Deception and Manipulation**: Social engineering attacks leverage deception and manipulation to trick unsuspecting individuals into disclosing confidential information such as social account credentials, personal details, and financial information.
-- **Human Vulnerability**: Often noted as the weakest link in cybersecurity, humans can be exploited through social engineering techniques to aid in cyber attack efforts and extraction of valuable information.
-- **Techniques Utilized**: Social engineering encompasses a set of techniques widely used in orchestrating successful cyberattacks. It uniquely targets a weak component in the cybersecurity chain—the user, who unlike systems and networks, cannot be protected from social engineering by the use of tools.
-
-#### Importance:
-Understanding social engineering is crucial as it embodies a significant portion of the threats individuals and organizations face in the digital realm. Awareness and education on social engineering techniques and tactics are primary measures in building a resilient defense against such deceptive and manipulative attacks. The knowledge of how social engineering attacks are conducted, the common signs of such attacks, and the psychological principles utilized can empower individuals and organizations to establish robust protocols to identify, prevent, and respond to social engineering attempts effectively.
-
-This introductory section aims to provide a foundational understanding of social engineering, highlighting its definition, the techniques employed, and the importance of awareness to mitigate the risks associated with it. Through this knowledge, individuals can better safeguard their personal information, and organizations can enhance their overall cybersecurity posture.
-
-In the subsequent sections, we will delve deeper into the various social engineering techniques, psychological principles behind these attacks, real-world case studies, and preventive measures to combat social engineering threats.
-''';
-
-class SocialEngineeringIntroPage extends StatelessWidget {
+class IntroToSocialEngineering extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ModuleIntroPage(
-      moduleTitle: 'Introduction to Cybersecurity',
-      introText: 'This module provides an introduction to cybersecurity...',
-      onStart: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ModulePage()),
-        );
+    return SubsectionPage(
+      subsectionTitle: subsectionTitle,
+      content: content,
+      onForward: () {
+        // TODO: Implement forward navigation
+      },
+      onBackward: () {
+        // TODO: Implement backward navigation
       },
     );
   }

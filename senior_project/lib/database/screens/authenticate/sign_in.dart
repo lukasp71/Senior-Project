@@ -43,7 +43,8 @@ class _SignInState extends State<SignIn> {
                       height: 400, // Set the desired height for the sign-in box
                       child: SingleChildScrollView(
                         child: Container(
-                          width: 300, // Set the desired width for the sign-in box
+                          width:
+                              300, // Set the desired width for the sign-in box
                           padding: const EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.8),
@@ -108,8 +109,8 @@ class _SignInState extends State<SignIn> {
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {
                                       setState(() => loading = true);
-                                      dynamic result =
-                                          await _auth.signInWithEmailAndPassword(
+                                      dynamic result = await _auth
+                                          .signInWithEmailAndPassword(
                                               email, password);
                                       if (result == null) {
                                         setState(() {

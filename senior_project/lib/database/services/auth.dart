@@ -1,6 +1,4 @@
-import "package:firebase_core/firebase_core.dart";
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:senior_project/database/models/user.dart';
 import 'package:senior_project/database/services/databse.dart';
 
@@ -54,7 +52,8 @@ class AuthService {
       User? user = result.user;
       //create a new doccument for the user with the uid
       if (user != null) {
-        await DatabaseService(uid: user.uid).updateUserData(username, 0, email);
+        await DatabaseService(uid: user.uid)
+            .updateUserData(username, email, 0, 0, 0, 0, 0, 0);
       }
       return _userFromFirebaseUser(user!);
     } catch (e) {

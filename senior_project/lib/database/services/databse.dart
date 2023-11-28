@@ -1,5 +1,4 @@
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:senior_project/database/models/userinfo.dart';
 
 class DatabaseService {
@@ -8,10 +7,25 @@ class DatabaseService {
   //collection reference
   final CollectionReference collection =
       FirebaseFirestore.instance.collection('User');
-  Future updateUserData(String name, int progress, String email) async {
-    return await collection
-        .doc(uid)
-        .set({'name': name, 'progress': progress, 'email': email});
+  Future updateUserData(
+      String name,
+      String email,
+      int introModuleQuizScore,
+      int malwareModuleQuizScore,
+      int threatModuleQuizScore,
+      int iotAIModuleQuizScore,
+      int cyberLawModuleQuizScore,
+      int ethicalHackingModuleQuizScore) async {
+    return await collection.doc(uid).set({
+      'name': name,
+      'email': email,
+      'introModuleQuizScore': introModuleQuizScore,
+      'malwareModuleQuizScore': malwareModuleQuizScore,
+      'threatModuleQuizScore': threatModuleQuizScore,
+      'iotAIModuleQuizScore': iotAIModuleQuizScore,
+      'cyberLawModuleQuizScore': cyberLawModuleQuizScore,
+      'ethicalHackingModuleQuizScore': ethicalHackingModuleQuizScore
+    });
   }
 
   // user data from snapshot
@@ -19,8 +33,14 @@ class DatabaseService {
     return snapshot.docs.map<UserInformation>((doc) {
       return UserInformation(
           name: doc.get('name') ?? '',
-          moduleProgress: doc.get('modules') ?? {},
-          email: doc.get('email'));
+          email: doc.get('email'),
+          introModuleQuizScore: doc.get('introModuleQuizScore'),
+          malwareModuleQuizScore: doc.get('malwareModuleQuizScore'),
+          threatModuleQuizScore: doc.get('threatModuleQuizScore'),
+          iotAIModuleQuizScore: doc.get('iotAIModuleQuizScore'),
+          cyberLawModuleQuizScore: doc.get('cyberLawModuleQuizScore'),
+          ethicalHackingModuleQuizScore:
+              doc.get('ethicalHackingModuleQuizScore'));
     }).toList();
   }
 
@@ -66,5 +86,23 @@ class DatabaseService {
   Future<void> updateModuleProgress(
       String moduleId, Map<String, dynamic> moduleData) async {
     return await collection.doc(uid).update({'modules.$moduleId': moduleData});
+  }
+
+  Future<void> updateQuizScore(String moduleName, int score) async {
+    return await collection
+        .doc(uid)
+        .update({
+          '$moduleName': score, // Assuming quizzes is a map of modules
+        })
+        .then((value) => print("Quiz Score Updated"))
+        .catchError((error) => print("Failed to update quiz score: $error"));
+  }
+
+  Future<void> updateUserFavorites(List<String> favoriteArticlesUrls) async {
+    return await collection
+        .doc(uid)
+        .set({'favorites': favoriteArticlesUrls}, SetOptions(merge: true))
+        .then((value) => print("Favorites Updated"))
+        .catchError((error) => print("Failed to update favorites: $error"));
   }
 }

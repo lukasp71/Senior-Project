@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(home: QuizPage()));
+void main() => runApp(MaterialApp(home: ThreatAttackQuizPage()));
 
-class QuizPage extends StatefulWidget {
+class ThreatAttackQuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
-class _QuizPageState extends State<QuizPage> {
+class _QuizPageState extends State<ThreatAttackQuizPage> {
   final List<String> questions = [
     'What is phishing?',
     'What is a Distributed Denial of Service (DDoS) attack?',
@@ -148,9 +148,6 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quiz'),
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(

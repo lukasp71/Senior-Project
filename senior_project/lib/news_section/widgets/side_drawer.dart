@@ -1,8 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+/*import 'package:flutter/material.dart';
 import 'package:senior_project/database/models/user.dart';
 import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/database/services/databse.dart';
@@ -11,7 +7,6 @@ import 'package:senior_project/news_section/controllers/news_controller.dart';
 import 'package:senior_project/news_section/screens/home_page.dart';
 import 'package:senior_project/news_section/widgets/user_profile_page.dart';
 import 'package:senior_project/vulnerability_section/vulnerability_page.dart';
-import 'package:senior_project/database/models/userinfo.dart';
 
 Drawer sideDrawer(BuildContext context, NewsController newsController) {
   final AuthService _authService = AuthService(); // Initialize your AuthService
@@ -133,3 +128,4 @@ Drawer sideDrawer(BuildContext context, NewsController newsController) {
     ),
   );
 }
+*/
