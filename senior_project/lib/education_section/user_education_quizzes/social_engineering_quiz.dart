@@ -87,13 +87,6 @@ class _QuizPageState extends State<SocialEngineeringQuizPage> {
   bool isSubmitted = false;
 
   @override
-  void initState() {
-    super.initState();
-    userAnswers =
-        List.filled(questions.length, null); // Initialize with null values
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -141,7 +134,48 @@ class _QuizPageState extends State<SocialEngineeringQuizPage> {
         : (userAnswers[index] == choiceIndex ? Colors.red : null);
   }
 
-  void _submitQuiz() {
+  @override
+  void initState() {
+    super.initState();
+    userAnswers = List.filled(questions.length, null);
+    _checkQuizProgress();
+  }
+
+  void _checkQuizProgress() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    DatabaseService service = DatabaseService(uid: user?.uid ?? "");
+    bool hasAttempted = await service.getQuizProgress('attemptUserQuiz4');
+    if (hasAttempted) {
+      int previousScore = await service.getQuizScore('userQuiz4Score');
+      _showAttemptDialog(previousScore);
+    }
+  }
+
+  void _showAttemptDialog(int previousScore) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Quiz Attempt'),
+        content: Text(
+            'You have already attempted this quiz and your highest score is $previousScore. Would you like to attempt again to try and get a higher score?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // Additional logic if required when user chooses to retake the quiz
+            },
+            child: Text('Yes'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submitQuiz() async {
     if (isSubmitted) return; // Prevent re-submitting
 
     int score = 0;
@@ -151,12 +185,17 @@ class _QuizPageState extends State<SocialEngineeringQuizPage> {
       }
     }
 
-    setState(() => isSubmitted = true);
     User? user = FirebaseAuth.instance.currentUser;
-    String uid = user?.uid ?? "";
-    DatabaseService service = DatabaseService(uid: uid);
-    service.updateQuizScore('SocialEngineeringQuizScore', score);
+    DatabaseService service = DatabaseService(uid: user?.uid ?? "");
+    int previousScore = await service.getQuizScore('userQuiz4Score');
 
+    if (score > previousScore) {
+      // Update only if the new score is higher
+      service.updateQuizScore('userQuiz4Score', score);
+      service.updateQuizProgress('attemptUserQuiz4', true);
+    }
+
+    setState(() => isSubmitted = true);
     _showScoreDialog(score);
   }
 
@@ -171,8 +210,47 @@ class _QuizPageState extends State<SocialEngineeringQuizPage> {
             onPressed: () => Navigator.of(context).pop(),
             child: const Text('OK'),
           ),
+          TextButton(
+            onPressed: _showIncorrectAnswers,
+            child: const Text('Show Incorrect Answers'),
+          ),
         ],
       ),
     );
+  }
+
+  void _showIncorrectAnswers() {
+    Navigator.of(context).pop(); // Close the score dialog
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Incorrect Answers'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: _getIncorrectAnswerWidgets(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _getIncorrectAnswerWidgets() {
+    List<Widget> widgets = [];
+    for (int i = 0; i < questions.length; i++) {
+      if (userAnswers[i] != null && userAnswers[i] != correctAnswers[i]) {
+        widgets.add(Text('Q: ${questions[i]}'));
+        widgets.add(SizedBox(height: 10));
+      }
+    }
+    if (widgets.isEmpty) {
+      widgets.add(Text('No incorrect answers!'));
+    }
+    return widgets;
   }
 }
