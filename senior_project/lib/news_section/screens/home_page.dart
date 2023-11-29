@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
@@ -24,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
     if (isFirstLaunch) {
       await prefs.setBool('isFirstLaunch', false);
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
         _showWelcomeDialog();
       });
     }
@@ -70,6 +72,8 @@ class _HomePageState extends State<HomePage> {
                   itemCount: controller.breakingNews.length,
                   itemBuilder: (context, index) {
                     final instance = controller.breakingNews[index];
+                    String imageUrl = instance.urlToImage ?? "";
+
                     return InkWell(
                       onTap: () async {
                         String articleUrl = instance.url;
@@ -86,17 +90,58 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Column(
                           children: [
-                            Container(
-                              height: 300, // Set a fixed height for the Card
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  instance.urlToImage ?? "",
-                                  fit: BoxFit.cover,
-                                  height: double.infinity,
-                                  width: double.infinity,
-                                ),
-                              ),
+                            FutureBuilder(
+                              future: _getImageSize(imageUrl),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  ImageInfo? imageInfo =
+                                      snapshot.data as ImageInfo?;
+                                  bool usePlaceholder = false;
+
+                                  if (imageInfo != null &&
+                                      (imageInfo.image.width ?? 0) < 600 &&
+                                      (imageInfo.image.height ?? 0) < 600) {
+                                    usePlaceholder = true;
+                                  }
+
+                                  return Container(
+                                    height: 300,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: usePlaceholder
+                                          ? Image.asset(
+                                              'assets/cyber_background.jpg',
+                                              fit: BoxFit.cover,
+                                              height: double.infinity,
+                                              width: double.infinity,
+                                            )
+                                          : Image.network(
+                                              imageUrl,
+                                              fit: BoxFit.cover,
+                                              height: double.infinity,
+                                              width: double.infinity,
+                                              errorBuilder: (context, error,
+                                                  stackTrace) {
+                                                return Image.asset(
+                                                  'assets/cyber_background.jpg',
+                                                  fit: BoxFit.cover,
+                                                  height: double.infinity,
+                                                  width: double.infinity,
+                                                );
+                                              },
+                                            ),
+                                    ),
+                                  );
+                                } else {
+                                  return Container(
+                                    height: 300,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                }
+                              },
                             ),
                             const SizedBox(height: 8),
                             Container(
@@ -132,5 +177,26 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<ImageInfo?> _getImageSize(String imageUrl) async {
+    Completer<ImageInfo?> completer = Completer();
+    final Image image = Image.network(
+      imageUrl,
+      fit: BoxFit.cover,
+    );
+
+    image.image.resolve(ImageConfiguration()).addListener(
+      ImageStreamListener(
+        (ImageInfo image, bool synchronousCall) {
+          completer.complete(image);
+        },
+        onError: (dynamic exception, StackTrace? stackTrace) {
+          completer.completeError(exception);
+        },
+      ),
+    );
+
+    return completer.future;
   }
 }
