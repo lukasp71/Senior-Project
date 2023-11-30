@@ -50,6 +50,8 @@ all traffic going in and out of that host, and monitors it in any way possible, 
 ''';
 
 class IntrusionPage extends StatelessWidget {
+  const IntrusionPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -58,13 +60,13 @@ class IntrusionPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => VPNPage()),
+          MaterialPageRoute(builder: (context) => const VPNPage()),
         );
       },
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FirewallPage()),
+          MaterialPageRoute(builder: (context) => const FirewallPage()),
         );
       },
     );

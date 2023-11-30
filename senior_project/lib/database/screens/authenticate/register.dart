@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/shared/loading.dart';
@@ -40,10 +42,12 @@ class _RegisterState extends State<Register> {
                   ),
                   Center(
                     child: SizedBox(
-                      height: 400, // Set the desired height for the registration box
+                      height:
+                          400, // Set the desired height for the registration box
                       child: SingleChildScrollView(
                         child: Container(
-                          width: 300, // Set the desired width for the registration box
+                          width:
+                              300, // Set the desired width for the registration box
                           padding: const EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.8),
@@ -70,8 +74,9 @@ class _RegisterState extends State<Register> {
                                         labelText: 'Username',
                                         prefixIcon: Icon(Icons.person),
                                       ),
-                                      validator: (val) =>
-                                          val!.isEmpty ? 'Enter a username' : null,
+                                      validator: (val) => val!.isEmpty
+                                          ? 'Enter a username'
+                                          : null,
                                       onChanged: (val) {
                                         setState(() => username = val);
                                       },
@@ -82,8 +87,9 @@ class _RegisterState extends State<Register> {
                                         labelText: 'Email',
                                         prefixIcon: Icon(Icons.email),
                                       ),
-                                      validator: (val) =>
-                                          val!.isEmpty ? 'Enter an email' : null,
+                                      validator: (val) => val!.isEmpty
+                                          ? 'Enter an email'
+                                          : null,
                                       onChanged: (val) {
                                         setState(() => email = val);
                                       },
@@ -105,17 +111,18 @@ class _RegisterState extends State<Register> {
                                     const SizedBox(height: 30),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.blue,
+                                        backgroundColor: Colors.blue,
                                       ),
                                       onPressed: () async {
                                         if (_formKey.currentState!.validate()) {
                                           setState(() => loading = true);
-                                          dynamic result =
-                                              await _auth.registerWithEmailAndPassword(
+                                          dynamic result = await _auth
+                                              .registerWithEmailAndPassword(
                                                   email, password, username);
                                           if (result == null) {
                                             setState(() {
-                                              error = 'Please supply a valid email';
+                                              error =
+                                                  'Please supply a valid email';
                                               loading = false;
                                             });
                                           }

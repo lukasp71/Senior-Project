@@ -1,9 +1,14 @@
+// ignore_for_file: library_private_types_in_public_api, avoid_print, avoid_unnecessary_containers, deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:senior_project/database/services/databse.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserProfilePage extends StatefulWidget {
+  const UserProfilePage({super.key});
+
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
 }
@@ -18,11 +23,11 @@ class _UserProfilePageState extends State<UserProfilePage>
   // Variables to hold user data
   String username = '';
   String email = '';
-
+  List<String> favURLs = [];
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     if (user != null) {
       service = DatabaseService(uid: user!.uid);
       _loadUserData();
@@ -33,16 +38,13 @@ class _UserProfilePageState extends State<UserProfilePage>
     try {
       if (user != null) {
         service = DatabaseService(uid: user!.uid);
-        var userData =
-            await service.getUserData(); // Assuming this returns a Future
-        String fetchedUsername =
-            await service.getUserUsername(); // Await the Future<String>
-        String fetchedEmail =
-            await service.getUserEmail(); // Await the Future<String>
-
+        String fetchedUsername = await service.getUserUsername();
+        String fetchedEmail = await service.getUserEmail();
+        List<String> fetchedURLs = await service.getFavURLs();
         setState(() {
           username = fetchedUsername;
           email = fetchedEmail;
+          favURLs = fetchedURLs;
           isLoading = false;
         });
       }
@@ -73,6 +75,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                   tabs: const [
                     Tab(text: 'Profile'),
                     Tab(text: 'Quiz Scores'),
+                    Tab(text: 'Favorites'),
                   ],
                 ),
               ),
@@ -82,6 +85,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                   children: [
                     _buildProfileTab(),
                     _buildQuizScoresTab(),
+                    _buildFavoritesTab(),
                   ],
                 ),
               ),
@@ -113,9 +117,52 @@ class _UserProfilePageState extends State<UserProfilePage>
   }
 
   Widget _buildQuizScoresTab() {
-    // Replace with your quiz scores UI
-    return Center(
+    return const Center(
       child: Text('Quiz Scores will be displayed here'),
+    );
+  }
+
+  Widget _buildFavoritesTab() {
+    List<String> favoritedURLs = favURLs; // Replace with actual data
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Favorite URLs',
+            style: TextStyle(
+                color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
+          ),
+          const Divider(color: Colors.red),
+          Expanded(
+            child: ListView.builder(
+              itemCount: favoritedURLs.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () async {
+                    // Handle URL click (e.g., open the article)
+                    String url = favoritedURLs[index];
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                    } else {
+                      print('Could not launch $url');
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      favoritedURLs[index],
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 

@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:senior_project/database/screens/wrapper.dart';
 import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/database/models/user.dart';
 import 'package:senior_project/news_section/screens/home_page.dart';
@@ -17,8 +16,8 @@ class MyApp extends StatelessWidget {
           return null;
         },
         initialData: null,
-        child:
-            MaterialApp(home: HomePage(), debugShowCheckedModeBanner: false));
+        child: const MaterialApp(
+            home: HomePage(), debugShowCheckedModeBanner: false));
   }
 }
 

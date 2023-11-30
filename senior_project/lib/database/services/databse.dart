@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:senior_project/database/models/userinfo.dart';
 
@@ -115,7 +117,7 @@ class DatabaseService {
     return await collection
         .doc(uid)
         .update({
-          '$moduleName': score, // Assuming quizzes is a map of modules
+          moduleName: score, // Assuming quizzes is a map of modules
         })
         .then((value) => print("Quiz Score Updated"))
         .catchError((error) => print("Failed to update quiz score: $error"));
@@ -125,7 +127,7 @@ class DatabaseService {
     return await collection
         .doc(uid)
         .update({
-          '$moduleName': flag, // Assuming quizzes is a map of modules
+          moduleName: flag, // Assuming quizzes is a map of modules
         })
         .then((value) => print("Quiz Score Updated"))
         .catchError((error) => print("Failed to update quiz score: $error"));
@@ -136,7 +138,7 @@ class DatabaseService {
       DocumentSnapshot snapshot = await collection.doc(uid).get();
       if (snapshot.exists && snapshot.data() != null) {
         var userData = snapshot.data() as Map<String, dynamic>;
-        return userData['$moduleName'] ??
+        return userData[moduleName] ??
             'Unknown'; // Return 'Unknown' if name is not found
       } else {
         return 0; // Return 'Unknown' if document does not exist
@@ -153,7 +155,7 @@ class DatabaseService {
       DocumentSnapshot snapshot = await collection.doc(uid).get();
       if (snapshot.exists && snapshot.data() != null) {
         var userData = snapshot.data() as Map<String, dynamic>;
-        return userData['$moduleName'] ??
+        return userData[moduleName] ??
             'Unknown'; // Return 'Unknown' if name is not found
       } else {
         return false; // Return 'Unknown' if document does not exist
@@ -162,6 +164,21 @@ class DatabaseService {
       // Handle any errors here
       print('Error getting user data: $e');
       return false; // Return 'Error' or any other appropriate default value
+    }
+  }
+
+  Future<List<String>> getFavURLs() async {
+    try {
+      DocumentSnapshot snapshot = await collection.doc(uid).get();
+      if (snapshot.exists && snapshot.data() != null) {
+        var userData = snapshot.data() as Map<String, dynamic>;
+        return (userData['favURLs'] as List<dynamic>).cast<String>();
+      } else {
+        return ['Error'];
+      }
+    } catch (e) {
+      print('Error getting user data: $e');
+      return ['Error'];
     }
   }
 }

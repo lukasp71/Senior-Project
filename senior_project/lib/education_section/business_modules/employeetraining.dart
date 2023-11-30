@@ -55,6 +55,8 @@ For more details, see https://www.nationwide.com/business/solutions-center/cyber
 ''';
 
 class EmployeeTrainingPage extends StatelessWidget {
+  const EmployeeTrainingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(

@@ -39,6 +39,8 @@ a VPN, especially if on a public network.
 ''';
 
 class VPNPage extends StatelessWidget {
+  const VPNPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -53,7 +55,7 @@ class VPNPage extends StatelessWidget {
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IntrusionPage()),
+          MaterialPageRoute(builder: (context) => const IntrusionPage()),
         );
       },
     );
