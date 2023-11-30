@@ -1,20 +1,50 @@
 class UserInformation {
   String name;
   String? email;
-  final int introModuleQuizScore;
-  int malwareModuleQuizScore;
-  int threatModuleQuizScore;
-  int iotAIModuleQuizScore;
-  int cyberLawModuleQuizScore;
-  int ethicalHackingModuleQuizScore;
+  int userQuiz1Score;
+  int userQuiz2Score;
+  int userQuiz3Score;
+  int userQuiz4Score;
+  int userQuiz5Score;
+  bool attemptUserQuiz1;
+  bool attemptUserQuiz2;
+  bool attemptUserQuiz3;
+  bool attemptUserQuiz4;
+  bool attemptUserQuiz5;
+  int businessQuiz1Score;
+  int businessQuiz2Score;
+  int businessQuiz3Score;
+  int businessQuiz4Score;
+  int businessQuiz5Score;
+  bool attemptBusinessQuiz1;
+  bool attemptBusinessQuiz2;
+  bool attemptBusinessQuiz3;
+  bool attemptBusinessQuiz4;
+  bool attemptBusinessQuiz5;
+  List<String> favURLs;
 
   UserInformation(
       {required this.name,
       required this.email,
-      required this.introModuleQuizScore,
-      required this.malwareModuleQuizScore,
-      required this.threatModuleQuizScore,
-      required this.iotAIModuleQuizScore,
-      required this.cyberLawModuleQuizScore,
-      required this.ethicalHackingModuleQuizScore});
+      required this.userQuiz1Score,
+      required this.userQuiz2Score,
+      required this.userQuiz3Score,
+      required this.userQuiz4Score,
+      required this.userQuiz5Score,
+      required this.attemptUserQuiz1,
+      required this.attemptUserQuiz2,
+      required this.attemptUserQuiz3,
+      required this.attemptUserQuiz4,
+      required this.attemptUserQuiz5,
+      required this.businessQuiz1Score,
+      required this.businessQuiz2Score,
+      required this.businessQuiz3Score,
+      required this.businessQuiz4Score,
+      required this.businessQuiz5Score,
+      required this.attemptBusinessQuiz1,
+      required this.attemptBusinessQuiz2,
+      required this.attemptBusinessQuiz3,
+      required this.attemptBusinessQuiz4,
+      required this.attemptBusinessQuiz5,
+      required this.favURLs});
 }

@@ -59,6 +59,8 @@ https://usa.kaspersky.com/resource-center/definitions/hacker-hat-types
 ''';
 
 class EthicalHacking extends StatelessWidget {
+  const EthicalHacking({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -73,7 +75,7 @@ class EthicalHacking extends StatelessWidget {
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => LawPage()),
+          MaterialPageRoute(builder: (context) => const LawPage()),
         );
       },
     );

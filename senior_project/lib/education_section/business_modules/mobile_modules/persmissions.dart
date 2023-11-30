@@ -60,6 +60,8 @@ For more details on App Permissions, visit: https://developer.android.com/guide/
 ''';
 
 class AppPermissionPage extends StatelessWidget {
+  const AppPermissionPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(

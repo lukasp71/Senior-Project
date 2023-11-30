@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/business_modules/aiandiot_module/cyberai.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
@@ -56,6 +58,8 @@ For more information, see https://www.fortinet.com/resources/cyberglossary/iot-s
 ''';
 
 class IOT extends StatelessWidget {
+  const IOT({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -70,7 +74,7 @@ class IOT extends StatelessWidget {
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AIinCyber()),
+          MaterialPageRoute(builder: (context) => const AIinCyber()),
         );
       },
     );

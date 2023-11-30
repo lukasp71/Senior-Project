@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:senior_project/database/models/user.dart';
 import 'package:senior_project/database/services/databse.dart';
@@ -53,7 +55,7 @@ class AuthService {
       //create a new doccument for the user with the uid
       if (user != null) {
         await DatabaseService(uid: user.uid)
-            .updateUserData(username, email, 0, 0, 0, 0, 0, 0);
+            .updateUserData(username, email, 0, false, []);
       }
       return _userFromFirebaseUser(user!);
     } catch (e) {

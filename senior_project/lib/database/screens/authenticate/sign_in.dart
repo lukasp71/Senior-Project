@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/services/auth.dart';
 import 'package:senior_project/shared/loading.dart';
@@ -104,7 +106,7 @@ class _SignInState extends State<SignIn> {
                                 const SizedBox(height: 30),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.blue,
+                                    backgroundColor: Colors.blue,
                                   ),
                                   onPressed: () async {
                                     if (_formKey.currentState!.validate()) {

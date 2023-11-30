@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/user_education_modules/intro_module/career_opportunity_page.dart';
 import 'package:senior_project/education_section/user_education_modules/intro_module/def_importance_page.dart';
@@ -64,6 +66,8 @@ final Map<String, Widget Function()> sectionPages = {
 };
 
 class SidebarMenu extends StatelessWidget {
+  const SidebarMenu({super.key});
+
   void navigateToSection(BuildContext context, String subsection) {
     final pageBuilder = sectionPages[subsection];
     if (pageBuilder != null) {
@@ -84,10 +88,10 @@ class SidebarMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           const DrawerHeader(
-            child: Text('Modules'),
             decoration: BoxDecoration(
-              color:  Color.fromARGB(255, 0, 94, 172),
+              color: Color.fromARGB(255, 0, 94, 172),
             ),
+            child: Text('Modules'),
           ),
           ...modules
               .map((module) => ExpansionTile(
