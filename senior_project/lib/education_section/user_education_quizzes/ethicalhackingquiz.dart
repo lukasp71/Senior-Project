@@ -13,48 +13,56 @@ class _QuizPageState extends State<QuizPage> {
     'What is a benefit of a White Hat Hacker?',
     'Why are Black Hat Hackers Malicious?',
     'What is a tool that Ethical Hacker use?',
-    'Which historical event significantly impacted the evolution of cybersecurity?',
+    'What is the Health Law that went into affect in 1996?',
+    'What did the Homeland Security Act Do?',
   ];
 
   final List<List<String>> choices = [
     [
-      'It does not know anything',
-      'Humans making a mistake when configurating it',
-      'People do not know how to find AI tools',
-      'AI hacks into systems',
+      'A Mix of White and Black Hat activities',
+      'Perform malicious activities',
+      'Recover Lost Data from Customers',
+      'Conduct Penetration Testing',
     ],
     [
-      'Give us new information',
+      'They will never do something malicious to you',
       'Add new jobs',
-      'Take outliers from preset rules and place it into collections of data with similarities or oddities.',
-      'All of the above',
+      'Test your cybersecurity systems and give you advice on how to improve it',
+      'Both A and C',
     ],
     [
-      'Not enough experts in the field',
-      'Lack of Jobs',
-      'Lack of Creativity',
-      'Increase of Technical Issues',
+      'They steal company information from businesses',
+      'Conduct unauthorized activities',
+      'They can become more powerful due to ignorant employees.',
+      'All of the Above',
     ],
     [
-      'Passwords',
-      'Touch Screens',
-      'Internet Capabilities',
-      'Encryption',
+      'CCleaner',
+      'Norton Antivirus',
+      'Nmap',
+      'iTunes',
+    ],  
+    [
+      'Homeland Security Act',
+      'Affordable Care Act',
+      'Health Insurance Portability and Accountability Act (HIPAA)',
+      'Cybersecurity Information Sharing Act (CISA)',
     ],
     [
-      'The Morris Worm',
-      'The invention of the internet',
-      'The Y2K bug',
-      'The creation of the first antivirus software',
+      'Established the CIA',
+      'Established the FBI',
+      'Established the Department of Homeland Security',
+      'Established the Department of War',
     ],  
   ];
 
   final List<int> correctAnswers = [
-    1,
+    0,
+    3,
+    3,
     2,
     3,
-    3,
-    0,
+    2,
   ]; 
   late List<int?> userAnswers; 
   bool isSubmitted = false;

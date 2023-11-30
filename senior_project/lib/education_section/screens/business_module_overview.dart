@@ -24,39 +24,39 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
   String selectedSection = '';
 
   final Map<String, List<String>> modules = {
-    'AI and IOT': [
-      'AI in Cybersecurity',
-      'IOT',
+    'Chapter 1: AI and IOT': [
+      'Section 1.1: AI in Cybersecurity',
+      'Section 1.2: IOT',
     ],
-    'Cybersecurity Laws': [
-      'Intro to Cyber Laws',
-      'Ethical Hacking',
+    'Chapter 2: Cybersecurity Laws': [
+      'Section 2.1: Intro to Cyber Laws',
+      'Section 2.2: Ethical Hacking',
     ],
-    'Firewalls': [
-      'Anonymous Browsing',
-      'Types of Firewalls',
-      'Intrusion Prevention Software',
-      'Virtual Private Networks'
+    'Chapter 3: Firewalls': [
+      'Section 3.1: Anonymous Browsing',
+      'Section 3.2: Types of Firewalls',
+      'Section 3.3: Intrusion Prevention Software',
+      'Section 3.4: Virtual Private Networks'
     ],
-    'Mobile Security': [
-      'mobile permissions',
+    'Chapter 4: Mobile Security': [
+      'Section 4.1: Mobile Permissions',
     ],
-    'Employee Training': [
-      'How to train employees',
+    'Chapter 5: Employee Training': [
+      'Section 5.1: How To Train Employees',
     ]
   };
 
   final Map<String, Widget> sectionPages = {
-    'AI in Cybersecurity': AIinCyber(),
-    'IOT': IOT(),
-    'Intro to Cyber Laws': LawPage(),
-    'Ethical Hacking': EthicalHacking(),
-    'Anonymous Browsing': AnonymousBrowsing(),
-    'Types of Firewalls': FirewallPage(),
-    'Intrusion Prevention Software': IntrusionPage(),
-    'Virtual Private Networks': VPNPage(),
-    'mobile permissions': AppPermissionPage(),
-    'How to train employees': EmployeeTrainingPage(),
+    'Section 1.1: AI in Cybersecurity': AIinCyber(),
+    'Section 1.2: IOT': IOT(),
+    'Section 2.1: Intro to Cyber Laws': LawPage(),
+    'Section 2.2: Ethical Hacking': EthicalHacking(),
+    'Section 3.1: Anonymous Browsing': AnonymousBrowsing(),
+    'Section 3.2: Types of Firewalls': FirewallPage(),
+    'Section 3.3: Intrusion Prevention Software': IntrusionPage(),
+    'Section 3.4: Virtual Private Networks': VPNPage(),
+    'Section 4.1: Mobile Permissions': AppPermissionPage(),
+    'Section 5.1: How To Train Employees': EmployeeTrainingPage(),
   };
 
   @override

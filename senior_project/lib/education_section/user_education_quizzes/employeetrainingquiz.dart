@@ -1,60 +1,60 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(home: AIandIoTQuizPage()));
+void main() => runApp(MaterialApp(home: EmployeeTrainingQuiz()));
 
-class AIandIoTQuizPage extends StatefulWidget {
+class EmployeeTrainingQuiz extends StatefulWidget {
   @override
-  _AIandIoTQuizPageState createState() => _AIandIoTQuizPageState();
+  _EmployeeTrainingQuizState createState() => _EmployeeTrainingQuizState();
 }
 
-class _AIandIoTQuizPageState extends State<AIandIoTQuizPage> {
+class _EmployeeTrainingQuizState extends State<EmployeeTrainingQuiz> {
   final List<String> questions = [
-    'What is a common problem with AI?',
-    'What can Machine Learning do for us?',
-    'Now that we have AI, what is a potential concern we consider?',
-    'What is something that most devices have that IoT devices do not?',
-    'How can we make IoT devices less vulnerable?',
+    'What is a Danger of Having Untrained Employees?',
+    'What is a Benefit of Having Trained Employees',
+    'What should you do about Passwords?',
+    'What kind of Software should not be used in the workplace?',
+    'What should you do about Company Debit and Credit Cards?',
   ];
 
   final List<List<String>> choices = [
     [
-      'It does not know anything',
-      'Humans making a mistake when configurating it',
-      'People do not know how to find AI tools',
-      'AI hacks into systems',
+      'Human error can lead to a data breach',
+      'The Company will get more money',
+      'No one will want to work there',
+      'All of the Above',
     ],
     [
-      'Give us new information',
-      'Add new jobs',
-      'Take outliers from preset rules and place it into collections of data with similarities or oddities.',
+      'There will be more Employees',
+      'There is a decreased risk of security events happening',
+      'There will be an increased risk of security events happening',
       'All of the above',
     ],
     [
-      'Not enough experts in the field',
-      'Lack of Jobs',
-      'Lack of Creativity',
-      'Increase of Technical Issues',
+      'Make them easy to remember',
+      'Share them with your closest friends',
+      'Change the passwords reguarly',
+      'Keep the same password forever',
     ],
     [
-      'Passwords',
-      'Touch Screens',
-      'Internet Capabilities',
-      'Encryption',
+      'Company Applications',
+      'Unauthorized Software',
+      'Authorized Software',
+      'None of the above',
     ],
     [
-      'Put it on a Public Network',
-      'Not using them',
-      'Keep them on a seperate network',
-      'All of the Above',
+      'Make sure to set limits',
+      'Ensure they are ONLY used for company purchases',
+      'Ensure that only authorized employees have access to it',
+      'All of the above',
     ],  
   ];
 
   final List<int> correctAnswers = [
+    0,
     1,
     2,
-    0,
-    3,
     2,
+    3,
   ]; 
   late List<int?> userAnswers; 
   bool isSubmitted = false;
