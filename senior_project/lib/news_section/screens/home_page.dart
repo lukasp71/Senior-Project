@@ -189,17 +189,22 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     // Favorite button
                                     if (isLoggedIn)
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.save,
-                                          color: instance.isFavorite
-                                              ? Colors.blue
-                                              : null,
+                                      Tooltip(
+                                        message: instance.isFavorite
+                                            ? 'Remove from Saved Articles'
+                                            : 'Save this Article',
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.save,
+                                            color: instance.isFavorite
+                                                ? Colors.blue
+                                                : null,
+                                          ),
+                                          onPressed: () async {
+                                            // Save the updated favorite status
+                                            _saveFavoriteStatus(instance);
+                                          },
                                         ),
-                                        onPressed: () async {
-                                          // Save the updated favorite status
-                                          _saveFavoriteStatus(instance);
-                                        },
                                       ),
                                   ],
                                 ),

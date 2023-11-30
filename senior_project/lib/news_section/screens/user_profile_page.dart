@@ -75,7 +75,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                   tabs: const [
                     Tab(text: 'Profile'),
                     Tab(text: 'Quiz Scores'),
-                    Tab(text: 'Favorites'),
+                    Tab(text: 'Saved'),
                   ],
                 ),
               ),
@@ -131,7 +131,7 @@ class _UserProfilePageState extends State<UserProfilePage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Favorite URLs',
+            'Saved Articles/Vulnerabilities',
             style: TextStyle(
                 color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
           ),
