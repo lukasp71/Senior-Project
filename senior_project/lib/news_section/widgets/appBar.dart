@@ -64,6 +64,25 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: Text('Sign Out'),
             onTap: () {
               auth.signOut();
+
+              // Reload the current page by replacing it with itself
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    if (currentSection == 'News') {
+                      return HomePage();
+                    } else if (currentSection == 'Vulnerabilities') {
+                      return VulnerabilityPage();
+                    } else if (currentSection == 'Education') {
+                      return EducationHomePage();
+                    } else {
+                      // Handle other cases or return a default page
+                      return HomePage();
+                    }
+                  },
+                ),
+              );
             },
           ),
         ],

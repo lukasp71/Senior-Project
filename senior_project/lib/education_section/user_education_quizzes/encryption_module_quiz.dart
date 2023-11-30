@@ -179,11 +179,13 @@ class _QuizPageState extends State<EncryptionQuizPage> {
 
   void _checkQuizProgress() async {
     User? user = FirebaseAuth.instance.currentUser;
-    DatabaseService service = DatabaseService(uid: user?.uid ?? "");
-    bool hasAttempted = await service.getQuizProgress('attemptUserQuiz5');
-    if (hasAttempted) {
-      int previousScore = await service.getQuizScore('userQuiz5Score');
-      _showAttemptDialog(previousScore);
+    if (user != null) {
+      DatabaseService service = DatabaseService(uid: user.uid);
+      bool hasAttempted = await service.getQuizProgress('attemptUserQuiz5');
+      if (hasAttempted) {
+        int previousScore = await service.getQuizScore('userQuiz5Score');
+        _showAttemptDialog(previousScore);
+      }
     }
   }
 
@@ -222,13 +224,16 @@ class _QuizPageState extends State<EncryptionQuizPage> {
     }
 
     User? user = FirebaseAuth.instance.currentUser;
-    DatabaseService service = DatabaseService(uid: user?.uid ?? "");
-    int previousScore = await service.getQuizScore('userQuiz5Score');
 
-    if (score > previousScore) {
-      // Update only if the new score is higher
-      service.updateQuizScore('userQuiz5Score', score);
-      service.updateQuizProgress('attemptUserQuiz5', true);
+    if (user != null) {
+      DatabaseService service = DatabaseService(uid: user.uid);
+      int previousScore = await service.getQuizScore('userQuiz5Score');
+
+      if (score > previousScore) {
+        // Update only if the new score is higher
+        service.updateQuizScore('userQuiz5Score', score);
+        service.updateQuizProgress('attemptUserQuiz5', true);
+      }
     }
 
     setState(() => isSubmitted = true);
@@ -256,7 +261,6 @@ class _QuizPageState extends State<EncryptionQuizPage> {
   }
 
   void _showIncorrectAnswers() {
-    Navigator.of(context).pop(); // Close the score dialog
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

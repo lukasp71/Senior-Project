@@ -51,6 +51,8 @@ For more information about firewalls, go to: https://www.cisco.com/c/en/us/produ
 ''';
 
 class FirewallPage extends StatelessWidget {
+  const FirewallPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -59,13 +61,13 @@ class FirewallPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => IntrusionPage()),
+          MaterialPageRoute(builder: (context) => const IntrusionPage()),
         );
       },
       onBackward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AnonymousBrowsing()),
+          MaterialPageRoute(builder: (context) => const AnonymousBrowsing()),
         );
       },
     );

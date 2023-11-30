@@ -1,24 +1,45 @@
+// ignore_for_file: deprecated_member_use, avoid_print, use_build_context_synchronously
+
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:senior_project/database/services/databse.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
+import 'package:senior_project/news_section/models/article_model.dart'; // Import your updated ArticleModel
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   final NewsController newsController = Get.put(NewsController());
+  bool isLoggedIn = false;
 
   @override
   void initState() {
     super.initState();
     _checkFirstLaunch();
+    _checkUserLogin();
+  }
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  late DatabaseService service;
+  Future<void> _checkUserLogin() async {
+    if (auth.currentUser != null) {
+      User? user = FirebaseAuth.instance.currentUser;
+      service = DatabaseService(uid: user!.uid);
+      isLoggedIn = true;
+    }
   }
 
   Future<void> _checkFirstLaunch() async {
@@ -26,7 +47,7 @@ class _HomePageState extends State<HomePage> {
     bool isFirstLaunch = prefs.getBool('isFirstLaunch') ?? true;
     if (isFirstLaunch) {
       await prefs.setBool('isFirstLaunch', false);
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         _showWelcomeDialog();
       });
     }
@@ -37,12 +58,12 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Welcome to Threat Awareness Hub'),
-          content: Text(
+          title: const Text('Welcome to Threat Awareness Hub'),
+          content: const Text(
               'Welcome to Threat Awareness Hub, your one-stop for Cybersecurity News and Education. Take a look at the most recent cybersecurity news and vulnerabilities, as well as learn the basics of various cybersecurity concepts for you or your business.'),
           actions: <Widget>[
             TextButton(
-              child: Text('Close'),
+              child: const Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -95,17 +116,16 @@ class _HomePageState extends State<HomePage> {
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.done) {
-                                  ImageInfo? imageInfo =
-                                      snapshot.data as ImageInfo?;
+                                  ImageInfo? imageInfo = snapshot.data;
                                   bool usePlaceholder = false;
 
                                   if (imageInfo != null &&
-                                      (imageInfo.image.width ?? 0) < 600 &&
-                                      (imageInfo.image.height ?? 0) < 600) {
+                                      (imageInfo.image.width) < 600 &&
+                                      (imageInfo.image.height) < 600) {
                                     usePlaceholder = true;
                                   }
 
-                                  return Container(
+                                  return SizedBox(
                                     height: 300,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
@@ -121,8 +141,8 @@ class _HomePageState extends State<HomePage> {
                                               fit: BoxFit.cover,
                                               height: double.infinity,
                                               width: double.infinity,
-                                              errorBuilder: (context, error,
-                                                  stackTrace) {
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
                                                 return Image.asset(
                                                   'assets/cyber_background.jpg',
                                                   fit: BoxFit.cover,
@@ -134,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   );
                                 } else {
-                                  return Container(
+                                  return const SizedBox(
                                     height: 300,
                                     child: Center(
                                       child: CircularProgressIndicator(),
@@ -144,25 +164,50 @@ class _HomePageState extends State<HomePage> {
                               },
                             ),
                             const SizedBox(height: 8),
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    instance.title,
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                            Flexible(
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        instance.title,
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    instance.description ?? '',
-                                    style: const TextStyle(fontSize: 18),
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
+                                    const SizedBox(height: 8),
+                                    Flexible(
+                                      child: Text(
+                                        instance.description ?? '',
+                                        style: const TextStyle(fontSize: 18),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    // Favorite button
+                                    if (isLoggedIn)
+                                      Tooltip(
+                                        message: instance.isFavorite
+                                            ? 'Remove from Saved Articles'
+                                            : 'Save this Article',
+                                        child: IconButton(
+                                          icon: Icon(
+                                            Icons.save,
+                                            color: instance.isFavorite
+                                                ? Colors.blue
+                                                : null,
+                                          ),
+                                          onPressed: () async {
+                                            // Save the updated favorite status
+                                            _saveFavoriteStatus(instance);
+                                          },
+                                        ),
+                                      ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -186,17 +231,99 @@ class _HomePageState extends State<HomePage> {
       fit: BoxFit.cover,
     );
 
-    image.image.resolve(ImageConfiguration()).addListener(
-      ImageStreamListener(
-        (ImageInfo image, bool synchronousCall) {
-          completer.complete(image);
-        },
-        onError: (dynamic exception, StackTrace? stackTrace) {
-          completer.completeError(exception);
-        },
-      ),
-    );
+    image.image.resolve(const ImageConfiguration()).addListener(
+          ImageStreamListener(
+            (ImageInfo image, bool synchronousCall) {
+              completer.complete(image);
+            },
+            onError: (dynamic exception, StackTrace? stackTrace) {
+              completer.completeError(exception);
+            },
+          ),
+        );
 
     return completer.future;
+  }
+
+  // Helper method to save the favorite status in shared preferences
+  Future<void> _saveFavoriteStatus(ArticleModel article) async {
+    if (!isLoggedIn) {
+      // Do not proceed if the user is not logged in
+      return;
+    }
+
+    try {
+      // Get the current user's ID from Firebase Authentication
+      String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+
+      // Reference to the user's document in the "User" collection
+      DocumentReference userRef =
+          FirebaseFirestore.instance.collection('User').doc(userId);
+
+      // Get the current user's favURLs
+      List<String> currentFavURLs = [];
+
+      DocumentSnapshot userSnapshot = await userRef.get();
+      if (userSnapshot.exists && userSnapshot.data() != null) {
+        var userData = userSnapshot.data() as Map<String, dynamic>;
+        currentFavURLs = List<String>.from(userData['favURLs'] ?? []);
+      }
+
+      // Check if the article is already in favorites
+      bool isInFavorites = currentFavURLs.contains(article.url);
+
+      if (isInFavorites) {
+        // Show confirmation dialog
+        bool removeConfirmed = await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Remove from Favorites'),
+              content: const Text(
+                  'Are you sure you want to remove this article from your favorites?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: const Text('Cancel'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: const Text('Remove'),
+                ),
+              ],
+            );
+          },
+        );
+
+        // If the user confirmed removal, update the UI and remove from favorites
+        if (removeConfirmed) {
+          setState(() {
+            article.isFavorite = false;
+          });
+
+          // Remove from favorites
+          currentFavURLs.remove(article.url);
+        }
+      } else {
+        // Toggle the favorite status
+        setState(() {
+          article.isFavorite = true;
+        });
+
+        // Add to favorites
+        currentFavURLs.add(article.url);
+      }
+
+      // Update the user's document with the new favURLs
+      await userRef.update({'favURLs': currentFavURLs});
+
+      // Optional: Update the local UI to reflect the change
+      setState(() {
+        // Update the local state if needed
+      });
+    } catch (error) {
+      print('Error updating favURLs: $error');
+      // Handle the error as needed
+    }
   }
 }

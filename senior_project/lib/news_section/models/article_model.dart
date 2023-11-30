@@ -1,12 +1,22 @@
 import 'package:senior_project/news_section/models/source_model.dart';
 
 class ArticleModel {
-  ArticleModel(this.source, this.author, this.title, this.description, this.url,
-      this.urlToImage, this.publishedAt, this.content);
+  ArticleModel(
+    this.source,
+    this.author,
+    this.title,
+    this.description,
+    this.url,
+    this.urlToImage,
+    this.publishedAt,
+    this.content,
+    this.isFavorite, // New field
+  );
 
   String? author, description, urlToImage, content;
   String title, url, publishedAt;
   SourceModel source;
+  bool isFavorite; // New field
 
   Map<String, dynamic> toJson() {
     return {
@@ -17,7 +27,8 @@ class ArticleModel {
       'title': title,
       'url': url,
       'publishedAt': publishedAt,
-      'source': source,
+      'source': source.toJson(),
+      'isFavorite': isFavorite, // Include isFavorite in the JSON
     };
   }
 
@@ -30,5 +41,22 @@ class ArticleModel {
         json['urlToImage'],
         json['publishedAt'],
         json['content'],
+        json['isFavorite'] ??
+            false, // Set isFavorite from JSON (default to false)
       );
+
+  // Helper method to create a new article with the favorite status toggled
+  ArticleModel toggleFavorite() {
+    return ArticleModel(
+      source,
+      author,
+      title,
+      description,
+      url,
+      urlToImage,
+      publishedAt,
+      content,
+      !isFavorite,
+    );
+  }
 }
