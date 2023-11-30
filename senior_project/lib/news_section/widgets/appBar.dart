@@ -14,11 +14,10 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
   final String currentSection;
-
-  SectionAppBar({
-    Key? key,
-    required this.currentSection,
-  })  : preferredSize = const Size.fromHeight(kToolbarHeight),
+  final bool backArrow;
+  SectionAppBar(
+      {Key? key, required this.currentSection, required this.backArrow})
+      : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -26,12 +25,12 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: backArrow,
       backgroundColor: const Color.fromARGB(255, 0, 94, 172), // Dark blue color
       elevation: 0,
-      title: Text(
+      title: const Text(
         'Threat Awareness Hub',
-        style:
-            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
       actions: <Widget>[
         _buildSectionButton(context, 'News', currentSection == 'News'),
@@ -54,14 +53,16 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
         itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
           PopupMenuItem<String>(
               value: 'Profile',
-              child: Text('Profile'),
+              child: const Text('Profile'),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UserProfilePage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const UserProfilePage()));
               }),
           PopupMenuItem<String>(
             value: 'SignOut',
-            child: Text('Sign Out'),
+            child: const Text('Sign Out'),
             onTap: () {
               auth.signOut();
 
@@ -71,14 +72,14 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
                 MaterialPageRoute(
                   builder: (BuildContext context) {
                     if (currentSection == 'News') {
-                      return HomePage();
+                      return const HomePage();
                     } else if (currentSection == 'Vulnerabilities') {
                       return VulnerabilityPage();
                     } else if (currentSection == 'Education') {
                       return EducationHomePage();
                     } else {
                       // Handle other cases or return a default page
-                      return HomePage();
+                      return const HomePage();
                     }
                   },
                 ),
@@ -86,16 +87,17 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
         ],
-        icon: Icon(Icons.person, color: Colors.white), // User profile icon
+        icon:
+            const Icon(Icons.person, color: Colors.white), // User profile icon
       );
     } else {
       // User is not logged in
       return TextButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Wrapper()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Wrapper()));
         },
-        child: Text(
+        child: const Text(
           'Login',
           style: TextStyle(
             color: Colors.white, // You can change the text color here
@@ -111,29 +113,31 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
     return TextButton(
       onPressed: () {
         if (title == 'News' && currentSection != 'News') {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         } else if (title == 'Vulnerabilities' &&
             currentSection != 'Vulnerabilities') {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => VulnerabilityPage()),
           );
         } else if (title == 'Education' && currentSection != 'Education') {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => EducationHomePage()),
           );
         } else {
-          ;
+          // Handle other cases if needed
         }
       },
       child: Text(
         title,
         style: TextStyle(
-          color: isSelected ? Color.fromARGB(255, 177, 138, 206) : Colors.white,
+          color: isSelected
+              ? const Color.fromARGB(255, 177, 138, 206)
+              : Colors.white,
           fontWeight: FontWeight.bold,
         ),
       ),

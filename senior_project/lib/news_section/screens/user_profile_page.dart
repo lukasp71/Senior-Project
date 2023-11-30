@@ -65,7 +65,7 @@ class _UserProfilePageState extends State<UserProfilePage>
     } else {
       return Scaffold(
         backgroundColor: Colors.black,
-        appBar: SectionAppBar(currentSection: 'Profile'),
+        appBar: SectionAppBar(currentSection: 'Profile', backArrow: true),
         body: SafeArea(
           child: Column(
             children: [

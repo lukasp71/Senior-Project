@@ -3,13 +3,11 @@ import 'package:senior_project/education_section/screens/business_module_overvie
 import 'package:senior_project/education_section/screens/education_module_overview.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
 
-void main() => runApp(EducationHomePage());
-
 class EducationHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Cybersecurity Homepage',
+        title: 'Education Homepage',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -22,7 +20,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SectionAppBar(currentSection: 'Education'),
+      appBar: SectionAppBar(currentSection: 'Education', backArrow: false),
       backgroundColor: Colors.purple[100], // You can adjust this color
       body: Stack(
         children: [

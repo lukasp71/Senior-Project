@@ -15,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
   @override
   // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
@@ -77,7 +76,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SectionAppBar(currentSection: 'News'),
+      appBar: SectionAppBar(currentSection: 'News', backArrow: false),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                                             : 'Save this Article',
                                         child: IconButton(
                                           icon: Icon(
-                                            Icons.save,
+                                            Icons.star,
                                             color: instance.isFavorite
                                                 ? Colors.blue
                                                 : null,
