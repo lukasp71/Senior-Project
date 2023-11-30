@@ -9,52 +9,52 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   final List<String> questions = [
-    'What is a common problem with AI?',
-    'What can Machine Learning do for us?',
-    'Now that we have AI, what is a potential concern we consider?',
-    'What is something that most devices have that IoT devices do not?',
-    'Which historical event significantly impacted the evolution of cybersecurity?',
+    'What is a Mobile Permission?',
+    'Which type of Permissions are featured in VPNs and AutoFill?',
+    'What kind of Permission is safe in most cases?',
+    'Time Permissions give an app limited access to...',
+    'If you download an unknown app that is asking for camera permission, you probably should:',
   ];
 
   final List<List<String>> choices = [
     [
-      'It does not know anything',
-      'Humans making a mistake when configurating it',
-      'People do not know how to find AI tools',
-      'AI hacks into systems',
-    ],
-    [
-      'Give us new information',
-      'Add new jobs',
-      'Take outliers from preset rules and place it into collections of data with similarities or oddities.',
+      'Access that you give to a specific application on a mobile device',
+      'Access you give to a computer to access another one remotely',
+      'Your username and password',
       'All of the above',
     ],
     [
-      'Not enough experts in the field',
-      'Lack of Jobs',
-      'Lack of Creativity',
-      'Increase of Technical Issues',
+      'Mobile Permissions',
+      'Install Time Permissions',
+      'Signature Permissions',
+      'Normal Permissions',
     ],
     [
-      'Passwords',
-      'Touch Screens',
-      'Internet Capabilities',
-      'Encryption',
+      'Mobile Permissions',
+      'Google Permissions',
+      'Apple Permissions',
+      'Normal Permissions',
     ],
     [
-      'The Morris Worm',
-      'The invention of the internet',
-      'The Y2K bug',
-      'The creation of the first antivirus software',
+      'Encrypted Data',
+      'Leaked Files',
+      'Restricted Data',
+      'Corrupted Data',
+    ],
+    [
+      'Accept the Permission',
+      'Research it First',
+      'Avoid It',
+      'Both B and C',
     ],  
   ];
 
   final List<int> correctAnswers = [
+    0,
     1,
+    3,
     2,
     3,
-    3,
-    0,
   ]; 
   late List<int?> userAnswers; 
   bool isSubmitted = false;

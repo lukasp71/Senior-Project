@@ -1,59 +1,67 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MaterialApp(home: AIandIoTQuizPage()));
+void main() => runApp(MaterialApp(home: QuizPage()));
 
-class AIandIoTQuizPage extends StatefulWidget {
+class QuizPage extends StatefulWidget {
   @override
-  _AIandIoTQuizPageState createState() => _AIandIoTQuizPageState();
+  _QuizPageState createState() => _QuizPageState();
 }
 
-class _AIandIoTQuizPageState extends State<AIandIoTQuizPage> {
+class _QuizPageState extends State<QuizPage> {
   final List<String> questions = [
-    'What is a common problem with AI?',
-    'What can Machine Learning do for us?',
-    'Now that we have AI, what is a potential concern we consider?',
-    'What is something that most devices have that IoT devices do not?',
-    'How can we make IoT devices less vulnerable?',
+    'What is a safe way of Messaging Anonymously?',
+    'What is an Ad Blocker?',
+    'Which Firewall has Intrusion Detection and URL Filtering?',
+    'Which Firewall lets you monitor and secure traffic across both physical and virtual networks?',
+    'What is the difference between NIPS and WIPS?',
+    'Which VPN would you use if you need to access company sites outside of work?',
   ];
 
   final List<List<String>> choices = [
     [
-      'It does not know anything',
-      'Humans making a mistake when configurating it',
-      'People do not know how to find AI tools',
-      'AI hacks into systems',
-    ],
-    [
-      'Give us new information',
-      'Add new jobs',
-      'Take outliers from preset rules and place it into collections of data with similarities or oddities.',
-      'All of the above',
-    ],
-    [
-      'Not enough experts in the field',
-      'Lack of Jobs',
-      'Lack of Creativity',
-      'Increase of Technical Issues',
-    ],
-    [
-      'Passwords',
-      'Touch Screens',
-      'Internet Capabilities',
-      'Encryption',
-    ],
-    [
-      'Put it on a Public Network',
-      'Not using them',
-      'Keep them on a seperate network',
+      'Use an App that no one uses',
+      'Use an encrypted internet connection and messaging app that supports encryption.',
+      'Send messages on a network with no password',
       'All of the Above',
+    ],
+    [
+      'Program that adds advertisements across a site',
+      'Program that blocks advertisements on all websites',
+      'Program that Unsubscribes you from emails',
+      'All of the Above',
+    ],
+    [
+      'Network-based Intrusion Prevention System',
+      'Wireless Intrusion Prevention System',
+      'Network Behavior Analysis System',
+      'Host-Based Intrusion Prevention System',
+    ],
+    [
+      'WIPS does not analyze advanced protocols like TCP, while NIPS does.',
+      'NIPS ',
+      'Nmap',
+      'iTunes',
+    ],  
+    [
+      'Homeland Security Act',
+      'Affordable Care Act',
+      'Health Insurance Portability and Accountability Act (HIPAA)',
+      'Cybersecurity Information Sharing Act (CISA)',
+    ],
+    [
+      'Established the CIA',
+      'Established the FBI',
+      'Established the Department of Homeland Security',
+      'Established the Department of War',
     ],  
   ];
 
   final List<int> correctAnswers = [
     1,
-    2,
+    1,
     0,
-    3,
+    2,
+    2,
     2,
   ]; 
   late List<int?> userAnswers; 

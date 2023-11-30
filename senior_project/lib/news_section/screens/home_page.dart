@@ -37,12 +37,12 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Welcome to Threat Awareness Hub'),
-          content: Text(
+          title: const Text('Welcome to Threat Awareness Hub'),
+          content: const Text(
               'Welcome to Threat Awareness Hub, your one-stop for Cybersecurity News and Education. Take a look at the most recent cybersecurity news and vulnerabilities, as well as learn the basics of various cybersecurity concepts for you or your business.'),
           actions: <Widget>[
             TextButton(
-              child: Text('Close'),
+              child: const Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                                 } else {
                                   return Container(
                                     height: 300,
-                                    child: Center(
+                                    child: const Center(
                                       child: CircularProgressIndicator(),
                                     ),
                                   );
@@ -186,7 +186,7 @@ class _HomePageState extends State<HomePage> {
       fit: BoxFit.cover,
     );
 
-    image.image.resolve(ImageConfiguration()).addListener(
+    image.image.resolve(const ImageConfiguration()).addListener(
       ImageStreamListener(
         (ImageInfo image, bool synchronousCall) {
           completer.complete(image);
