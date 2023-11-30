@@ -34,6 +34,8 @@ https://www.knowledgehut.com/blog/security/cyber-security-laws
 ''';
 
 class LawPage extends StatelessWidget {
+  const LawPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -42,7 +44,7 @@ class LawPage extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => EthicalHacking()),
+          MaterialPageRoute(builder: (context) => const EthicalHacking()),
         );
       },
       onBackward: () {

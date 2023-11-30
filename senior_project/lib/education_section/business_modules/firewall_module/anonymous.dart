@@ -44,6 +44,8 @@ encrypt all communication between you and that website.
 ''';
 
 class AnonymousBrowsing extends StatelessWidget {
+  const AnonymousBrowsing({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
@@ -52,7 +54,7 @@ class AnonymousBrowsing extends StatelessWidget {
       onForward: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => FirewallPage()),
+          MaterialPageRoute(builder: (context) => const FirewallPage()),
         );
       },
       onBackward: () {

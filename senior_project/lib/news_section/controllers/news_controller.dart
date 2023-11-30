@@ -10,6 +10,8 @@ import 'package:senior_project/news_section/models/news_model.dart';
 class NewsController extends GetxController {
   List<ArticleModel> allNews = <ArticleModel>[];
   List<ArticleModel> breakingNews = <ArticleModel>[];
+  List<String> userFavURLs =
+      <String>[]; // New list to store user's favorite URLs
   ScrollController scrollController = ScrollController();
   RxBool articleNotFound = false.obs;
   RxBool isLoading = false.obs;
@@ -114,7 +116,7 @@ class NewsController extends GetxController {
         update();
       } else {
         if (isLoading.value == true) {
-          allNews.addAll(newsData.articles); // Use addAll to append articles
+          allNews.addAll(newsData.articles);
           update();
         } else {
           if (newsData.articles.isNotEmpty) {
@@ -131,5 +133,11 @@ class NewsController extends GetxController {
       articleNotFound.value = true;
       update();
     }
+  }
+
+  // New method to set user's favorite URLs
+  setUserFavURLs(List<String> favURLs) {
+    userFavURLs = favURLs;
+    update();
   }
 }

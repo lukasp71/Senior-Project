@@ -62,7 +62,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SectionAppBar(currentSection: 'Education'),
+      appBar: SectionAppBar(currentSection: 'Education', backArrow: true),
       body: Row(
         children: [
           Container(
