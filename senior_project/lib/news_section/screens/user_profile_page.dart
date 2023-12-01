@@ -24,6 +24,7 @@ class _UserProfilePageState extends State<UserProfilePage>
   String username = '';
   String email = '';
   List<String> favURLs = [];
+  List<String> savedTitles = [];
   @override
   void initState() {
     super.initState();
@@ -41,10 +42,12 @@ class _UserProfilePageState extends State<UserProfilePage>
         String fetchedUsername = await service.getUserUsername();
         String fetchedEmail = await service.getUserEmail();
         List<String> fetchedURLs = await service.getFavURLs();
+        List<String> fetchedTitles = await service.getsavedTitles();
         setState(() {
           username = fetchedUsername;
           email = fetchedEmail;
           favURLs = fetchedURLs;
+          savedTitles = fetchedTitles;
           isLoading = false;
         });
       }
@@ -75,7 +78,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                   tabs: const [
                     Tab(text: 'Profile'),
                     Tab(text: 'Quiz Scores'),
-                    Tab(text: 'Saved'),
+                    Tab(text: 'Saved Articles/Vulnerbilities'),
                   ],
                 ),
               ),
@@ -102,6 +105,12 @@ class _UserProfilePageState extends State<UserProfilePage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const CircleAvatar(
+            radius: 40,
+            backgroundImage: NetworkImage(
+                'https://via.placeholder.com/150'), // Replace with user's actual image URL
+          ),
+          const SizedBox(height: 16),
           const Text(
             'Profile Settings',
             style: TextStyle(
@@ -140,22 +149,26 @@ class _UserProfilePageState extends State<UserProfilePage>
             child: ListView.builder(
               itemCount: favoritedURLs.length,
               itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () async {
-                    // Handle URL click (e.g., open the article)
-                    String url = favoritedURLs[index];
-                    if (await canLaunch(url)) {
-                      await launch(url);
-                    } else {
-                      print('Could not launch $url');
-                    }
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      favoritedURLs[index],
+                return Card(
+                  color: Colors.grey[850],
+                  child: ListTile(
+                    title: Text(
+                      savedTitles[index], // Replace with actual article title
                       style: const TextStyle(color: Colors.white),
                     ),
+                    subtitle: Text(
+                      favoritedURLs[index],
+                      style: TextStyle(color: Colors.grey[300]),
+                    ),
+                    onTap: () async {
+                      // Handle URL click (e.g., open the article)
+                      String url = favoritedURLs[index];
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        print('Could not launch $url');
+                      }
+                    },
                   ),
                 );
               },

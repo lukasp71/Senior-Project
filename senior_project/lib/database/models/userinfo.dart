@@ -22,6 +22,7 @@ class UserInformation {
   bool attemptBusinessQuiz4;
   bool attemptBusinessQuiz5;
   List<String> favURLs;
+  List<String> savedTitles;
 
   UserInformation(
       {required this.name,
@@ -46,5 +47,6 @@ class UserInformation {
       required this.attemptBusinessQuiz3,
       required this.attemptBusinessQuiz4,
       required this.attemptBusinessQuiz5,
-      required this.favURLs});
+      required this.favURLs,
+      required this.savedTitles});
 }

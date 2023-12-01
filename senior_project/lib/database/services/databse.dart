@@ -9,8 +9,13 @@ class DatabaseService {
   //collection reference
   final CollectionReference collection =
       FirebaseFirestore.instance.collection('User');
-  Future updateUserData(String name, String email, int defaultUserScore,
-      bool defaultQuizProgress, List<String> favURLs) async {
+  Future updateUserData(
+      String name,
+      String email,
+      int defaultUserScore,
+      bool defaultQuizProgress,
+      List<String> favURLs,
+      List<String> savedTitles) async {
     return await collection.doc(uid).set({
       'name': name,
       'email': email,
@@ -34,7 +39,8 @@ class DatabaseService {
       'attemptBusinessQuiz3': defaultQuizProgress,
       'attemptBusinessQuiz4': defaultQuizProgress,
       'attemptBusinessQuiz5': defaultQuizProgress,
-      'favURLs': favURLs
+      'favURLs': favURLs,
+      'savedTitles': savedTitles,
     });
   }
 
@@ -65,6 +71,7 @@ class DatabaseService {
         attemptBusinessQuiz4: doc.get('attemptBusinessQuiz4'),
         attemptBusinessQuiz5: doc.get('attemptBusinessQuiz5'),
         favURLs: doc.get('favURLs'),
+        savedTitles: doc.get('savedTitles'),
       );
     }).toList();
   }
@@ -173,6 +180,21 @@ class DatabaseService {
       if (snapshot.exists && snapshot.data() != null) {
         var userData = snapshot.data() as Map<String, dynamic>;
         return (userData['favURLs'] as List<dynamic>).cast<String>();
+      } else {
+        return ['Error'];
+      }
+    } catch (e) {
+      print('Error getting user data: $e');
+      return ['Error'];
+    }
+  }
+
+  Future<List<String>> getsavedTitles() async {
+    try {
+      DocumentSnapshot snapshot = await collection.doc(uid).get();
+      if (snapshot.exists && snapshot.data() != null) {
+        var userData = snapshot.data() as Map<String, dynamic>;
+        return (userData['savedTitles'] as List<dynamic>).cast<String>();
       } else {
         return ['Error'];
       }
