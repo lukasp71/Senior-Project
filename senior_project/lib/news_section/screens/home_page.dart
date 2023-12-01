@@ -261,11 +261,12 @@ class _HomePageState extends State<HomePage> {
 
       // Get the current user's favURLs
       List<String> currentFavURLs = [];
-
+      List<String> savedTitles = [];
       DocumentSnapshot userSnapshot = await userRef.get();
       if (userSnapshot.exists && userSnapshot.data() != null) {
         var userData = userSnapshot.data() as Map<String, dynamic>;
         currentFavURLs = List<String>.from(userData['favURLs'] ?? []);
+        savedTitles = List<String>.from(userData['savedTitles'] ?? []);
       }
 
       // Check if the article is already in favorites
@@ -302,6 +303,7 @@ class _HomePageState extends State<HomePage> {
 
           // Remove from favorites
           currentFavURLs.remove(article.url);
+          savedTitles.remove(article.title);
         }
       } else {
         // Toggle the favorite status
@@ -311,15 +313,13 @@ class _HomePageState extends State<HomePage> {
 
         // Add to favorites
         currentFavURLs.add(article.url);
+        savedTitles.add(article.title);
       }
 
       // Update the user's document with the new favURLs
       await userRef.update({'favURLs': currentFavURLs});
-
+      await userRef.update({'savedTitles': savedTitles});
       // Optional: Update the local UI to reflect the change
-      setState(() {
-        // Update the local state if needed
-      });
     } catch (error) {
       print('Error updating favURLs: $error');
       // Handle the error as needed
