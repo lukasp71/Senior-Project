@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:senior_project/database/services/databse.dart';
+import 'package:senior_project/news_section/screens/welcome_pupup.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
@@ -53,24 +54,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showWelcomeDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Welcome to Threat Awareness Hub'),
-          content: const Text(
-              'Welcome to Threat Awareness Hub, your one-stop for Cybersecurity News and Education. Take a look at the most recent cybersecurity news and vulnerabilities, as well as learn the basics of various cybersecurity concepts for you or your business.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+    return WelcomePopup.show(context);
   }
 
   @override

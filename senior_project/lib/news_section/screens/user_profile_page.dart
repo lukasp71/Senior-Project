@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print, avoid_unnecessary_containers, deprecated_member_use
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:senior_project/database/services/databse.dart';
@@ -19,7 +20,7 @@ class _UserProfilePageState extends State<UserProfilePage>
   late DatabaseService service;
   late TabController _tabController;
   bool isLoading = true; // Initially, set to true to show the loading state
-
+  late DocumentReference userRef;
   // Variables to hold user data
   String username = '';
   String email = '';
@@ -43,6 +44,7 @@ class _UserProfilePageState extends State<UserProfilePage>
         String fetchedEmail = await service.getUserEmail();
         List<String> fetchedURLs = await service.getFavURLs();
         List<String> fetchedTitles = await service.getsavedTitles();
+        userRef = FirebaseFirestore.instance.collection('User').doc(user!.uid);
         setState(() {
           username = fetchedUsername;
           email = fetchedEmail;
@@ -132,7 +134,73 @@ class _UserProfilePageState extends State<UserProfilePage>
   }
 
   Widget _buildFavoritesTab() {
-    List<String> favoritedURLs = favURLs; // Replace with actual data
+    TextEditingController searchController = TextEditingController();
+    List<String> filteredTitles =
+        List.from(savedTitles); // Initialize with all titles
+
+    void filterSearchResults(String query) {
+      if (query.isEmpty) {
+        setState(() {
+          filteredTitles = List.from(savedTitles);
+        });
+        return;
+      }
+
+      List<String> tempList = [];
+      for (String title in savedTitles) {
+        if (title.toLowerCase().contains(query.toLowerCase())) {
+          tempList.add(title);
+        }
+      }
+
+      setState(() {
+        filteredTitles = tempList;
+      });
+    }
+
+    Future<void> _showDeleteConfirmation(int index) async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // User must tap button to dismiss
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Confirm Removal'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('Are you sure you want to remove this article?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: Text('Remove'),
+                onPressed: () async {
+                  setState(() {
+                    int originalIndex =
+                        savedTitles.indexOf(filteredTitles[index]);
+                    favURLs.removeAt(originalIndex);
+                    savedTitles.removeAt(originalIndex);
+                    filteredTitles.removeAt(index);
+
+                    // Also, update this change in your database
+                  });
+                  Navigator.of(context).pop();
+                  await userRef.update({'favURLs': favURLs});
+                  await userRef.update({'savedTitles': savedTitles});
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -145,24 +213,50 @@ class _UserProfilePageState extends State<UserProfilePage>
                 color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
           ),
           const Divider(color: Colors.red),
+          TextField(
+            onChanged: filterSearchResults,
+            controller: searchController,
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.black,
+              labelText: "Search",
+              labelStyle: TextStyle(color: Colors.white),
+              hintText: "Search in saved articles",
+              hintStyle: TextStyle(color: Colors.grey),
+              prefixIcon: Icon(Icons.search, color: Colors.white),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: favoritedURLs.length,
+              itemCount: filteredTitles.length,
               itemBuilder: (context, index) {
                 return Card(
                   color: Colors.grey[850],
                   child: ListTile(
                     title: Text(
-                      savedTitles[index], // Replace with actual article title
+                      filteredTitles[
+                          index], // Display the filtered article title
                       style: const TextStyle(color: Colors.white),
                     ),
                     subtitle: Text(
-                      favoritedURLs[index],
+                      favURLs[savedTitles.indexOf(filteredTitles[
+                          index])], // Display the corresponding URL
                       style: TextStyle(color: Colors.grey[300]),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete, color: Colors.red),
+                      onPressed: () => _showDeleteConfirmation(index),
                     ),
                     onTap: () async {
                       // Handle URL click (e.g., open the article)
-                      String url = favoritedURLs[index];
+                      String url =
+                          favURLs[savedTitles.indexOf(filteredTitles[index])];
                       if (await canLaunch(url)) {
                         await launch(url);
                       } else {
