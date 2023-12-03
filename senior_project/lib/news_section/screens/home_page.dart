@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use, avoid_print, use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -61,22 +62,38 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SectionAppBar(currentSection: 'News', backArrow: false),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            GetBuilder<NewsController>(
-              builder: (controller) {
-                return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                  ),
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.breakingNews.length,
-                  itemBuilder: (context, index) {
-                    final instance = controller.breakingNews[index];
-                    String imageUrl = instance.urlToImage ?? "";
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/flashNews.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1), 
+            child: Container(
+              color: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.6), 
+            ),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                GetBuilder<NewsController>(
+                  builder: (controller) {
+                    return GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                      ),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.breakingNews.length,
+                      itemBuilder: (context, index) {
+                        final instance = controller.breakingNews[index];
+                        String imageUrl = instance.urlToImage ?? "";
 
                     return InkWell(
                       onTap: () async {
@@ -203,6 +220,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ),
+        ],
       ),
     );
   }
