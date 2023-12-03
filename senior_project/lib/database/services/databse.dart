@@ -15,7 +15,8 @@ class DatabaseService {
       int defaultUserScore,
       bool defaultQuizProgress,
       List<String> favURLs,
-      List<String> savedTitles) async {
+      List<String> savedTitles,
+      String pfpURL) async {
     return await collection.doc(uid).set({
       'name': name,
       'email': email,
@@ -34,13 +35,16 @@ class DatabaseService {
       'businessQuiz3Score': defaultUserScore,
       'businessQuiz4Score': defaultUserScore,
       'businessQuiz5Score': defaultUserScore,
+      'businessQuiz6Score': defaultUserScore,
       'attemptBusinessQuiz1': defaultQuizProgress,
       'attemptBusinessQuiz2': defaultQuizProgress,
       'attemptBusinessQuiz3': defaultQuizProgress,
       'attemptBusinessQuiz4': defaultQuizProgress,
       'attemptBusinessQuiz5': defaultQuizProgress,
+      'attemptBusinessQuiz6': defaultQuizProgress,
       'favURLs': favURLs,
       'savedTitles': savedTitles,
+      'pfpURL': pfpURL
     });
   }
 
@@ -65,13 +69,16 @@ class DatabaseService {
         businessQuiz3Score: doc.get('businessQuiz3Score'),
         businessQuiz4Score: doc.get('businessQuiz4Score'),
         businessQuiz5Score: doc.get('businessQuiz5Score'),
+        businessQuiz6Score: doc.get('businessQuiz6Score'),
         attemptBusinessQuiz1: doc.get('attemptBusinessQuiz1'),
         attemptBusinessQuiz2: doc.get('attemptBusinessQuiz2'),
         attemptBusinessQuiz3: doc.get('attemptBusinessQuiz3'),
         attemptBusinessQuiz4: doc.get('attemptBusinessQuiz4'),
         attemptBusinessQuiz5: doc.get('attemptBusinessQuiz5'),
+        attemptBusinessQuiz6: doc.get('attemptBusinessQuiz6'),
         favURLs: doc.get('favURLs'),
         savedTitles: doc.get('savedTitles'),
+        pfpURL: doc.get('pfpURL'),
       );
     }).toList();
   }
@@ -137,6 +144,22 @@ class DatabaseService {
           moduleName: flag, // Assuming quizzes is a map of modules
         })
         .then((value) => print("Quiz Score Updated"))
+        .catchError((error) => print("Failed to update quiz score: $error"));
+  }
+
+  Future<void> updateUsername(String newUsername) async {
+    return await collection
+        .doc(uid)
+        .update({'name': newUsername})
+        .then((value) => print("Username Updated"))
+        .catchError((error) => print("Failed to update quiz score: $error"));
+  }
+
+  Future<void> updateEmail(String newEmail) async {
+    return await collection
+        .doc(uid)
+        .update({'email': newEmail})
+        .then((value) => print("Email Updated"))
         .catchError((error) => print("Failed to update quiz score: $error"));
   }
 

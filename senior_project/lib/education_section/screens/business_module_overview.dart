@@ -9,6 +9,12 @@ import 'package:senior_project/education_section/business_modules/firewall_modul
 import 'package:senior_project/education_section/business_modules/firewall_module/intrusion.dart';
 import 'package:senior_project/education_section/business_modules/firewall_module/vpn.dart';
 import 'package:senior_project/education_section/business_modules/mobile_modules/persmissions.dart';
+import 'package:senior_project/education_section/user_education_quizzes/Firewallquiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/aiandiotquiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/cyberlawquiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/employeetrainingquiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/ethicalhackingquiz.dart';
+import 'package:senior_project/education_section/user_education_quizzes/mobilequiz.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
 
 void main() => runApp(MaterialApp(
@@ -27,22 +33,28 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
     'Chapter 1: AI and IOT': [
       'Section 1.1: AI in Cybersecurity',
       'Section 1.2: IOT',
+      'AI and IOT Quiz'
     ],
     'Chapter 2: Cybersecurity Laws': [
       'Section 2.1: Intro to Cyber Laws',
       'Section 2.2: Ethical Hacking',
+      'Cyber Law Quiz',
+      'Ethical Hacking Quiz'
     ],
     'Chapter 3: Firewalls': [
       'Section 3.1: Anonymous Browsing',
       'Section 3.2: Types of Firewalls',
       'Section 3.3: Intrusion Prevention Software',
-      'Section 3.4: Virtual Private Networks'
+      'Section 3.4: Virtual Private Networks',
+      'Firewalls Quiz'
     ],
     'Chapter 4: Mobile Security': [
       'Section 4.1: Mobile Permissions',
+      'Mobile Security Quiz'
     ],
     'Chapter 5: Employee Training': [
       'Section 5.1: How To Train Employees',
+      'Employee Training Quiz'
     ]
   };
 
@@ -57,6 +69,12 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
     'Section 3.4: Virtual Private Networks': VPNPage(),
     'Section 4.1: Mobile Permissions': AppPermissionPage(),
     'Section 5.1: How To Train Employees': EmployeeTrainingPage(),
+    'AI and IOT Quiz': AIandIoTQuizPage(),
+    'Cyber Law Quiz': CyberLawQuizPage(),
+    'Ethical Hacking Quiz': EthicalHackingQuizPage(),
+    'Firewalls Quiz': FirewallQuizPage(),
+    'Mobile Security Quiz': MobileQuizPage(),
+    'Employee Training Quiz': EmployeeTrainingQuiz()
   };
 
   @override
