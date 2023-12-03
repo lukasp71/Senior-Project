@@ -69,7 +69,7 @@ class _UserProfilePageState extends State<UserProfilePage>
       );
     } else {
       return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black, // Dark blue background
         appBar: SectionAppBar(currentSection: 'Profile', backArrow: true),
         body: SafeArea(
           child: Column(
@@ -77,10 +77,13 @@ class _UserProfilePageState extends State<UserProfilePage>
               Container(
                 child: TabBar(
                   controller: _tabController,
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.grey,
+                  indicatorColor: Colors.white,
                   tabs: const [
                     Tab(text: 'Profile'),
                     Tab(text: 'Quiz Scores'),
-                    Tab(text: 'Saved Articles/Vulnerbilities'),
+                    Tab(text: 'Saved Articles/Vulnerabilities'),
                   ],
                 ),
               ),
@@ -102,27 +105,132 @@ class _UserProfilePageState extends State<UserProfilePage>
   }
 
   Widget _buildProfileTab() {
-    return Padding(
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController usernameController = TextEditingController();
+
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const CircleAvatar(
-            radius: 40,
-            backgroundImage: NetworkImage(
-                'https://via.placeholder.com/150'), // Replace with user's actual image URL
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Profile Settings',
-            style: TextStyle(
-                color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
-          ),
-          const Divider(color: Colors.red),
-          _buildTextFormField('Username', username),
-          _buildTextFormField('Email', email),
-          // Add more profile fields if necessary
-        ],
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(
+                    'https://via.placeholder.com/150'), // Replace with user's actual image URL
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Profile Settings',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor),
+            ),
+            const SizedBox(height: 16),
+            _buildStyledTextField(
+              'Username',
+              username,
+              onChanged: (value) => username = value,
+              icon: Icons.person,
+            ),
+            _buildStyledTextField(
+              'New Email',
+              email,
+              controller: emailController,
+              icon: Icons.email,
+              validator: (value) => value != null && !value.contains('@')
+                  ? 'Enter a valid email'
+                  : null,
+            ),
+            _buildStyledTextField(
+              'New Password',
+              '',
+              controller: passwordController,
+              icon: Icons.lock,
+              isPassword: true,
+              validator: (value) => value != null && value.length < 6
+                  ? 'Password must be at least 6 characters'
+                  : null,
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                  ),
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      bool emailUpdated =
+                          await updateEmail(emailController.text);
+                      bool passwordUpdated =
+                          await updatePassword(passwordController.text);
+
+                      if (emailUpdated && passwordUpdated) {
+                        _showMessage('Profile updated successfully');
+                        await service.updateEmail(emailController.text);
+                        await service.updateUsername(username);
+                      } else {
+                        // Individual error messages are already shown by the update methods
+                      }
+                    }
+                  },
+                  child: const Text('Update Profile'),
+                )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStyledTextField(
+    String label,
+    String initialValue, {
+    TextEditingController? controller,
+    IconData? icon,
+    bool isPassword = false,
+    Function(String)? onChanged,
+    String? Function(String?)? validator, // Add validator parameter
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        controller: controller,
+        initialValue: controller == null ? initialValue : null,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: icon != null ? Icon(icon) : null,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          filled: true,
+          fillColor: Colors.white,
+        ),
+        obscureText: isPassword,
+        onChanged: onChanged,
+        validator: validator, // Use the validator in TextFormField
+      ),
+    );
+  }
+
+  Widget _buildStyledButton(String label, VoidCallback onPressed) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Theme.of(context).primaryColor,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          padding: EdgeInsets.symmetric(vertical: 12),
+        ),
+        onPressed: onPressed,
+        child: Text(label),
       ),
     );
   }
@@ -210,9 +318,9 @@ class _UserProfilePageState extends State<UserProfilePage>
           const Text(
             'Saved Articles/Vulnerabilities',
             style: TextStyle(
-                color: Colors.red, fontSize: 28, fontWeight: FontWeight.bold),
+                color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
           ),
-          const Divider(color: Colors.red),
+          const Divider(color: Colors.white),
           TextField(
             onChanged: filterSearchResults,
             controller: searchController,
@@ -284,14 +392,39 @@ class _UserProfilePageState extends State<UserProfilePage>
           labelText: label,
           labelStyle: const TextStyle(color: Colors.white),
           enabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
-          ),
+              borderSide: BorderSide(color: Colors.grey)),
           focusedBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.red),
-          ),
+              borderSide: BorderSide(color: Colors.white)),
         ),
         style: const TextStyle(color: Colors.white),
       ),
     );
+  }
+
+  Future<bool> updateEmail(String newEmail) async {
+    try {
+      await user!.updateEmail(newEmail);
+      await user!.reload();
+      user = FirebaseAuth.instance.currentUser;
+      return true; // Success
+    } catch (e) {
+      _showMessage('Error updating email: $e'); // Show error message
+      return false; // Failure
+    }
+  }
+
+  Future<bool> updatePassword(String newPassword) async {
+    try {
+      await user!.updatePassword(newPassword);
+      return true; // Success
+    } catch (e) {
+      _showMessage('Error updating password: $e'); // Show error message
+      return false; // Failure
+    }
+  }
+
+  void _showMessage(String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

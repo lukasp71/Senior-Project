@@ -16,13 +16,16 @@ class UserInformation {
   int businessQuiz3Score;
   int businessQuiz4Score;
   int businessQuiz5Score;
+  int businessQuiz6Score;
   bool attemptBusinessQuiz1;
   bool attemptBusinessQuiz2;
   bool attemptBusinessQuiz3;
   bool attemptBusinessQuiz4;
   bool attemptBusinessQuiz5;
+  bool attemptBusinessQuiz6;
   List<String> favURLs;
   List<String> savedTitles;
+  String pfpURL;
 
   UserInformation(
       {required this.name,
@@ -42,11 +45,14 @@ class UserInformation {
       required this.businessQuiz3Score,
       required this.businessQuiz4Score,
       required this.businessQuiz5Score,
+      required this.businessQuiz6Score,
       required this.attemptBusinessQuiz1,
       required this.attemptBusinessQuiz2,
       required this.attemptBusinessQuiz3,
       required this.attemptBusinessQuiz4,
       required this.attemptBusinessQuiz5,
+      required this.attemptBusinessQuiz6,
       required this.favURLs,
-      required this.savedTitles});
+      required this.savedTitles,
+      required this.pfpURL});
 }
