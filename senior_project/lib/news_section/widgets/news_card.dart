@@ -17,7 +17,7 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // TODO: Implement navigation to detailed view or webview
+        
       },
       child: Card(
         elevation: Sizes.dimen_4,

@@ -101,7 +101,7 @@ class _RegisterState extends State<Register> {
                                     TextFormField(
                                       decoration: InputDecoration(
                                         labelText: 'Password',
-                                        prefixIcon: Icon(Icons.lock),
+                                        prefixIcon: const Icon(Icons.lock),
                                         suffixIcon: IconButton(
                                           icon: Icon(
                                             _isPasswordVisible
