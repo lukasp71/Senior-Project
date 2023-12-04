@@ -200,7 +200,7 @@ class _QuizPageState extends State<EthicalHackingQuizPage> {
           ),
           TextButton(
             onPressed: _showIncorrectAnswers,
-            child: const Text('Show Incorrect Answers'),
+            child: const Text('Show Incorrect Questions'),
           ),
         ],
       ),
@@ -211,7 +211,7 @@ class _QuizPageState extends State<EthicalHackingQuizPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Incorrect Answers'),
+        title: Text('Incorrect Questions'),
         content: SingleChildScrollView(
           child: ListBody(
             children: _getIncorrectAnswerWidgets(),

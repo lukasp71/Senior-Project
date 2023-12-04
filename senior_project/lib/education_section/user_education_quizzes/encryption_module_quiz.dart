@@ -195,7 +195,7 @@ class _QuizPageState extends State<EncryptionQuizPage> {
       builder: (context) => AlertDialog(
         title: const Text('Quiz Attempt'),
         content: Text(
-            'You have already attempted this quiz and your highest score is $previousScore. Would you like to attempt again to try and get a higher score?'),
+            'You have already attempted this quiz and your highest score is $previousScore/${questions.length}. Would you like to attempt again to try and get a higher score?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -253,7 +253,7 @@ class _QuizPageState extends State<EncryptionQuizPage> {
           ),
           TextButton(
             onPressed: _showIncorrectAnswers,
-            child: const Text('Show Incorrect Answers'),
+            child: const Text('Show Incorrect Questions'),
           ),
         ],
       ),
@@ -264,7 +264,7 @@ class _QuizPageState extends State<EncryptionQuizPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Incorrect Answers'),
+        title: const Text('Incorrect Questions'),
         content: SingleChildScrollView(
           child: ListBody(
             children: _getIncorrectAnswerWidgets(),

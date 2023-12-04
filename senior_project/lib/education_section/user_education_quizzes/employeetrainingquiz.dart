@@ -192,7 +192,7 @@ class _EmployeeTrainingQuizState extends State<EmployeeTrainingQuiz> {
           ),
           TextButton(
             onPressed: _showIncorrectAnswers,
-            child: const Text('Show Incorrect Answers'),
+            child: const Text('Show Incorrect Questions'),
           ),
         ],
       ),
@@ -203,7 +203,7 @@ class _EmployeeTrainingQuizState extends State<EmployeeTrainingQuiz> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Incorrect Answers'),
+        title: const Text('Incorrect Questions'),
         content: SingleChildScrollView(
           child: ListBody(
             children: _getIncorrectAnswerWidgets(),
