@@ -44,7 +44,7 @@ class ModuleIntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Module Intro Page'),
+        title: const Text('Module Intro Page'),
         backgroundColor: const Color.fromARGB(255, 0, 94, 172),
       ),
       body: Center(
@@ -55,20 +55,20 @@ class ModuleIntroPage extends StatelessWidget {
             children: [
               Text(
                 moduleTitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               Text(
                 introText,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: onStart,
-                child: Text('Start Module'),
+                child: const Text('Start Module'),
               ),
             ],
           ),

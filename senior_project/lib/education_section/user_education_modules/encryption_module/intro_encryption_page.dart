@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Fundamentals of Encryption';
-final String content = '1. **Definition and Purpose of Encryption**:\n'
+const String subsectionTitle = 'Fundamentals of Encryption';
+const String content = '1. **Definition and Purpose of Encryption**:\n'
     '- **What Is Encryption?**: Encryption is the method of converting plain text into ciphertext to prevent unauthorized access. It is vital for data confidentiality and integrity.\n'
     '- **Purpose of Encryption**: The primary purpose is to protect digital data on computer systems or transmitted via networks.\n\n'
     '2. **Basic Principles of Encryption**:\n'

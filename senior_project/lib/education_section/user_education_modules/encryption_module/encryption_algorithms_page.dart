@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Types of Encryption Algorithms';
-final String content =
+const String subsectionTitle = 'Types of Encryption Algorithms';
+const String content =
     'Understanding different encryption algorithms is crucial in cybersecurity. Here’s an expanded overview:\n\n'
     '1. **Symmetric Encryption Algorithms**:\n'
     '   - **AES (Advanced Encryption Standard)**: Widely used for its speed and security, ideal for encrypting large volumes of data.\n'

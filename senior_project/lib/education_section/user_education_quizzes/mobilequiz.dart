@@ -132,20 +132,20 @@ class _QuizPageState extends State<MobileQuizPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Quiz Attempt'),
+        title: const Text('Quiz Attempt'),
         content: Text(
             'You have already attempted this quiz and your highest score is $previousScore/${questions.length}. Would you like to attempt again to try and get a higher score?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('No'),
+            child: const Text('No'),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               // Additional logic if required when user chooses to retake the quiz
             },
-            child: Text('Yes'),
+            child: const Text('Yes'),
           ),
         ],
       ),
@@ -203,7 +203,7 @@ class _QuizPageState extends State<MobileQuizPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Incorrect Answers'),
+        title: const Text('Incorrect Answers'),
         content: SingleChildScrollView(
           child: ListBody(
             children: _getIncorrectAnswerWidgets(),
@@ -224,11 +224,11 @@ class _QuizPageState extends State<MobileQuizPage> {
     for (int i = 0; i < questions.length; i++) {
       if (userAnswers[i] != null && userAnswers[i] != correctAnswers[i]) {
         widgets.add(Text('Q: ${questions[i]}'));
-        widgets.add(SizedBox(height: 10));
+        widgets.add(const SizedBox(height: 10));
       }
     }
     if (widgets.isEmpty) {
-      widgets.add(Text('No incorrect answers!'));
+      widgets.add(const Text('No incorrect answers!'));
     }
     return widgets;
   }

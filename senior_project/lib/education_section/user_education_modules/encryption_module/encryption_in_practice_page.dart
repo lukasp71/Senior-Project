@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle =
+const String subsectionTitle =
     'Encryption in Practice: SSL/TLS for Secure Internet Communications';
-final String content =
+const String content =
     'SSL/TLS protocols are essential for secure internet communications. Here’s a comprehensive overview:\n\n'
     '1. **Overview of SSL/TLS**: These cryptographic protocols are foundational for internet security. They encrypt data between web servers and clients (browsers), protecting sensitive information during transmission.\n'
     '2. **How SSL/TLS Works**: It involves digital certificates for server authentication and establishing a secure connection. The encryption process protects data integrity and confidentiality against eavesdropping and tampering.\n'

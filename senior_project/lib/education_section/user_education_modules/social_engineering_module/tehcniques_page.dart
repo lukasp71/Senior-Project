@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Common Social Engineering Techniques';
-final String content =
+const String subsectionTitle = 'Common Social Engineering Techniques';
+const String content =
     'Social engineering attacks leverage various sophisticated techniques to trick individuals into disclosing sensitive information. Key techniques include:\n\n'
     '1. Phishing: Acquiring sensitive data through deceptive messages.\n'
     '2. Scareware: Tricking users into downloading harmful software.\n'

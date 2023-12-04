@@ -5,8 +5,8 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Attack Methodology';
-final String content = '''
+const String subsectionTitle = 'Attack Methodology';
+const String content = '''
 ### Attack Methodology:
 
 #### 1. **Attack Stages (Cyber Kill Chain):**

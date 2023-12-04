@@ -50,8 +50,8 @@ class _WelcomePopupState extends State<WelcomePopup>
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          title: Text('Welcome to Threat Awareness Hub'),
-          content: SingleChildScrollView(
+          title: const Text('Welcome to Threat Awareness Hub'),
+          content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 Text(
@@ -62,13 +62,13 @@ class _WelcomePopupState extends State<WelcomePopup>
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Close'),
+              child: const Text('Close'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Sign In'),
+              child: const Text('Sign In'),
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const Wrapper()));
