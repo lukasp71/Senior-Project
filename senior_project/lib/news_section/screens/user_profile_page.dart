@@ -174,7 +174,7 @@ class _UserProfilePageState extends State<UserProfilePage>
       );
     } else {
       return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blue[900],
         appBar: SectionAppBar(currentSection: 'Profile', backArrow: true),
         body: SafeArea(
           child: Column(
@@ -234,7 +234,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                Divider(color: Colors.red),
+                Divider(color: Colors.white),
                 _buildReadOnlyField('Username', username),
                 _buildReadOnlyField('Email', email),
 
@@ -259,7 +259,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        Divider(color: Colors.red),
+                        Divider(color: Colors.white),
                         _buildPasswordField(
                           'Current Password',
                           _oldPasswordController,
@@ -294,8 +294,8 @@ class _UserProfilePageState extends State<UserProfilePage>
                         ElevatedButton(
                           // Button to update password
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red, // Button color
-                            onPrimary: Colors.white, // Text color
+                            primary: Colors.white, // Button color
+                            onPrimary: Colors.blue[900], // Text color
                           ),
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
@@ -354,7 +354,7 @@ class _UserProfilePageState extends State<UserProfilePage>
         children: [
           Text(label, style: TextStyle(color: Colors.grey[300], fontSize: 16)),
           Text(value, style: TextStyle(color: Colors.white, fontSize: 20)),
-          Divider(color: Colors.grey[700]),
+          Divider(color: Colors.white),
         ],
       ),
     );
@@ -457,7 +457,7 @@ class _UserProfilePageState extends State<UserProfilePage>
     List<String> businessEducationQuizzes = [
       'AI and IOT',
       'Cyber laws',
-      'Penetration Testing',
+      'Ethical Hacking',
       'Firewalls',
       'Mobile Security',
       'Employee Training'
@@ -492,43 +492,57 @@ class _UserProfilePageState extends State<UserProfilePage>
       attemptBusinessQuiz5,
       attemptBusinessQuiz6
     ];
+    List<int> userQuizMaxScore = [7, 15, 15, 10, 15];
+    List<int> businessQuizMaxScore = [5, 5, 6, 6, 5, 5];
     return SingleChildScrollView(
+      padding: const EdgeInsets.all(16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('User Education Quizzes',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(
+            'User Education Quizzes',
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const SizedBox(height: 10),
           _buildQuizList(userEducationQuizzes, userEducationVariables,
-              userEducatinoProgress),
-          SizedBox(height: 20),
-          Text('Business Education Quizzes',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              userEducatinoProgress, userQuizMaxScore),
+          const SizedBox(height: 20),
+          Text(
+            'Business Education Quizzes',
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const SizedBox(height: 10),
           _buildQuizList(businessEducationQuizzes, businessEducationVariables,
-              businessEducationProgress),
+              businessEducationProgress, businessQuizMaxScore),
         ],
       ),
     );
   }
 
-  Widget _buildQuizList(
-      List<String> quizzes, List<int> quizScores, List<bool> quizProgress) {
+  Widget _buildQuizList(List<String> quizzes, List<int> quizScores,
+      List<bool> quizProgress, List<int> maxNumAnswers) {
     return ListView.builder(
       shrinkWrap: true,
-      physics:
-          NeverScrollableScrollPhysics(), // to disable ListView's scrolling
+      physics: NeverScrollableScrollPhysics(),
       itemCount: quizzes.length,
       itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Text(quizzes[index],
-              style: TextStyle(
-                  color: Color.fromARGB(
-                      255, 0, 94, 172))), // Dark blue color for title
-          subtitle: Text(
+        return Card(
+          margin: const EdgeInsets.symmetric(vertical: 5),
+          child: ListTile(
+            leading: quizProgress[index]
+                ? Icon(Icons.check_circle_outline, color: Colors.green)
+                : Icon(Icons.help_outline, color: Colors.orange),
+            title: Text(quizzes[index], style: TextStyle(color: Colors.black)),
+            subtitle: Text(
               quizProgress[index]
-                  ? 'Score: ${quizScores[index]}'
+                  ? 'Score: ${quizScores[index]}/${maxNumAnswers[index]}'
                   : 'Not Attempted',
-              style: TextStyle(
-                  color: Color.fromARGB(
-                      255, 0, 94, 172))), // Dark blue color for subtitle
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+            trailing: Icon(Icons.arrow_forward_ios, size: 16),
+          ),
         );
       },
     );
@@ -617,15 +631,15 @@ class _UserProfilePageState extends State<UserProfilePage>
           TextField(
             onChanged: filterSearchResults,
             controller: searchController,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.black),
             decoration: InputDecoration(
               filled: true,
-              fillColor: Colors.black,
+              fillColor: Colors.white,
               labelText: "Search",
-              labelStyle: TextStyle(color: Colors.white),
+              labelStyle: TextStyle(color: Colors.black),
               hintText: "Search in saved articles",
               hintStyle: TextStyle(color: Colors.grey),
-              prefixIcon: Icon(Icons.search, color: Colors.white),
+              prefixIcon: Icon(Icons.search, color: Colors.black),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(25.0)),
                 borderSide: BorderSide.none,
@@ -638,24 +652,23 @@ class _UserProfilePageState extends State<UserProfilePage>
               itemCount: filteredTitles.length,
               itemBuilder: (context, index) {
                 return Card(
-                  color: Colors.grey[850],
+                  color: Colors.white,
                   child: ListTile(
                     title: Text(
                       filteredTitles[
                           index], // Display the filtered article title
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black),
                     ),
                     subtitle: Text(
                       favURLs[savedTitles.indexOf(filteredTitles[
                           index])], // Display the corresponding URL
-                      style: TextStyle(color: Colors.grey[300]),
+                      style: TextStyle(color: Colors.black),
                     ),
                     trailing: IconButton(
                       icon: Icon(Icons.delete, color: Colors.red),
                       onPressed: () => _showDeleteConfirmation(index),
                     ),
                     onTap: () async {
-                      // Handle URL click (e.g., open the article)
                       String url =
                           favURLs[savedTitles.indexOf(filteredTitles[index])];
                       if (await canLaunch(url)) {

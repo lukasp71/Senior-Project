@@ -5,6 +5,7 @@ class WelcomePopup extends StatefulWidget {
   static void show(BuildContext context) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) => WelcomePopup(),
     );
   }
@@ -23,12 +24,14 @@ class _WelcomePopupState extends State<WelcomePopup>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    _scaleAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.elasticOut,
+    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Curves.easeOutBack,
+      ),
     );
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
     _controller.forward();
@@ -48,33 +51,46 @@ class _WelcomePopupState extends State<WelcomePopup>
         scale: _scaleAnimation,
         child: AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
-          title: const Text('Welcome to Threat Awareness Hub'),
-          content: const SingleChildScrollView(
+          title: const Text(
+            'Welcome to Threat Awareness Hub',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(
+                const Text(
                   'Your one-stop for Cybersecurity News and Education. Take a look at the most recent cybersecurity news and vulnerabilities, as well as learn the basics of various cybersecurity concepts for you or your business.',
+                  style: TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Register an account or sign into an already existing profile.',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text('Sign In'),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Wrapper()));
+                  },
                 ),
               ],
             ),
           ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Sign In'),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Wrapper()));
-              },
-            ),
-          ],
+          titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          actionsAlignment: MainAxisAlignment.start,
         ),
       ),
     );
