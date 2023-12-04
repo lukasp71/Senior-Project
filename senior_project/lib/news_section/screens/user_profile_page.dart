@@ -19,21 +19,51 @@ class _UserProfilePageState extends State<UserProfilePage>
   User? user = FirebaseAuth.instance.currentUser;
   late DatabaseService service;
   late TabController _tabController;
-  bool isLoading = true; // Initially, set to true to show the loading state
+  bool isLoading = true;
+
   late DocumentReference userRef;
-  // Variables to hold user data
   String username = '';
   String email = '';
+  int userQuiz1Score = 0;
+  int userQuiz2Score = 0;
+  int userQuiz3Score = 0;
+  int userQuiz4Score = 0;
+  int userQuiz5Score = 0;
+  bool attemptUserQuiz1 = false;
+  bool attemptUserQuiz2 = false;
+  bool attemptUserQuiz3 = false;
+  bool attemptUserQuiz4 = false;
+  bool attemptUserQuiz5 = false;
+  int businessQuiz1Score = 0;
+  int businessQuiz2Score = 0;
+  int businessQuiz3Score = 0;
+  int businessQuiz4Score = 0;
+  int businessQuiz5Score = 0;
+  int businessQuiz6Score = 0;
+  bool attemptBusinessQuiz1 = false;
+  bool attemptBusinessQuiz2 = false;
+  bool attemptBusinessQuiz3 = false;
+  bool attemptBusinessQuiz4 = false;
+  bool attemptBusinessQuiz5 = false;
+  bool attemptBusinessQuiz6 = false;
   List<String> favURLs = [];
   List<String> savedTitles = [];
+
+  // Password visibility state variables
+  bool _isOldPasswordVisible = false;
+  bool _isNewPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
+
+  // Text editing controllers
+  final _oldPasswordController = TextEditingController();
+  final _newPasswordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    if (user != null) {
-      service = DatabaseService(uid: user!.uid);
-      _loadUserData();
-    }
+    _loadUserData();
   }
 
   Future<void> _loadUserData() async {
@@ -44,6 +74,50 @@ class _UserProfilePageState extends State<UserProfilePage>
         String fetchedEmail = await service.getUserEmail();
         List<String> fetchedURLs = await service.getFavURLs();
         List<String> fetchedTitles = await service.getsavedTitles();
+        int fetchedUserQuiz1Score =
+            await service.getQuizScore('userQuiz1Score');
+        int fetchedUserQuiz2Score =
+            await service.getQuizScore('userQuiz2Score');
+        int fetchedUserQuiz3Score =
+            await service.getQuizScore('userQuiz3Score');
+        int fetchedUserQuiz4Score =
+            await service.getQuizScore('userQuiz4Score');
+        int fetchedUserQuiz5Score =
+            await service.getQuizScore('userQuiz5Score');
+        bool fetchedAttemptUserQuiz1 =
+            await service.getQuizProgress('attemptUserQuiz1');
+        bool fetchedAttemptUserQuiz2 =
+            await service.getQuizProgress('attemptUserQuiz2');
+        bool fetchedAttemptUserQuiz3 =
+            await service.getQuizProgress('attemptUserQuiz3');
+        bool fetchedAttemptUserQuiz4 =
+            await service.getQuizProgress('attemptUserQuiz4');
+        bool fetchedAttemptUserQuiz5 =
+            await service.getQuizProgress('attemptUserQuiz5');
+        int fetchedBusinessQuiz1Score =
+            await service.getQuizScore('businessQuiz1Score');
+        int fetchedBusinessQuiz2Score =
+            await service.getQuizScore('businessQuiz2Score');
+        int fetchedBusinessQuiz3Score =
+            await service.getQuizScore('businessQuiz3Score');
+        int fetchedBusinessQuiz4Score =
+            await service.getQuizScore('businessQuiz4Score');
+        int fetchedBusinessQuiz5Score =
+            await service.getQuizScore('businessQuiz5Score');
+        int fetchedBusinessQuiz6Score =
+            await service.getQuizScore('businessQuiz6Score');
+        bool fetchedAttemptBusinessQuiz1 =
+            await service.getQuizProgress('attemptBusinessQuiz1');
+        bool fetchedAttemptBusinessQuiz2 =
+            await service.getQuizProgress('attemptBusinessQuiz2');
+        bool fetchedAttemptBusinessQuiz3 =
+            await service.getQuizProgress('attemptBusinessQuiz3');
+        bool fetchedAttemptBusinessQuiz4 =
+            await service.getQuizProgress('attemptBusinessQuiz4');
+        bool fetchedAttemptBusinessQuiz5 =
+            await service.getQuizProgress('attemptBusinessQuiz5');
+        bool fetchedAttemptBusinessQuiz6 =
+            await service.getQuizProgress('attemptBusinessQuiz6');
         userRef = FirebaseFirestore.instance.collection('User').doc(user!.uid);
         setState(() {
           username = fetchedUsername;
@@ -51,12 +125,43 @@ class _UserProfilePageState extends State<UserProfilePage>
           favURLs = fetchedURLs;
           savedTitles = fetchedTitles;
           isLoading = false;
+          userQuiz1Score = fetchedUserQuiz1Score;
+          userQuiz2Score = fetchedUserQuiz2Score;
+          userQuiz3Score = fetchedUserQuiz3Score;
+          userQuiz4Score = fetchedUserQuiz4Score;
+          userQuiz5Score = fetchedUserQuiz5Score;
+          attemptUserQuiz1 = fetchedAttemptUserQuiz1;
+          attemptUserQuiz2 = fetchedAttemptUserQuiz2;
+          attemptUserQuiz3 = fetchedAttemptUserQuiz3;
+          attemptUserQuiz4 = fetchedAttemptUserQuiz4;
+          attemptUserQuiz5 = fetchedAttemptUserQuiz5;
+          businessQuiz1Score = fetchedBusinessQuiz1Score;
+          businessQuiz2Score = fetchedBusinessQuiz2Score;
+          businessQuiz3Score = fetchedBusinessQuiz3Score;
+          businessQuiz4Score = fetchedBusinessQuiz4Score;
+          businessQuiz5Score = fetchedBusinessQuiz5Score;
+          businessQuiz6Score = fetchedBusinessQuiz6Score;
+          attemptBusinessQuiz1 = fetchedAttemptBusinessQuiz1;
+          attemptBusinessQuiz2 = fetchedAttemptBusinessQuiz2;
+          attemptBusinessQuiz3 = fetchedAttemptBusinessQuiz3;
+          attemptBusinessQuiz4 = fetchedAttemptBusinessQuiz4;
+          attemptBusinessQuiz5 = fetchedAttemptBusinessQuiz5;
+          attemptBusinessQuiz6 = fetchedAttemptBusinessQuiz6;
         });
       }
     } catch (e) {
       print('Error fetching user data: $e');
       // Handle the error state
     }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _oldPasswordController.dispose();
+    _newPasswordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -69,7 +174,7 @@ class _UserProfilePageState extends State<UserProfilePage>
       );
     } else {
       return Scaffold(
-        backgroundColor: Colors.black, // Dark blue background
+        backgroundColor: Colors.black,
         appBar: SectionAppBar(currentSection: 'Profile', backArrow: true),
         body: SafeArea(
           child: Column(
@@ -106,9 +211,6 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   Widget _buildProfileTab() {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController usernameController = TextEditingController();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
@@ -117,106 +219,163 @@ class _UserProfilePageState extends State<UserProfilePage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(
-                    'https://via.placeholder.com/150'), // Replace with user's actual image URL
-              ),
-            ),
-            const SizedBox(height: 20),
             Text(
               'Profile Settings',
               style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor),
+                  color: Colors.white),
             ),
-            const SizedBox(height: 16),
-            _buildStyledTextField(
-              'Username',
-              username,
-              onChanged: (value) => username = value,
-              icon: Icons.person,
-            ),
-            _buildStyledTextField(
-              'New Email',
-              email,
-              controller: emailController,
-              icon: Icons.email,
-              validator: (value) => value != null && !value.contains('@')
-                  ? 'Enter a valid email'
-                  : null,
-            ),
-            _buildStyledTextField(
-              'New Password',
-              '',
-              controller: passwordController,
-              icon: Icons.lock,
-              isPassword: true,
-              validator: (value) => value != null && value.length < 6
-                  ? 'Password must be at least 6 characters'
-                  : null,
-            ),
-            Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Theme.of(context).primaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      bool emailUpdated =
-                          await updateEmail(emailController.text);
-                      bool passwordUpdated =
-                          await updatePassword(passwordController.text);
+            Divider(color: Colors.red),
 
-                      if (emailUpdated && passwordUpdated) {
-                        _showMessage('Profile updated successfully');
-                        await service.updateEmail(emailController.text);
-                        await service.updateUsername(username);
-                      } else {
-                        // Individual error messages are already shown by the update methods
-                      }
-                    }
-                  },
-                  child: const Text('Update Profile'),
-                )),
+            // Display Username and Email fields as read-only
+            _buildReadOnlyField('Username', username),
+            _buildReadOnlyField('Email', email),
+
+            SizedBox(height: 30),
+            Text(
+              'Security Settings',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+            Divider(color: Colors.red),
+
+            // Old Password Field
+            _buildPasswordField(
+              'Current Password',
+              _oldPasswordController,
+              'Enter your current password',
+              isPasswordVisible: _isOldPasswordVisible,
+              togglePasswordVisibility: () {
+                setState(() => _isOldPasswordVisible = !_isOldPasswordVisible);
+              },
+            ),
+
+            // New Password Field
+            _buildPasswordField(
+              'New Password',
+              _newPasswordController,
+              'Enter new password',
+              isPasswordVisible: _isNewPasswordVisible,
+              togglePasswordVisibility: () {
+                setState(() => _isNewPasswordVisible = !_isNewPasswordVisible);
+              },
+            ),
+
+            // Confirm New Password Field
+            _buildPasswordField(
+              'Confirm New Password',
+              _confirmPasswordController,
+              'Confirm new password',
+              isPasswordVisible: _isConfirmPasswordVisible,
+              togglePasswordVisibility: () {
+                setState(() =>
+                    _isConfirmPasswordVisible = !_isConfirmPasswordVisible);
+              },
+            ),
+
+            SizedBox(height: 30),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red, // Button color
+                onPrimary: Colors.white, // Text color
+              ),
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  // Validate and update password logic
+                }
+              },
+              child: Text('Update Password'),
+            ),
           ],
         ),
       ),
     );
   }
 
+  Widget _buildReadOnlyField(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: TextStyle(color: Colors.grey[300], fontSize: 16)),
+          Text(value, style: TextStyle(color: Colors.white, fontSize: 20)),
+          Divider(color: Colors.grey[700]),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPasswordField(
+    String label,
+    TextEditingController controller,
+    String emptyValidationMessage, {
+    required bool isPasswordVisible,
+    required VoidCallback togglePasswordVisibility,
+    String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: Colors.grey[300]),
+        enabledBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+        suffixIcon: IconButton(
+          icon: Icon(
+            isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+            color: Colors.grey[300],
+          ),
+          onPressed: togglePasswordVisibility,
+        ),
+      ),
+      style: TextStyle(color: Colors.white),
+      obscureText: !isPasswordVisible,
+      validator: validator,
+    );
+  }
+
   Widget _buildStyledTextField(
     String label,
-    String initialValue, {
-    TextEditingController? controller,
+    TextEditingController controller, {
     IconData? icon,
     bool isPassword = false,
-    Function(String)? onChanged,
-    String? Function(String?)? validator, // Add validator parameter
+    String? Function(String?)? validator,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         controller: controller,
-        initialValue: controller == null ? initialValue : null,
         decoration: InputDecoration(
           labelText: label,
-          prefixIcon: icon != null ? Icon(icon) : null,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-          filled: true,
-          fillColor: Colors.white,
+          prefixIcon: icon != null ? Icon(icon, color: Colors.red) : null,
+          labelStyle: TextStyle(color: Colors.grey),
+          enabledBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+          focusedBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+          errorBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+          focusedErrorBorder:
+              UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+          errorStyle: TextStyle(color: Colors.red),
         ),
         obscureText: isPassword,
-        onChanged: onChanged,
-        validator: validator, // Use the validator in TextFormField
+        validator: validator,
+        style: TextStyle(color: Colors.white),
       ),
     );
+  }
+
+  void _showMessage(String message, Color backgroundColor) {
+    final snackBar =
+        SnackBar(content: Text(message), backgroundColor: backgroundColor);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   Widget _buildStyledButton(String label, VoidCallback onPressed) {
@@ -236,8 +395,91 @@ class _UserProfilePageState extends State<UserProfilePage>
   }
 
   Widget _buildQuizScoresTab() {
-    return const Center(
-      child: Text('Quiz Scores will be displayed here'),
+    List<String> userEducationQuizzes = [
+      'Intro to Cyber Security',
+      'Threats and Attacks',
+      'Malware',
+      'Social Engineering',
+      'Encryption'
+    ];
+
+    List<String> businessEducationQuizzes = [
+      'AI and IOT',
+      'Cyber laws',
+      'Penetration Testing',
+      'Firewalls',
+      'Mobile Security',
+      'Employee Training'
+    ];
+    List<int> userEducationVariables = [
+      userQuiz1Score,
+      userQuiz2Score,
+      userQuiz3Score,
+      userQuiz4Score,
+      userQuiz5Score
+    ];
+    List<bool> userEducatinoProgress = [
+      attemptUserQuiz1,
+      attemptUserQuiz2,
+      attemptUserQuiz3,
+      attemptUserQuiz4,
+      attemptUserQuiz5
+    ];
+    List<int> businessEducationVariables = [
+      businessQuiz1Score,
+      businessQuiz2Score,
+      businessQuiz3Score,
+      businessQuiz4Score,
+      businessQuiz5Score,
+      businessQuiz6Score
+    ];
+    List<bool> businessEducationProgress = [
+      attemptBusinessQuiz1,
+      attemptBusinessQuiz2,
+      attemptBusinessQuiz3,
+      attemptBusinessQuiz4,
+      attemptBusinessQuiz5,
+      attemptBusinessQuiz6
+    ];
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Text('User Education Quizzes',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          _buildQuizList(userEducationQuizzes, userEducationVariables,
+              userEducatinoProgress),
+          SizedBox(height: 20),
+          Text('Business Education Quizzes',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          _buildQuizList(businessEducationQuizzes, businessEducationVariables,
+              businessEducationProgress),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuizList(
+      List<String> quizzes, List<int> quizScores, List<bool> quizProgress) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics:
+          NeverScrollableScrollPhysics(), // to disable ListView's scrolling
+      itemCount: quizzes.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          title: Text(quizzes[index],
+              style: TextStyle(
+                  color: Color.fromARGB(
+                      255, 0, 94, 172))), // Dark blue color for title
+          subtitle: Text(
+              quizProgress[index]
+                  ? 'Score: ${quizScores[index]}'
+                  : 'Not Attempted',
+              style: TextStyle(
+                  color: Color.fromARGB(
+                      255, 0, 94, 172))), // Dark blue color for subtitle
+        );
+      },
     );
   }
 
@@ -401,30 +643,33 @@ class _UserProfilePageState extends State<UserProfilePage>
     );
   }
 
-  Future<bool> updateEmail(String newEmail) async {
-    try {
-      await user!.updateEmail(newEmail);
-      await user!.reload();
-      user = FirebaseAuth.instance.currentUser;
-      return true; // Success
-    } catch (e) {
-      _showMessage('Error updating email: $e'); // Show error message
-      return false; // Failure
-    }
-  }
-
   Future<bool> updatePassword(String newPassword) async {
+    // Assuming user is the current Firebase user
+    user = FirebaseAuth.instance.currentUser;
     try {
       await user!.updatePassword(newPassword);
       return true; // Success
     } catch (e) {
-      _showMessage('Error updating password: $e'); // Show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text('Failed to update password: $e'),
+            backgroundColor: Colors.red),
+      );
       return false; // Failure
     }
   }
 
-  void _showMessage(String message) {
-    final snackBar = SnackBar(content: Text(message));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  Future<bool> verifyCurrentPassword(String oldPassword) async {
+    // Assuming user is the current Firebase user
+    user = FirebaseAuth.instance.currentUser;
+    var authCredentials = EmailAuthProvider.credential(
+        email: user!.email!, password: oldPassword);
+    try {
+      var authResult =
+          await user?.reauthenticateWithCredential(authCredentials);
+      return authResult?.user != null;
+    } catch (e) {
+      return false;
+    }
   }
 }
