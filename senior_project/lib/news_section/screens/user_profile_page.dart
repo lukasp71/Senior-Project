@@ -69,7 +69,7 @@ class _UserProfilePageState extends State<UserProfilePage>
       );
     } else {
       return Scaffold(
-        backgroundColor: Colors.black, // Dark blue background
+        backgroundColor: Colors.black,
         appBar: SectionAppBar(currentSection: 'Profile', backArrow: true),
         body: SafeArea(
           child: Column(
@@ -117,11 +117,11 @@ class _UserProfilePageState extends State<UserProfilePage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
+            const Center(
               child: CircleAvatar(
                 radius: 50,
                 backgroundImage: NetworkImage(
-                    'https://via.placeholder.com/150'), // Replace with user's actual image URL
+                    'https://via.placeholder.com/150'), 
               ),
             ),
             const SizedBox(height: 20),
@@ -165,7 +165,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                     primary: Theme.of(context).primaryColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12)),
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
@@ -227,7 +227,7 @@ class _UserProfilePageState extends State<UserProfilePage>
           primary: Theme.of(context).primaryColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.symmetric(vertical: 12),
         ),
         onPressed: onPressed,
         child: Text(label),
@@ -272,8 +272,8 @@ class _UserProfilePageState extends State<UserProfilePage>
         barrierDismissible: false, // User must tap button to dismiss
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Confirm Removal'),
-            content: SingleChildScrollView(
+            title: const Text('Confirm Removal'),
+            content: const SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
                   Text('Are you sure you want to remove this article?'),
@@ -282,13 +282,13 @@ class _UserProfilePageState extends State<UserProfilePage>
             ),
             actions: <Widget>[
               TextButton(
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text('Remove'),
+                child: const Text('Remove'),
                 onPressed: () async {
                   setState(() {
                     int originalIndex =
@@ -324,8 +324,8 @@ class _UserProfilePageState extends State<UserProfilePage>
           TextField(
             onChanged: filterSearchResults,
             controller: searchController,
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
+            style: const TextStyle(color: Colors.white),
+            decoration: const InputDecoration(
               filled: true,
               fillColor: Colors.black,
               labelText: "Search",
@@ -339,7 +339,7 @@ class _UserProfilePageState extends State<UserProfilePage>
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               itemCount: filteredTitles.length,
@@ -358,7 +358,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                       style: TextStyle(color: Colors.grey[300]),
                     ),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () => _showDeleteConfirmation(index),
                     ),
                     onTap: () async {

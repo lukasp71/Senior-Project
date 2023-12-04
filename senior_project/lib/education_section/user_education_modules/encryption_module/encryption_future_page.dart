@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Challenges and Future of Encryption';
-final String content =
+const String subsectionTitle = 'Challenges and Future of Encryption';
+const String content =
     'The field of encryption faces various challenges and is evolving rapidly. Key areas include:\n\n'
     '1. **Key Management Challenges**:\n'
     '   - Managing keys in large organizations is complex and risky.\n'

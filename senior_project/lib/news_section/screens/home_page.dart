@@ -12,7 +12,7 @@ import 'package:senior_project/news_section/screens/welcome_pupup.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
-import 'package:senior_project/news_section/models/article_model.dart'; // Import your updated ArticleModel
+import 'package:senior_project/news_section/models/article_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
