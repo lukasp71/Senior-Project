@@ -234,7 +234,7 @@ class _UserProfilePageState extends State<UserProfilePage>
 
             SizedBox(height: 30),
             Text(
-              'Security Settings',
+              'Upadte your password',
               style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
