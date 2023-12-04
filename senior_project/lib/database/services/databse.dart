@@ -168,15 +168,14 @@ class DatabaseService {
       DocumentSnapshot snapshot = await collection.doc(uid).get();
       if (snapshot.exists && snapshot.data() != null) {
         var userData = snapshot.data() as Map<String, dynamic>;
-        return userData[moduleName] ??
-            'Unknown'; // Return 'Unknown' if name is not found
+        // Check if the score exists and is an int, else return 0
+        return (userData[moduleName] is int) ? userData[moduleName] : 0;
       } else {
-        return 0; // Return 'Unknown' if document does not exist
+        return 0; // No data found
       }
     } catch (e) {
-      // Handle any errors here
       print('Error getting user data: $e');
-      return 0; // Return 'Error' or any other appropriate default value
+      return 0; // Error case
     }
   }
 
@@ -185,15 +184,14 @@ class DatabaseService {
       DocumentSnapshot snapshot = await collection.doc(uid).get();
       if (snapshot.exists && snapshot.data() != null) {
         var userData = snapshot.data() as Map<String, dynamic>;
-        return userData[moduleName] ??
-            'Unknown'; // Return 'Unknown' if name is not found
+        // Check if the progress exists and is a bool, else return false
+        return (userData[moduleName] is bool) ? userData[moduleName] : false;
       } else {
-        return false; // Return 'Unknown' if document does not exist
+        return false; // No data found
       }
     } catch (e) {
-      // Handle any errors here
       print('Error getting user data: $e');
-      return false; // Return 'Error' or any other appropriate default value
+      return false; // Error case
     }
   }
 
