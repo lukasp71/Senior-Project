@@ -227,18 +227,18 @@ class _UserProfilePageState extends State<UserProfilePage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Profile Settings section
-                Text(
+                const Text(
                   'Profile Settings',
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
-                Divider(color: Colors.red),
+                const Divider(color: Colors.red),
                 _buildReadOnlyField('Username', username),
                 _buildReadOnlyField('Email', email),
 
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 // Update Password section
                 Container(
                   decoration: BoxDecoration(
@@ -252,14 +252,14 @@ class _UserProfilePageState extends State<UserProfilePage>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Update Your Password',
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        Divider(color: Colors.red),
+                        const Divider(color: Colors.red),
                         _buildPasswordField(
                           'Current Password',
                           _oldPasswordController,
@@ -290,7 +290,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                                 !_isConfirmPasswordVisible);
                           },
                         ),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 30),
                         ElevatedButton(
                           // Button to update password
                           style: ElevatedButton.styleFrom(
@@ -332,7 +332,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                               }
                             }
                           },
-                          child: Text('Update Password'),
+                          child: const Text('Update Password'),
                         ),
                       ],
                     ),
@@ -353,7 +353,7 @@ class _UserProfilePageState extends State<UserProfilePage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(label, style: TextStyle(color: Colors.grey[300], fontSize: 16)),
-          Text(value, style: TextStyle(color: Colors.white, fontSize: 20)),
+          Text(value, style: const TextStyle(color: Colors.white, fontSize: 20)),
           Divider(color: Colors.grey[700]),
         ],
       ),
@@ -374,9 +374,9 @@ class _UserProfilePageState extends State<UserProfilePage>
         labelText: label,
         labelStyle: TextStyle(color: Colors.grey[300]),
         enabledBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+            const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
         focusedBorder:
-            UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+            const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         suffixIcon: IconButton(
           icon: Icon(
             isPasswordVisible ? Icons.visibility : Icons.visibility_off,
@@ -385,7 +385,7 @@ class _UserProfilePageState extends State<UserProfilePage>
           onPressed: togglePasswordVisibility,
         ),
       ),
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
       obscureText: !isPasswordVisible,
       validator: validator,
     );
@@ -405,20 +405,20 @@ class _UserProfilePageState extends State<UserProfilePage>
         decoration: InputDecoration(
           labelText: label,
           prefixIcon: icon != null ? Icon(icon, color: Colors.red) : null,
-          labelStyle: TextStyle(color: Colors.grey),
+          labelStyle: const TextStyle(color: Colors.grey),
           enabledBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              const UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+              const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
           errorBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+              const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
           focusedErrorBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-          errorStyle: TextStyle(color: Colors.red),
+              const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+          errorStyle: const TextStyle(color: Colors.red),
         ),
         obscureText: isPassword,
         validator: validator,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
@@ -437,7 +437,7 @@ class _UserProfilePageState extends State<UserProfilePage>
           primary: Theme.of(context).primaryColor,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.symmetric(vertical: 12),
         ),
         onPressed: onPressed,
         child: Text(label),
@@ -495,12 +495,12 @@ class _UserProfilePageState extends State<UserProfilePage>
     return SingleChildScrollView(
       child: Column(
         children: [
-          Text('User Education Quizzes',
+          const Text('User Education Quizzes',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           _buildQuizList(userEducationQuizzes, userEducationVariables,
               userEducatinoProgress),
-          SizedBox(height: 20),
-          Text('Business Education Quizzes',
+          const SizedBox(height: 20),
+          const Text('Business Education Quizzes',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           _buildQuizList(businessEducationQuizzes, businessEducationVariables,
               businessEducationProgress),
@@ -514,19 +514,19 @@ class _UserProfilePageState extends State<UserProfilePage>
     return ListView.builder(
       shrinkWrap: true,
       physics:
-          NeverScrollableScrollPhysics(), // to disable ListView's scrolling
+          const NeverScrollableScrollPhysics(), // to disable ListView's scrolling
       itemCount: quizzes.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
           title: Text(quizzes[index],
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color.fromARGB(
                       255, 0, 94, 172))), // Dark blue color for title
           subtitle: Text(
               quizProgress[index]
                   ? 'Score: ${quizScores[index]}'
                   : 'Not Attempted',
-              style: TextStyle(
+              style: const TextStyle(
                   color: Color.fromARGB(
                       255, 0, 94, 172))), // Dark blue color for subtitle
         );
@@ -565,8 +565,8 @@ class _UserProfilePageState extends State<UserProfilePage>
         barrierDismissible: false, // User must tap button to dismiss
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Confirm Removal'),
-            content: SingleChildScrollView(
+            title: const Text('Confirm Removal'),
+            content: const SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
                   Text('Are you sure you want to remove this article?'),
@@ -575,13 +575,13 @@ class _UserProfilePageState extends State<UserProfilePage>
             ),
             actions: <Widget>[
               TextButton(
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text('Remove'),
+                child: const Text('Remove'),
                 onPressed: () async {
                   setState(() {
                     int originalIndex =
@@ -617,8 +617,8 @@ class _UserProfilePageState extends State<UserProfilePage>
           TextField(
             onChanged: filterSearchResults,
             controller: searchController,
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
+            style: const TextStyle(color: Colors.white),
+            decoration: const InputDecoration(
               filled: true,
               fillColor: Colors.black,
               labelText: "Search",
@@ -632,7 +632,7 @@ class _UserProfilePageState extends State<UserProfilePage>
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               itemCount: filteredTitles.length,
@@ -651,7 +651,7 @@ class _UserProfilePageState extends State<UserProfilePage>
                       style: TextStyle(color: Colors.grey[300]),
                     ),
                     trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
+                      icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () => _showDeleteConfirmation(index),
                     ),
                     onTap: () async {

@@ -21,7 +21,6 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SectionAppBar(currentSection: 'Education', backArrow: false),
-      backgroundColor: Colors.purple[100], // You can adjust this color
       body: Stack(
         children: [
           Container(
