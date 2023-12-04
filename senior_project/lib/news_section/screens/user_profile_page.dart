@@ -216,80 +216,131 @@ class _UserProfilePageState extends State<UserProfilePage>
       padding: const EdgeInsets.all(16.0),
       child: Form(
         key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Profile Settings',
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+        child: Center(
+          // Center the content
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width *
+                  0.5, // Half of the screen width
             ),
-            Divider(color: Colors.red),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Profile Settings section
+                Text(
+                  'Profile Settings',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                Divider(color: Colors.red),
+                _buildReadOnlyField('Username', username),
+                _buildReadOnlyField('Email', email),
 
-            // Display Username and Email fields as read-only
-            _buildReadOnlyField('Username', username),
-            _buildReadOnlyField('Email', email),
+                SizedBox(height: 30),
+                // Update Password section
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey), // Box border color
+                    borderRadius:
+                        BorderRadius.circular(10), // Box border radius
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.all(8.0), // Padding inside the box
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Update Your Password',
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Divider(color: Colors.red),
+                        _buildPasswordField(
+                          'Current Password',
+                          _oldPasswordController,
+                          'Enter your current password',
+                          isPasswordVisible: _isOldPasswordVisible,
+                          togglePasswordVisibility: () {
+                            setState(() =>
+                                _isOldPasswordVisible = !_isOldPasswordVisible);
+                          },
+                        ),
+                        _buildPasswordField(
+                          'New Password',
+                          _newPasswordController,
+                          'Enter new password',
+                          isPasswordVisible: _isNewPasswordVisible,
+                          togglePasswordVisibility: () {
+                            setState(() =>
+                                _isNewPasswordVisible = !_isNewPasswordVisible);
+                          },
+                        ),
+                        _buildPasswordField(
+                          'Confirm New Password',
+                          _confirmPasswordController,
+                          'Confirm new password',
+                          isPasswordVisible: _isConfirmPasswordVisible,
+                          togglePasswordVisibility: () {
+                            setState(() => _isConfirmPasswordVisible =
+                                !_isConfirmPasswordVisible);
+                          },
+                        ),
+                        SizedBox(height: 30),
+                        ElevatedButton(
+                          // Button to update password
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.red, // Button color
+                            onPrimary: Colors.white, // Text color
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              // Form is valid
+                              bool isCurrentPasswordValid =
+                                  await verifyCurrentPassword(
+                                      _oldPasswordController.text);
+                              if (!isCurrentPasswordValid) {
+                                _showMessage("Current password is incorrect",
+                                    Colors.red);
+                                return;
+                              }
 
-            SizedBox(height: 30),
-            Text(
-              'Upadte Your Password',
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
+                              if (_newPasswordController.text !=
+                                  _confirmPasswordController.text) {
+                                _showMessage(
+                                    "New passwords do not match", Colors.red);
+                                return;
+                              }
+
+                              bool passwordUpdated = await updatePassword(
+                                  _newPasswordController.text);
+                              if (passwordUpdated) {
+                                _showMessage("Password updated successfully",
+                                    Colors.green);
+
+                                // Clear the password fields
+                                _oldPasswordController.clear();
+                                _newPasswordController.clear();
+                                _confirmPasswordController.clear();
+                              } else {
+                                _showMessage(
+                                    "Failed to update password", Colors.red);
+                              }
+                            }
+                          },
+                          child: Text('Update Password'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Divider(color: Colors.red),
-
-            // Old Password Field
-            _buildPasswordField(
-              'Current Password',
-              _oldPasswordController,
-              'Enter your current password',
-              isPasswordVisible: _isOldPasswordVisible,
-              togglePasswordVisibility: () {
-                setState(() => _isOldPasswordVisible = !_isOldPasswordVisible);
-              },
-            ),
-
-            // New Password Field
-            _buildPasswordField(
-              'New Password',
-              _newPasswordController,
-              'Enter new password',
-              isPasswordVisible: _isNewPasswordVisible,
-              togglePasswordVisibility: () {
-                setState(() => _isNewPasswordVisible = !_isNewPasswordVisible);
-              },
-            ),
-
-            // Confirm New Password Field
-            _buildPasswordField(
-              'Confirm New Password',
-              _confirmPasswordController,
-              'Confirm new password',
-              isPasswordVisible: _isConfirmPasswordVisible,
-              togglePasswordVisibility: () {
-                setState(() =>
-                    _isConfirmPasswordVisible = !_isConfirmPasswordVisible);
-              },
-            ),
-
-            SizedBox(height: 30),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red, // Button color
-                onPrimary: Colors.white, // Text color
-              ),
-              onPressed: () async {
-                if (_formKey.currentState!.validate()) {
-                  // Validate and update password logic
-                }
-              },
-              child: Text('Update Password'),
-            ),
-          ],
+          ),
         ),
       ),
     );
