@@ -7,54 +7,43 @@ import 'package:senior_project/education_section/screens/business_module_overvie
 
 const String subsectionTitle = 'Anonymous Browsing';
 const String content = '''
+# IoT Device Security
 
+## Overview
 
-### IoT Device Security
+**Internet of Things (IoT) devices**, such as Smart TVs and smart appliances, are increasingly common in our daily lives. However, many of these devices are vulnerable by default, lacking built-in security features.
 
-Internet-Of-Things devices are used everywhere, these include your Smart TV's, smart appliances, and more.
+## Challenges with IoT Security
 
+## Lack of Regular Updates
 
-Most of these devices are vulnerable by default, they don't really come with any security features built in.
-
-Sometimes, manufacturers will release patches to devices to address security issues.
-
-The main issue with this is very simple. Most people have smart appliances nowadays and forget that that device can recieve updates. 
-Most people will never update their smart devices. That is why it is good for people to update when there is an update available, and see if there
-is an "update automatically" option. 
-
+The primary challenge is that most users do not regularly update their smart devices, potentially missing critical security patches. It's important to check for updates and, if available, enable an "update automatically" option.
 
 ## Main Issues with IoT Security
 
-1. Most IoT devices do not support encryption, which means that the information it transmits is usually vulnerable to attacks.
-IoT devices like security cameras, and even medical devices are always compromised.
+1. **Lack of Encryption:** Many IoT devices do not support encryption, leaving the information they transmit susceptible to cyberattacks. This includes devices like security cameras and medical equipment.
 
-2. The Protocol used in those devices are old and Insecure. The HTTP protocol is specifically used in most of the devices, and not HTTPS
+2. **Outdated Protocols:** A significant number of IoT devices use older, insecure protocols, such as HTTP instead of the more secure HTTPS.
 
+3. **Insufficient Patching:** IoT devices often do not receive necessary patches, leaving longstanding vulnerabilities.
 
-3. Even though devices can be patched, IoT devices usually don't even recieve patches in the first place,
-which can leave them vulnerable to attacks permanently. 
+## Mitigation Strategies
 
+## 1. Separate Network for IoT Devices
 
+- **Strategy:** To protect IoT devices, consider placing them on a separate network, isolated from other home devices.
 
+## 2. Cloud-Based Security
 
-## Ways to Mitigate this
+- **Solution:** Implement cloud-based security measures to protect IoT devices at the network level, preventing attackers from reaching the devices directly.
 
-1. Have a seperate network for IoT Devices
+## 3. Endpoint Encryption
 
-One thing you can do so that your IoT devices don't get compromised is to put them on a completely seperate network, which
-is not accessed by any other home devices.
-
-
-2. Add Cloud-Based Security to your network.
-
-  You can purchase or add a form of cloud based security to your network, which will protect those devices before an attacker can reach the device.
-
-
-3. Endpoint Encryption:
+- **Encryption:** Encrypting data at the endpoint can significantly enhance the security of IoT devices.
 
 This information is provided by Fortinet, Inc.
 
-For more information, see https://www.fortinet.com/resources/cyberglossary/iot-security
+For more information, visit: [Fortinet IoT Security](https://www.fortinet.com/resources/cyberglossary/iot-security)
 ''';
 
 class IOT extends StatelessWidget {

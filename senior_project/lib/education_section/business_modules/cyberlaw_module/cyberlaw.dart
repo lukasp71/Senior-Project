@@ -5,32 +5,35 @@ import 'package:senior_project/education_section/screens/business_module_overvie
 
 const String subsectionTitle = 'Cybersecurity Laws in the United States';
 const String content = '''
+# Cyber Laws and Regulations in the United States
 
-## Cyber Laws and Regulations in the United States
+## Introduction
 
-Governments around the world have laws in place that protect our information physically and virtually. 
-Here are some laws that apply to the United States:
+Governments worldwide have established laws to protect information both physically and virtually. In the United States, several significant laws have been passed to safeguard data and maintain cybersecurity.
 
+## Key Cybersecurity Laws
 
-1. Health Insurance Portability and Accountability Act (HIPAA):
-This law went into affect in 1996, and basically controls who can see your medical and health information.
+## 1. Health Insurance Portability and Accountability Act (HIPAA)
+- **Year Enacted:** 1996
+- **Purpose:** Controls who can access and view medical and health information.
 
-2. Homeland Security Act:
-Passed in 2002 after the 9/11 attacks, this act established the Department of Homeland Security and new sets of 
-procedures into place to protect the public. 
+## 2. Homeland Security Act
+- **Year Enacted:** 2002, following the 9/11 attacks
+- **Establishment:** Created the Department of Homeland Security
+- **Objective:** Implemented new procedures to enhance public protection.
 
-3. Cybersecurity Information Sharing Act (CISA):
-  This law passed in 2015 encourages private companies to share their knowledge of cyber threats with the U.S government.
-  While also providing liability protections for those companies. 
+## 3. Cybersecurity Information Sharing Act (CISA)
+- **Year Enacted:** 2015
+- **Encouragement:** Motivates private companies to share information about cyber threats with the U.S. government.
+- **Liability Protection:** Offers legal protections for these companies.
 
+# Additional Resources
 
+This information is provided by Enterprise Engineering Solutions and Knowledgehut.com.
 
-This information is Provided by Enterprise Engineering Solutions and Knowledgehut.com
-For more details see: 
-https://www.eescorporation.com/cybersecurity-laws-and-regulations-in-us/
-and 
-https://www.knowledgehut.com/blog/security/cyber-security-laws
-
+For more details, visit:
+- [EES Corporation on Cybersecurity Laws and Regulations in the US](https://www.eescorporation.com/cybersecurity-laws-and-regulations-in-us/)
+- [Knowledgehut on Cyber Security Laws](https://www.knowledgehut.com/blog/security/cyber-security-laws)
 ''';
 
 class LawPage extends StatelessWidget {

@@ -4,54 +4,35 @@ import 'package:senior_project/education_section/screens/business_module_overvie
 
 const String subsectionTitle = 'Anonymous Browsing';
 const String content = '''
+# Employee Training in Cybersecurity
 
+## Importance in Businesses
 
-### Employee Training
+In the realm of business, the education of both personal users and employees in basic cybersecurity practices is crucial. A single mistake by an employee can lead to significant damage, including leaked or stolen information, or compromised devices. Implementing effective training methods is key to enhancing cybersecurity awareness.
 
-When it comes to businesses, it is important that both personal users and employees of
-businesses are educated when it comes to basic cybersecurity practices. One employee's mistake could also major 
-damage to the company, whether it is information that is leaked or stolen, or a device becoming compromised.
-There are ways to educate your employees so that they are in the know.
+# Essential Training Practices
 
+## 1. Adherence to Protocols
+- **Compliance:** Ensure all employees understand and follow company protocols regarding data handling, including transmission, sharing, and deletion.
+- **Continuous Education:** Keep employees updated through meetings and reviews. Regular testing can reinforce their understanding of these protocols.
 
-1. Have Protocols in Place that also must be followed at all times.
+## 2. Password Management
+- **Strength and Regular Changes:** Encourage the use of strong passwords and mandate regular password changes to enhance security.
 
+## 3. Ban on Unauthorized Software
+- **Strict Enforcement:** Prohibit the use of any unauthorized software on corporate devices, with clear consequences for violations.
 
-Make sure all employees are educated on company protocols when it comes to data about your business. This must include everything, including what to do when transmitting, sharing, or even deleting very
-important information. If as little as one step isn't followed properly, this can lead to the data becoming compromised.
-Also, ensure that all employees are up to date on these protocols. Follow up with them with meetings, because sometimes people will lazily not read
-an entire document. 
+## 4. Policies on Company Cards
+- **Restricted Access:** Limit access to company payment methods to authorized personnel only. Ensure these methods are not used for personal purchases.
 
-You could also try to test your employees to see if they really know all the protocols in place.
+## 5. Data Backup
+- **Mandatory Backups:** Require employees to regularly backup company data and store it in a secure environment.
 
+## Additional Information
 
+This content is provided by Nationwide, Inc.
 
-2. Ensure all passwords are strong and set to change regularly. 
-
-Make sure all passwords being used for any company asset or site are strong. It is also best to require employees to change their passwords
-after a given period of time. This period of time can be set at the boss's discretion. 
-
-
-3. Ban Unauthorized Software
-
-As a precautionary measure, you should, not allow employees to use any unauthorized software on any
-corporate device. This is something that must always be enforced, and any employee that violates this rule could face
-serious punishment. 
-
-4. Policys on Company Cards
-
-Make sure that only authorized employees have access to company cards or methods of payment. They must also not be using these company cards for purchases
-outside the company scope, such as for personal use. 
-
-
-
-5. Always Have a Backup
-
-Require Employees to have a backup of all company data, and stored in a very secure environment. 
-
-
-This information is provided by Nationwide, Inc. 
-For more details, see https://www.nationwide.com/business/solutions-center/cybersecurity/train-employees
+For more details on employee cybersecurity training, visit: [Nationwide Cybersecurity Training for Employees](https://www.nationwide.com/business/solutions-center/cybersecurity/train-employees)
 ''';
 
 class EmployeeTrainingPage extends StatelessWidget {

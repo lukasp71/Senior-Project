@@ -5,59 +5,43 @@ import 'package:senior_project/education_section/screens/business_module_overvie
 
 const String subsectionTitle = 'Anonymous Browsing';
 const String content = '''
+# AI and Machine Learning in Cybersecurity
 
-AI and Machine Learning in Cybersecurity
+In the modern age, **Artificial Intelligence (AI)** and **Machine Learning (ML)** have significantly advanced various technologies, including Cybersecurity. AI helps overcome obstacles that humans face in Cybersecurity. Here are some key ways AI and ML contribute:
 
-In the modern age, Artificial Intelligence and Machine Learning have been able to help us with all kinds of technology, and now it can
-help us with Cybersecurity. There are obstacles that humans have had to overcome with Cybersecurity, and AI is helping us
-overcome that. Here are some ways:
+## 1. Human Error in Configuration:
 
-1. Human Error in Configuration:
+- **Problem:** A common issue faced by companies involves errors in system configuration. These mistakes or oversights can leave systems vulnerable to attacks and breaches.
+- **AI Solution:** AI automates many tasks, providing teams with up-to-date information on emerging issues and enabling automatic resolution of these problems.
 
-This is a very common issue ran into by almost any company. When confuguring some sort of system, whether it is for security or not
-a mistake is made, or something is overlooked which ends up making them vulnerable to attacks and breaches.
-AI can help us do a lot of automated tasks, which allows teams to get up-to-date information on new issues, and have them
-automatically resolved.
+## 2. Threat Response Time:
 
-2. Threat Response Time:
-
-The most important thing in a Cyber attack is being able to respond to it promptly. Nowadays, machine learning can aid us
-by pulling information from the attack and quickly analyzing it in order to give security teams information on the attack. It 
-can also provide advice to prevent further damage and stop further attacks.
+- **Importance:** Prompt response to Cyber attacks is crucial.
+- **ML Contribution:** Machine learning assists by analyzing data from attacks to quickly provide security teams with insights. It offers advice to mitigate damage and prevent future attacks.
 
 ## What Machine Learning Can Do For Us:
 
-  ##Data Classifying:
-  Uses rules that are predetermined to assigned to data points.
-
-  ##Data Clustering
-  Takes outliers from preset rules and places it into collections of data with similarities or oddities.
-  
-  ##Predictive forecasting:
-  Predicts potential outcomes by analyzing existing datasets, and this can be used for various endpoint solutions.
-  
+- **Data Classifying:** Uses predetermined rules to classify data points.
+- **Data Clustering:** Identifies outliers from preset rules and groups them into collections based on similarities or anomalies.
+- **Predictive Forecasting:** Analyzes existing datasets to predict potential outcomes, useful for various endpoint solutions.
 
 ## The Future of Cybersecurity
 
-While AI and Machine Learning can help us improve our cybersecurity practices, there are some legal aspects that need to be addressed in the
-future regarding AI.
+While AI and ML enhance cybersecurity practices, there are legal aspects to consider:
 
-1. Data Privacy Laws
+## 1. Data Privacy Laws
 
-Machine Learning works with datasets in order to create models, one issue is having human identifiers can violate some privacy laws.
-One way this could be addressed is to make the data points anonymous, and making the data impossible to access once the software's been trained with AI.
+- **Challenge:** Machine Learning requires datasets, which may contain human identifiers, potentially violating privacy laws.
+- **Solution:** Anonymize data points and secure the data to prevent access post-training with AI.
 
+## 2. Lack of Knowledgeable Experts
 
-2. Lack of Knowledgeable Experts
-
-As AI and Machine learning are very new, there also is not a huge industry of knowledgeable experts in the field who can assist and also provide fixes
-and debugging when needed. Global demand is increasing significantly, and people need to be ready. 
-That said, you should still have a team on deck dedicated to security, just because we have AI does not mean you should completely rely on it.
+- **Issue:** The novelty of AI and ML has resulted in a shortage of experts in the field.
+- **Response:** Global demand for knowledgeable professionals is increasing. It's essential to prepare and also maintain a dedicated security team, as reliance solely on AI is not advisable.
 
 This information was provided by Kaspersky, Inc.
 
-For more information, see: https://usa.kaspersky.com/resource-center/definitions/ai-cybersecurity
-
+For more information, see: [Kaspersky AI Cybersecurity](https://usa.kaspersky.com/resource-center/definitions/ai-cybersecurity)
 ''';
 
 class AIinCyber extends StatelessWidget {

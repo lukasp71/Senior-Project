@@ -5,57 +5,44 @@ import 'package:senior_project/education_section/screens/business_module_overvie
 
 const String subsectionTitle = 'Ethical Hacking';
 const String content = '''
+# Ethical Hacking
 
-Ethical Hacking
+## Introduction
 
-There are various methods of hacking, but there are forms of hacking which is considered Ethical. This means that this 
-type of hacking is legal and for good purposes, not for stealing information maliciously and causing harm.
-This is actually a profession in Cybersecurity, Ethical hackers are usually tasked with testing security systems to see if they are 
-vulnerable to attacks. This usually relates to businesses. They can also use the information they find to help the business improve their
-security systems in the event of a real attack. 
+Ethical Hacking refers to legal and morally driven hacking practices, aimed at improving cybersecurity rather than causing harm or stealing information. Ethical hackers are professionals in the cybersecurity field, tasked with testing and evaluating security systems, particularly for businesses, to identify vulnerabilities.
 
+## Three Types of Hackers
 
-### Three Types of Hackers
+## 1. White Hat Hacker
+- **Role:** Ethical hackers who assist businesses in identifying weaknesses in their cybersecurity systems.
+- **Methods:** Employ techniques like penetration testing, reconnaissance and research, and social engineering.
+- **Purpose:** Use their skills to improve security systems against real attacks.
 
+## 2. Black Hat Hacker
+- **Intent:** Engage in malicious activities such as unauthorized access to sensitive data and information theft.
+- **Common Tactics:** Scamming by impersonating others, hacking into businesses and companies for harmful purposes.
 
-1. White Hat Hacker:
-White hat hacker usually are ethical hackers. They help businesses find weaknesses in their cyberscurity systems. They are usually provided information
-beforehand to make their job a little bit easier. They use tactics like penetration testing, reconnaisance and research, and social engineering to achieve this.
+## 3. Grey Hat Hacker
+- **Nature:** A blend of both white and black hat hacking.
+- **Activities:** May assist businesses in enhancing their security systems, sometimes without official authorization, but without malicious intent.
 
+# Tools Used by Ethical Hackers
 
+## 1. Nmap
+- **Function:** A network scanner identifying open ports and vulnerabilities.
+- **Capabilities:** Allows viewing of all devices on a network, supports remote and local scans, and can be used on computers and mobile devices.
 
-2. Black Hat Hacker
-These are usually the hackers who are out to do malicious intent. Hacking into businesses and companies to steal their information or get unauthorized access
-to sensitive data. One famous form of this is scamming. Black hat hackers can scam companies by impersonating other people or companies to get the information they want. 
+## 2. Wireshark
+- **Purpose:** Another network scanning tool, similar to Nmap.
+- **Features:** Helps in analyzing the traffic exchanged between devices but is limited to viewing unencrypted internet packets.
 
-3. Grey Hat Hacker
+## Additional Information
 
-Grey hat hackers are a mix of white and black hat hacking. They may assist businesses with security systems with or without their knowledge.
-This means that they may perform some unauthorized tasks. However, it is done with non-malicious intent
+This content is provided by Kaspersky, Inc. and CompTIA.
 
-
-
-## What Ethical Hackers Use
-
-Here are some of the software tools that ethical hackers use which assist them:
-
-1. Nmap
-
-This tool is a network scanner which basically scans for open ports and vulnerabilities on the network you are on. This can also let you
-see all devices that are connected to your network. This can do remote and local scans, and be used on computers and mobile devices. 
-
-2. Wireshark
-
-This is also a network scanning tool which provides relatively the same services as Nmap. It can help ethical hackers find out the traffic being exchanged between devices.
-It does only let you see internet packes if they're unencrypted.
-
-
-This information is provided by Kaspersky, Inc and CompTIA
-
-For more info, see: https://www.comptia.org/content/articles/what-is-ethical-hacking
-and
-https://usa.kaspersky.com/resource-center/definitions/hacker-hat-types
-
+For more information, visit:
+- [CompTIA on Ethical Hacking](https://www.comptia.org/content/articles/what-is-ethical-hacking)
+- [Kaspersky on Hacker Hat Types](https://usa.kaspersky.com/resource-center/definitions/hacker-hat-types)
 ''';
 
 class EthicalHacking extends StatelessWidget {

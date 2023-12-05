@@ -7,13 +7,13 @@ import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Incident Response and Recovery';
 const String content = '''
-### Incident Response and Recovery:
+# Incident Response and Recovery:
 
-#### 1. **Introduction to Incident Response**:
+## 1. **Introduction to Incident Response**:
    - Definition: Incident response entails a structured approach employed by organizations to address and manage the aftermath of a security breach or cyber attack, also known as an incident. The objective is to handle the situation in a manner that limits damage and reduces recovery time and costs.
    - Importance: A well-designed incident response plan can significantly mitigate the damage from an incident and accelerate the recovery of normal business operations.
 
-#### 2. **Incident Response Life Cycle**:
+## 2. **Incident Response Life Cycle**:
    - **Preparation**: Establishing and training your incident response team, as well as equipping them with the necessary tools and resources.
    - **Identification**: Detecting and acknowledging the incident.
    - **Containment**: Short-term and long-term actions taken to prevent further damage.
@@ -21,13 +21,13 @@ const String content = '''
    - **Recovery**: Validating system functionality for business operations, and monitoring the systems for signs of weaknesses that could be exploited again.
    - **Lessons Learned**: Documenting the incident, discussing it, and learning from it to better prepare for the future.
 
-#### 3. **Effective Practices for Cyber Incident Response and Recovery**:
+## 3. **Effective Practices for Cyber Incident Response and Recovery**:
    - Governance, planning and preparation, analysis, mitigation, restoration and recovery, coordination and communication, and improvement are key components to consider when developing practices for effective cyber incident response and recovery.
 
-#### 4. **Cybersecurity Incident Recovery**:
+## 4. **Cybersecurity Incident Recovery**:
    - Organizations are provided with strategic guidance for planning, playbook developing, testing, and improvements of recovery planning following a cybersecurity event.
 
-#### 5. **Creating an Incident Response Plan**:
+## 5. **Creating an Incident Response Plan**:
    - Step 1: Create a Policy: Establish a clear policy that defines the scope of your incident response plan.
    - Step 2: Form a Response Team: Assemble a group of individuals who will be responsible for handling incidents.
    - Step 3: Define and Classify Incidents: Establish what constitutes an incident and categorize them based on severity.

@@ -5,7 +5,6 @@ class WelcomePopup extends StatefulWidget {
   static void show(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false,
       builder: (BuildContext context) => WelcomePopup(),
     );
   }

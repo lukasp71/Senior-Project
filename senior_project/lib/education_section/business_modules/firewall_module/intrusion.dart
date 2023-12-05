@@ -5,48 +5,42 @@ import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Anonymous Browsing';
 const String content = '''
+# Intrusion Detection and Prevention System
 
+## Overview
 
-## Intrusion Detection and Prevention System
+An Intrusion Detection and Prevention System (IDPS) continuously monitors a network or device. Upon detecting a potential threat, it alerts the administrator.
 
-A system which is constantly monitoring your network or device, and when a possible threat is detected, it alerts
-the administrator.
+# Basic Functions of IDPS
 
+1. **Protect Infrastructure:** Guards the technological infrastructure and sensitive data.
+2. **Policy Review:** Assesses user and security policies in place.
+3. **Information Gathering:** Collects data from network resources.
+4. **Compliance:** Aids in meeting various compliance regulations.
 
-## Basic Functions of this System
+# Types of Intrusion Prevention Systems
 
-1. It guards the infrastructure of the technology and any sensitive data
+## 1. Network-based Intrusion Prevention System (NIPS)
+- **Function:** Monitors wired networks for malicious traffic by analyzing network activities and protocols.
+- **Deployment:** Installed at network boundaries, typically behind routers and firewalls.
+- **Mechanism:** Compares network activity against a database of known attacks, blocking transmission if a match is found.
 
-2. It reviews user and security policies already in place.
+## 2. Wireless Intrusion Prevention System (WIPS)
+- **Similarity:** Functions like NIPS but for wireless networks.
+- **Limitation:** Primarily focuses on wireless protocols and does not delve into advanced protocols like TCP.
+- **Usage:** Ideal in areas with extensive unauthorized wireless networking.
 
-3. Gathers info from network resources
+## 3. Network Behavior Analysis System (NBA)
+- **Approach:** Instead of analyzing protocols, NBA systems detect threats by identifying unusual traffic patterns.
+- **Use Cases:** Effective in identifying malware attacks, Distributed Denial of Service (DDoS) attacks, and more.
 
-4. Helps meet compliance regulations.
+## 4. Host-based Intrusion Prevention System (HIPS)
+- **Deployment:** Installed on a single host, typically servers holding extremely important data.
+- **Monitoring:** Scrutinizes all traffic to and from the host, including logs, processes, and configuration changes.
 
+# Conclusion
 
-## Different types of Intrusion Prevention Systems
-
-
-1. Network-based intrusion prevention system (NIPS):
-
-This system usually monitors wireless networks by analyzing networks or network segments for malicious traffic. Usually, it analyzes protocol activity and
-sees if it matches a database of known attacks. If so, the data will not transmit. NIPS are installed at network boundaries, and behind routers and firewalls.
-
-2. Wireless Intrusion Prevention System:
-
-This is basically NIPS, but wireless. It analyzes wireless protocols, but it does not
-analyze more advanced ones like TCP. This is used in any area that has more unauthorized wireless networking.
-
-3. Network behavior analysis system: 
-While NIPS analyze protocol activity, NBA systems identify threats by looking for traffic patterns that are unusual. This can happen with malware attacks, DDoS attacks,
-and more. 
-
-
-4. Host based intrusion prevention system. 
-
-This system is deployed in a single host, and are servers that have extrmeley important data on them. This system monitors
-all traffic going in and out of that host, and monitors it in any way possible, including logs, processes, and configuration changes. 
-
+Intrusion Detection and Prevention Systems are vital in safeguarding networks and hosts against various cyber threats. Their diverse functionalities cater to different network environments and security needs.
 ''';
 
 class IntrusionPage extends StatelessWidget {

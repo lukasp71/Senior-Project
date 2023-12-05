@@ -7,7 +7,7 @@ import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Common Cyber Threats';
 const String content = '''
-### Definition and Types of Common Cyber Threats:
+# Definition and Types of Common Cyber Threats:
 - **Malware**:
   - Definition: Malware, short for malicious software, refers to a variety of software types designed to access, damage, or steal information from systems and networks without the owner's consent.
   - Types:
@@ -34,14 +34,14 @@ const String content = '''
 - **Distributed-Denial-of-Service (DDoS) Attacks**:
   - Definition: Similar to DoS attacks but coordinated from multiple compromised systems to increase the attack's effectiveness.
 
-### Impact of Common Cyber Threats:
+# Impact of Common Cyber Threats:
 - **Financial Loss**: Costs associated with data breach remediation, ransom payments, or fraud.
 - **Data Breach**: Unauthorized access and theft of sensitive data.
 - **System or Network Downtime**: Loss of availability impacting operations and productivity.
 - **Reputation Damage**: Loss of trust from customers and stakeholders following a cyber incident.
 - **Legal and Regulatory Consequences**: Potential legal actions and regulatory fines due to non-compliance with data protection laws.
 
-### Prevention Measures:
+# Prevention Measures:
 - **Awareness and Education**: Educating individuals and employees about common cyber threats and safe online practices.
 - **Regular Software Updates**: Keeping systems, applications, and security software up-to-date to patch known vulnerabilities.
 - **Strong Authentication**: Implementing strong passwords, two-factor authentication, and other authentication mechanisms.
