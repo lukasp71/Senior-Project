@@ -1,95 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/database/screens/wrapper.dart';
+import 'package:senior_project/database/screens/authenticate/authenticate.dart';
+import 'package:senior_project/database/screens/authenticate/register_authenticate.dart';
 
-class WelcomePopup extends StatefulWidget {
-  static void show(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => WelcomePopup(),
-    );
-  }
-
-  @override
-  _WelcomePopupState createState() => _WelcomePopupState();
-}
-
-class _WelcomePopupState extends State<WelcomePopup>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-  late Animation<double> _fadeAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOutBack,
-      ),
-    );
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _fadeAnimation,
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
+    void showSignIn() {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const Authenticate()));
+    }
+
+    void showRegister() {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const RegisterAuthenticate()));
+    }
+
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      child: Container(
+        width: MediaQuery.of(context).size.width *
+            0.50, // Adjust the width as needed
+        height: MediaQuery.of(context).size.height *
+            0.40, // Adjust the height as needed
+        decoration: BoxDecoration(
+          image: const DecorationImage(
+            image: AssetImage('assets/flashNews.jpg'),
+            fit: BoxFit.cover,
           ),
-          title: const Text(
-            'Welcome to Threat Awareness Hub',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                const Text(
-                  'Your one-stop for Cybersecurity News and Education. Take a look at the most recent cybersecurity news and vulnerabilities, as well as learn the basics of various cybersecurity concepts for you or your business.',
-                  style: TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 20),
-                const Text(
-                  'Register an account or sign into an already existing profile.',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text('Sign In'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Wrapper()));
-                  },
-                ),
-              ],
+          borderRadius: BorderRadius.circular(20), // Rounded corners
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 20),
+            const Text(
+              'Welcome to the Threat Awareness Hub',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
-          ),
-          titlePadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-          contentPadding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-          actionsAlignment: MainAxisAlignment.start,
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Stay informed and protected in the digital world! Our app brings you the latest in cybersecurity news, recent vulnerability updates, and comprehensive learning modules.',
+                style: TextStyle(fontSize: 16, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                'Whether you\'re an individual user or a business, our resources are tailored to enhance your cybersecurity awareness and defenses.',
+                style: TextStyle(fontSize: 16, color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: showSignIn,
+              child: const Text('Login With Current Account'),
+            ),
+            ElevatedButton(
+              onPressed: showRegister,
+              child: const Text('Register a New Account'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(), // Close the popup
+              child: const Text('Continue as a Guest'),
+            ),
+            const SizedBox(height: 20),
+          ],
         ),
       ),
     );
