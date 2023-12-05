@@ -55,7 +55,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showWelcomeDialog() {
-    return WelcomePopup.show(context);
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const WelcomePage(),
+    );
   }
 
   @override
@@ -73,9 +77,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1), 
+            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
             child: Container(
-              color: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.6), 
+              color: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.6),
             ),
           ),
           SingleChildScrollView(
@@ -85,7 +89,8 @@ class _HomePageState extends State<HomePage> {
                 GetBuilder<NewsController>(
                   builder: (controller) {
                     return GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
                       ),
                       shrinkWrap: true,
@@ -95,132 +100,135 @@ class _HomePageState extends State<HomePage> {
                         final instance = controller.breakingNews[index];
                         String imageUrl = instance.urlToImage ?? "";
 
-                    return InkWell(
-                      onTap: () async {
-                        String articleUrl = instance.url;
-                        if (await canLaunch(articleUrl)) {
-                          await launch(articleUrl);
-                        } else {
-                          print('Could not launch $articleUrl');
-                        }
-                      },
-                      child: Card(
-                        elevation: 10,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          children: [
-                            FutureBuilder(
-                              future: _getImageSize(imageUrl),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  ImageInfo? imageInfo = snapshot.data;
-                                  bool usePlaceholder = false;
+                        return InkWell(
+                          onTap: () async {
+                            String articleUrl = instance.url;
+                            if (await canLaunch(articleUrl)) {
+                              await launch(articleUrl);
+                            } else {
+                              print('Could not launch $articleUrl');
+                            }
+                          },
+                          child: Card(
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                FutureBuilder(
+                                  future: _getImageSize(imageUrl),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      ImageInfo? imageInfo = snapshot.data;
+                                      bool usePlaceholder = false;
 
-                                  if (imageInfo != null &&
-                                      (imageInfo.image.width) < 600 &&
-                                      (imageInfo.image.height) < 600) {
-                                    usePlaceholder = true;
-                                  }
+                                      if (imageInfo != null &&
+                                          (imageInfo.image.width) < 600 &&
+                                          (imageInfo.image.height) < 600) {
+                                        usePlaceholder = true;
+                                      }
 
-                                  return SizedBox(
-                                    height: 300,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: usePlaceholder
-                                          ? Image.asset(
-                                              'assets/cyber_background.jpg',
-                                              fit: BoxFit.cover,
-                                              height: double.infinity,
-                                              width: double.infinity,
-                                            )
-                                          : Image.network(
-                                              imageUrl,
-                                              fit: BoxFit.cover,
-                                              height: double.infinity,
-                                              width: double.infinity,
-                                              errorBuilder:
-                                                  (context, error, stackTrace) {
-                                                return Image.asset(
+                                      return SizedBox(
+                                        height: 300,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: usePlaceholder
+                                              ? Image.asset(
                                                   'assets/cyber_background.jpg',
                                                   fit: BoxFit.cover,
                                                   height: double.infinity,
                                                   width: double.infinity,
-                                                );
+                                                )
+                                              : Image.network(
+                                                  imageUrl,
+                                                  fit: BoxFit.cover,
+                                                  height: double.infinity,
+                                                  width: double.infinity,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return Image.asset(
+                                                      'assets/cyber_background.jpg',
+                                                      fit: BoxFit.cover,
+                                                      height: double.infinity,
+                                                      width: double.infinity,
+                                                    );
+                                                  },
+                                                ),
+                                        ),
+                                      );
+                                    } else {
+                                      return const SizedBox(
+                                        height: 300,
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                                const SizedBox(height: 8),
+                                Flexible(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            instance.title,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Flexible(
+                                          child: Text(
+                                            instance.description ?? '',
+                                            style:
+                                                const TextStyle(fontSize: 18),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        // Favorite button
+                                        if (isLoggedIn)
+                                          Tooltip(
+                                            message: instance.isFavorite
+                                                ? 'Remove from Saved Articles'
+                                                : 'Save this Article',
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.star,
+                                                color: instance.isFavorite
+                                                    ? Colors.blue
+                                                    : null,
+                                              ),
+                                              onPressed: () async {
+                                                // Save the updated favorite status
+                                                _saveFavoriteStatus(instance);
                                               },
                                             ),
-                                    ),
-                                  );
-                                } else {
-                                  return const SizedBox(
-                                    height: 300,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  );
-                                }
-                              },
-                            ),
-                            const SizedBox(height: 8),
-                            Flexible(
-                              child: Container(
-                                padding: const EdgeInsets.all(8),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        instance.title,
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Flexible(
-                                      child: Text(
-                                        instance.description ?? '',
-                                        style: const TextStyle(fontSize: 18),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                    // Favorite button
-                                    if (isLoggedIn)
-                                      Tooltip(
-                                        message: instance.isFavorite
-                                            ? 'Remove from Saved Articles'
-                                            : 'Save this Article',
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.star,
-                                            color: instance.isFavorite
-                                                ? Colors.blue
-                                                : null,
                                           ),
-                                          onPressed: () async {
-                                            // Save the updated favorite status
-                                            _saveFavoriteStatus(instance);
-                                          },
-                                        ),
-                                      ),
-                                  ],
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ),
+                          ),
+                        );
+                      },
                     );
                   },
-                );
-              },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
         ],
       ),
     );
