@@ -5,49 +5,43 @@ import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'All About Firewalls';
 const String content = '''
+# What is a Firewall?
 
-### What is a Firewall?
+## Introduction
 
-- A Firewall is a security device, physical or virtual, which acts as a first line of defense
- if something malicious is detected on your network and system. 
- 
- - Firewalls create barries between secured and controlled internal networks that are trusted or untrusted.
+A Firewall is a crucial security device, either physical or virtual, that serves as the first line of defense against malicious activity on your network and system.
 
- - Firewalls can be implemented as a private or public cloud, hardware, software, or even
- software as a service. 
+## Key Functions
 
- - Most computers today already have a firewall built into their operating system. So no additional work is needed by the user to ensure it is functioning properly.
- In the everyday world, you are generally safe, but if you're working in a business or on a machine with much more confidential and sensitive data, it is best to have additional firewalls,
- just in case. 
+- **Barrier Creation:** Firewalls establish barriers between secured and controlled internal networks, distinguishing between trusted and untrusted ones.
+- **Deployment:** They can be implemented in various forms including private/public cloud, hardware, software, or Software as a Service (SaaS).
+- **Built-in Firewalls:** Most modern computers have firewalls built into their operating systems, requiring minimal user intervention for basic functioning.
 
- ### Examples of Firewalls
+## Types of Firewalls
 
- 1. Next Generation Firewall
- This is a modern firewall used to block attacks and threats that are much newer in today's world that may have
- not been seen before. These firewalls even have standards, provided by Gartner, Inc. They state that a next-generation
- firewall has to include the following:
-  •	Intelligence-based access control with stateful inspection
-•	Integrated intrusion prevention system (IPS)
-•	Application awareness and control to see and block risky apps
-•	Upgrade paths to include future information feeds
-•	Techniques to address evolving security threats
-•	URL filtering based on geolocation and reputation
+## 1. Next Generation Firewall
+- **Features:**
+  - Intelligence-based access control with stateful inspection.
+  - Integrated intrusion prevention system (IPS).
+  - Application awareness and control to see and block risky apps.
+  - Upgrade paths to include future information feeds.
+  - Techniques to address evolving security threats.
+  - URL filtering based on geolocation and reputation.
+- **Standards:** Defined by Gartner, Inc., a next-generation firewall must include the above features.
 
-2. Virtual Firewall
+## 2. Virtual Firewall
+- **Deployment:** Usually deployed in private clouds like Azure, Amazon Web Services, etc.
+- **Function:** Monitors and secures traffic across both physical and virtual networks, preventing unauthorized access.
 
-  This is a firewall which is usuallt deployed virtually into a private cloud like Azure, Amazon Web Services, and more.
-  This firewall monitors and secures traffic across both physical and virtual networks, to ensure no unknown outsider can 
-  maliciously access the cloud and cause harm
+## 3. Unified Threat Management (UTM) Firewall
+- **Combination:** Integrates a traditional firewall with intrusion prevention and an antivirus.
+- **Goal:** Offers simplicity and ease of use while providing comprehensive protection.
 
+# Additional Information
 
-3. Unified Threat Management (UTM) Firewall:
-  UTM Firewalls combine a traditional firewall with intrusion prevention and an antivirus.
-  The main goal of this firewall is to be simple and easy to use, while providing sufficient protection.
+This content is provided by Cisco, Inc.
 
-
-This information is provided by Cisco, Inc. 
-For more information about firewalls, go to: https://www.cisco.com/c/en/us/products/security/firewalls/what-is-a-firewall.html
-
+For more information about firewalls, visit: [Cisco Firewalls Explained](https://www.cisco.com/c/en/us/products/security/firewalls/what-is-a-firewall.html)
 ''';
 
 class FirewallPage extends StatelessWidget {

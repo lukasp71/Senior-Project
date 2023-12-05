@@ -21,7 +21,6 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SectionAppBar(currentSection: 'Education', backArrow: false),
-      backgroundColor: Colors.purple[100], // You can adjust this color
       body: Stack(
         children: [
           Container(
@@ -38,7 +37,7 @@ class MyHomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text(
-                  'Interested about Learning More on CyberSecurity and keeping yourself safe? We have a set of modules ready for you to learn and study.',
+                  'Welcome to the Threat Awareness Hub Education Section. There are 2 sets of modules available for personal users and businesses. ',
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -63,7 +62,7 @@ class MyHomePage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => ModulePage()),
                     );
                   },
-                  child: const CyberSecurityCategory("Cybersecurity for You"),
+                  child: const CyberSecurityCategory("Cybersecurity for Personal Users"),
                 ),
                 const SizedBox(height: 20),
                 GestureDetector(
@@ -76,7 +75,7 @@ class MyHomePage extends StatelessWidget {
                     // Add your navigation logic here for the second category
                   },
                   child: const CyberSecurityCategory(
-                      "Cybersecurity for Businesses"),
+                      "Cybersecurity for Business Owners/Employees"),
                 ),
               ],
             ),

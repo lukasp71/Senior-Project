@@ -1,126 +1,243 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:senior_project/database/services/databse.dart';
 
-void main() => runApp(MaterialApp(home: QuizPage()));
+void main() => runApp(MaterialApp(home: EthicalHackingQuizPage()));
 
-class QuizPage extends StatefulWidget {
+class EthicalHackingQuizPage extends StatefulWidget {
   @override
   _QuizPageState createState() => _QuizPageState();
 }
 
-class _QuizPageState extends State<QuizPage> {
+class _QuizPageState extends State<EthicalHackingQuizPage> {
   final List<String> questions = [
     'What does a Grey Hat Hacker do?',
     'What is a benefit of a White Hat Hacker?',
     'Why are Black Hat Hackers Malicious?',
     'What is a tool that Ethical Hacker use?',
-    'Which historical event significantly impacted the evolution of cybersecurity?',
+    'What is the Health Law that went into affect in 1996?',
+    'What did the Homeland Security Act Do?',
   ];
 
   final List<List<String>> choices = [
     [
-      'It does not know anything',
-      'Humans making a mistake when configurating it',
-      'People do not know how to find AI tools',
-      'AI hacks into systems',
+      'A Mix of White and Black Hat activities',
+      'Perform malicious activities',
+      'Recover Lost Data from Customers',
+      'Conduct Penetration Testing',
     ],
     [
-      'Give us new information',
+      'They will never do something malicious to you',
       'Add new jobs',
-      'Take outliers from preset rules and place it into collections of data with similarities or oddities.',
-      'All of the above',
+      'Test your cybersecurity systems and give you advice on how to improve it',
+      'Both A and C',
     ],
     [
-      'Not enough experts in the field',
-      'Lack of Jobs',
-      'Lack of Creativity',
-      'Increase of Technical Issues',
+      'They steal company information from businesses',
+      'Conduct unauthorized activities',
+      'They can become more powerful due to ignorant employees.',
+      'All of the Above',
     ],
     [
-      'Passwords',
-      'Touch Screens',
-      'Internet Capabilities',
-      'Encryption',
+      'CCleaner',
+      'Norton Antivirus',
+      'Nmap',
+      'iTunes',
     ],
     [
-      'The Morris Worm',
-      'The invention of the internet',
-      'The Y2K bug',
-      'The creation of the first antivirus software',
-    ],  
+      'Homeland Security Act',
+      'Affordable Care Act',
+      'Health Insurance Portability and Accountability Act (HIPAA)',
+      'Cybersecurity Information Sharing Act (CISA)',
+    ],
+    [
+      'Established the CIA',
+      'Established the FBI',
+      'Established the Department of Homeland Security',
+      'Established the Department of War',
+    ],
   ];
 
   final List<int> correctAnswers = [
-    1,
+    0,
+    3,
+    3,
     2,
     3,
-    3,
-    0,
-  ]; 
-  late List<int?> userAnswers; 
+    2,
+  ];
+  late List<int?> userAnswers;
   bool isSubmitted = false;
-
-  @override
-  void initState() {
-    super.initState();
-    userAnswers =
-        List.filled(questions.length, null); 
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Quiz'),
-      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: List.generate(
             questions.length,
-            (index) {
-              return Card(
-                child: Column(
-                  children: [
-                    Text(questions[index]),
-                    ...List.generate(
-                      choices[index].length,
-                      (choiceIndex) {
-                        return RadioListTile<int>(
-                          value: choiceIndex,
-                          groupValue: userAnswers[index],
-                          onChanged: isSubmitted
-                              ? null
-                              : (value) {
-                                  setState(() {
-                                    userAnswers[index] = value;
-                                  });
-                                },
-                          title: Text(choices[index][choiceIndex]),
-                          activeColor: isSubmitted
-                              ? (choiceIndex == correctAnswers[index]
-                                  ? Colors.green
-                                  : (userAnswers[index] == choiceIndex
-                                      ? Colors.red
-                                      : null))
-                              : null,
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
+            (index) => _buildQuestionCard(index),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            isSubmitted = true;
-          });
-        },
+        onPressed: _submitQuiz,
         child: const Text('Submit'),
       ),
     );
+  }
+
+  Widget _buildQuestionCard(int index) {
+    return Card(
+      child: Column(
+        children: [
+          Text(questions[index]),
+          ...List.generate(
+            choices[index].length,
+            (choiceIndex) => RadioListTile<int>(
+              value: choiceIndex,
+              groupValue: userAnswers[index],
+              onChanged: isSubmitted
+                  ? null
+                  : (value) => setState(() => userAnswers[index] = value),
+              title: Text(choices[index][choiceIndex]),
+              activeColor: _getAnswerColor(index, choiceIndex),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Color? _getAnswerColor(int index, int choiceIndex) {
+    if (!isSubmitted) return null;
+    return choiceIndex == correctAnswers[index]
+        ? Colors.green
+        : (userAnswers[index] == choiceIndex ? Colors.red : null);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    userAnswers = List.filled(questions.length, null);
+    _checkQuizProgress();
+  }
+
+  void _checkQuizProgress() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DatabaseService service = DatabaseService(uid: user.uid);
+      bool hasAttempted = await service.getQuizProgress('attemptBusinessQuiz3');
+      if (hasAttempted) {
+        int previousScore = await service.getQuizScore('businessQuiz3Score');
+        _showAttemptDialog(previousScore);
+      }
+    }
+  }
+
+  void _showAttemptDialog(int previousScore) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Quiz Attempt'),
+        content: Text(
+            'You have already attempted this quiz and your highest score is $previousScore/${questions.length}. Would you like to attempt again to try and get a higher score?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // Additional logic if required when user chooses to retake the quiz
+            },
+            child: const Text('Yes'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submitQuiz() async {
+    if (isSubmitted) return; // Prevent re-submitting
+
+    int score = 0;
+    for (int i = 0; i < correctAnswers.length; i++) {
+      if (userAnswers[i] == correctAnswers[i]) {
+        score++;
+      }
+    }
+
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      DatabaseService service = DatabaseService(uid: user.uid);
+      int previousScore = await service.getQuizScore('businessQuiz3Score');
+
+      if (score > previousScore) {
+        // Update only if the new score is higher
+        service.updateQuizScore('businessQuiz3Score', score);
+        service.updateQuizProgress('attemptBusinessQuiz3', true);
+      }
+    }
+
+    setState(() => isSubmitted = true);
+    _showScoreDialog(score);
+  }
+
+  void _showScoreDialog(int score) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Quiz Results'),
+        content: Text('Your score: $score/${questions.length}'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+          TextButton(
+            onPressed: _showIncorrectAnswers,
+            child: const Text('Show Incorrect Questions'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showIncorrectAnswers() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Incorrect Questions'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: _getIncorrectAnswerWidgets(),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _getIncorrectAnswerWidgets() {
+    List<Widget> widgets = [];
+    for (int i = 0; i < questions.length; i++) {
+      if (userAnswers[i] != null && userAnswers[i] != correctAnswers[i]) {
+        widgets.add(Text('Q: ${questions[i]}'));
+        widgets.add(const SizedBox(height: 10));
+      }
+    }
+    if (widgets.isEmpty) {
+      widgets.add(const Text('No incorrect answers!'));
+    }
+    return widgets;
   }
 }

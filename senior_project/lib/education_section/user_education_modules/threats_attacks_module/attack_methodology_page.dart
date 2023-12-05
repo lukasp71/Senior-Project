@@ -5,11 +5,11 @@ import 'package:senior_project/education_section/user_education_modules/threats_
 import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
-final String subsectionTitle = 'Attack Methodology';
-final String content = '''
-### Attack Methodology:
+const String subsectionTitle = 'Attack Methodology';
+const String content = '''
+# Attack Methodology:
 
-#### 1. **Attack Stages (Cyber Kill Chain):**
+## 1. **Attack Stages (Cyber Kill Chain):**
    - **Reconnaissance:** Identifying targets and gathering information.
    - **Weaponization:** Creating a weapon like malware to exploit a vulnerability.
    - **Delivery:** Transmitting the weapon to the targeted system.
@@ -18,7 +18,7 @@ final String content = '''
    - **Command and Control:** Establishing a command channel to control malware.
    - **Actions on Objectives:** Achieving the attacker's goals like data theft.
 
-#### 2. **Common Cyber Attack Methods:**
+## 2. **Common Cyber Attack Methods:**
    - **Compromised Credentials:** Due to weak or stolen credentials, which account for over 80% of breaches globally.
    - **Malicious Insiders:** Attacks carried out by authorized individuals within the organization.
    - **Misconfiguration:** Such as misconfigured databases leading to data exposure.
@@ -26,7 +26,7 @@ final String content = '''
    - **Trust Relationships:** Exploiting connections with third-party organizations or supply chain partners.
    - **Zero-Day Vulnerabilities:** Unknown security vulnerabilities exploited before a patch is available.
 
-#### 3. **Cyber Attack Techniques:**
+## 3. **Cyber Attack Techniques:**
    - **Cross-Site Scripting:** Stealing session IDs to hijack sessions.
    - **Denial of Service:** Disrupting authorized user access to systems.
    - **Logical Bomb:** Code auto-execution under certain conditions, causing damage or data theft.
@@ -34,7 +34,7 @@ final String content = '''
    - **Trojan Horse, Virus, Worm:** Various malware types each with different propagation and payload delivery methods.
    - **Spam and Botnets:** Distributing malicious content or coordinating attacks across compromised systems.
 
-#### 4. **Attack Vectors:**
+## 4. **Attack Vectors:**
    - **Malware Sharing:** Distributing malware via email attachments, web links, or other media.
    - **Exploiting System Vulnerabilities:** Taking advantage of system weaknesses to gain unauthorized access.
 ''';

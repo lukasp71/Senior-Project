@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/services/auth.dart';
+import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:senior_project/shared/loading.dart';
 
 class Register extends StatefulWidget {
@@ -17,6 +18,7 @@ class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
+  bool _isPasswordVisible = false;
   String email = '';
   String password = '';
   String username = '';
@@ -27,6 +29,7 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
+            appBar: SectionAppBar(currentSection: 'Login', backArrow: false),
             body: Center(
               child: Stack(
                 children: [
@@ -96,14 +99,28 @@ class _RegisterState extends State<Register> {
                                     ),
                                     const SizedBox(height: 20.0),
                                     TextFormField(
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         labelText: 'Password',
-                                        prefixIcon: Icon(Icons.lock),
+                                        prefixIcon: const Icon(Icons.lock),
+                                        suffixIcon: IconButton(
+                                          icon: Icon(
+                                            _isPasswordVisible
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              _isPasswordVisible =
+                                                  !_isPasswordVisible;
+                                            });
+                                          },
+                                        ),
                                       ),
                                       validator: (val) => val!.length < 6
                                           ? 'Password must be at least 6 characters long'
                                           : null,
-                                      obscureText: true,
+                                      obscureText:
+                                          !_isPasswordVisible, // Use the visibility variable
                                       onChanged: (val) {
                                         setState(() => password = val);
                                       },

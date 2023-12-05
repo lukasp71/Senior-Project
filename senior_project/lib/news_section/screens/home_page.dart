@@ -1,16 +1,18 @@
 // ignore_for_file: deprecated_member_use, avoid_print, use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:senior_project/database/services/databse.dart';
+import 'package:senior_project/news_section/screens/welcome_pupup.dart';
 import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:senior_project/news_section/controllers/news_controller.dart';
-import 'package:senior_project/news_section/models/article_model.dart'; // Import your updated ArticleModel
+import 'package:senior_project/news_section/models/article_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,46 +55,45 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _showWelcomeDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Welcome to Threat Awareness Hub'),
-          content: const Text(
-              'Welcome to Threat Awareness Hub, your one-stop for Cybersecurity News and Education. Take a look at the most recent cybersecurity news and vulnerabilities, as well as learn the basics of various cybersecurity concepts for you or your business.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+    return WelcomePopup.show(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SectionAppBar(currentSection: 'News', backArrow: false),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            GetBuilder<NewsController>(
-              builder: (controller) {
-                return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                  ),
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: controller.breakingNews.length,
-                  itemBuilder: (context, index) {
-                    final instance = controller.breakingNews[index];
-                    String imageUrl = instance.urlToImage ?? "";
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/flashNews.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1), 
+            child: Container(
+              color: const Color.fromARGB(255, 0, 140, 255).withOpacity(0.6), 
+            ),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                GetBuilder<NewsController>(
+                  builder: (controller) {
+                    return GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                      ),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.breakingNews.length,
+                      itemBuilder: (context, index) {
+                        final instance = controller.breakingNews[index];
+                        String imageUrl = instance.urlToImage ?? "";
 
                     return InkWell(
                       onTap: () async {
@@ -220,6 +221,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+        ],
+      ),
     );
   }
 
@@ -261,11 +264,12 @@ class _HomePageState extends State<HomePage> {
 
       // Get the current user's favURLs
       List<String> currentFavURLs = [];
-
+      List<String> savedTitles = [];
       DocumentSnapshot userSnapshot = await userRef.get();
       if (userSnapshot.exists && userSnapshot.data() != null) {
         var userData = userSnapshot.data() as Map<String, dynamic>;
         currentFavURLs = List<String>.from(userData['favURLs'] ?? []);
+        savedTitles = List<String>.from(userData['savedTitles'] ?? []);
       }
 
       // Check if the article is already in favorites
@@ -302,6 +306,7 @@ class _HomePageState extends State<HomePage> {
 
           // Remove from favorites
           currentFavURLs.remove(article.url);
+          savedTitles.remove(article.title);
         }
       } else {
         // Toggle the favorite status
@@ -311,15 +316,13 @@ class _HomePageState extends State<HomePage> {
 
         // Add to favorites
         currentFavURLs.add(article.url);
+        savedTitles.add(article.title);
       }
 
       // Update the user's document with the new favURLs
       await userRef.update({'favURLs': currentFavURLs});
-
+      await userRef.update({'savedTitles': savedTitles});
       // Optional: Update the local UI to reflect the change
-      setState(() {
-        // Update the local state if needed
-      });
     } catch (error) {
       print('Error updating favURLs: $error');
       // Handle the error as needed

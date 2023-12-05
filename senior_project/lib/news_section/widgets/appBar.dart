@@ -97,11 +97,13 @@ class SectionAppBar extends StatelessWidget implements PreferredSizeWidget {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const Wrapper()));
         },
-        child: const Text(
+        child: Text(
           'Login',
           style: TextStyle(
-            color: Colors.white, // You can change the text color here
-            fontWeight: FontWeight.bold, // Optional: for bold text
+            color: (currentSection == 'Login')
+                ? const Color.fromARGB(255, 177, 138, 206)
+                : Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       );

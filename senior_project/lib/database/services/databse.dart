@@ -9,8 +9,14 @@ class DatabaseService {
   //collection reference
   final CollectionReference collection =
       FirebaseFirestore.instance.collection('User');
-  Future updateUserData(String name, String email, int defaultUserScore,
-      bool defaultQuizProgress, List<String> favURLs) async {
+  Future updateUserData(
+      String name,
+      String email,
+      int defaultUserScore,
+      bool defaultQuizProgress,
+      List<String> favURLs,
+      List<String> savedTitles,
+      String pfpURL) async {
     return await collection.doc(uid).set({
       'name': name,
       'email': email,
@@ -29,12 +35,16 @@ class DatabaseService {
       'businessQuiz3Score': defaultUserScore,
       'businessQuiz4Score': defaultUserScore,
       'businessQuiz5Score': defaultUserScore,
+      'businessQuiz6Score': defaultUserScore,
       'attemptBusinessQuiz1': defaultQuizProgress,
       'attemptBusinessQuiz2': defaultQuizProgress,
       'attemptBusinessQuiz3': defaultQuizProgress,
       'attemptBusinessQuiz4': defaultQuizProgress,
       'attemptBusinessQuiz5': defaultQuizProgress,
-      'favURLs': favURLs
+      'attemptBusinessQuiz6': defaultQuizProgress,
+      'favURLs': favURLs,
+      'savedTitles': savedTitles,
+      'pfpURL': pfpURL
     });
   }
 
@@ -59,12 +69,16 @@ class DatabaseService {
         businessQuiz3Score: doc.get('businessQuiz3Score'),
         businessQuiz4Score: doc.get('businessQuiz4Score'),
         businessQuiz5Score: doc.get('businessQuiz5Score'),
+        businessQuiz6Score: doc.get('businessQuiz6Score'),
         attemptBusinessQuiz1: doc.get('attemptBusinessQuiz1'),
         attemptBusinessQuiz2: doc.get('attemptBusinessQuiz2'),
         attemptBusinessQuiz3: doc.get('attemptBusinessQuiz3'),
         attemptBusinessQuiz4: doc.get('attemptBusinessQuiz4'),
         attemptBusinessQuiz5: doc.get('attemptBusinessQuiz5'),
+        attemptBusinessQuiz6: doc.get('attemptBusinessQuiz6'),
         favURLs: doc.get('favURLs'),
+        savedTitles: doc.get('savedTitles'),
+        pfpURL: doc.get('pfpURL'),
       );
     }).toList();
   }
@@ -133,20 +147,35 @@ class DatabaseService {
         .catchError((error) => print("Failed to update quiz score: $error"));
   }
 
+  Future<void> updateUsername(String newUsername) async {
+    return await collection
+        .doc(uid)
+        .update({'name': newUsername})
+        .then((value) => print("Username Updated"))
+        .catchError((error) => print("Failed to update quiz score: $error"));
+  }
+
+  Future<void> updateEmail(String newEmail) async {
+    return await collection
+        .doc(uid)
+        .update({'email': newEmail})
+        .then((value) => print("Email Updated"))
+        .catchError((error) => print("Failed to update quiz score: $error"));
+  }
+
   Future<int> getQuizScore(String moduleName) async {
     try {
       DocumentSnapshot snapshot = await collection.doc(uid).get();
       if (snapshot.exists && snapshot.data() != null) {
         var userData = snapshot.data() as Map<String, dynamic>;
-        return userData[moduleName] ??
-            'Unknown'; // Return 'Unknown' if name is not found
+        // Check if the score exists and is an int, else return 0
+        return (userData[moduleName] is int) ? userData[moduleName] : 0;
       } else {
-        return 0; // Return 'Unknown' if document does not exist
+        return 0; // No data found
       }
     } catch (e) {
-      // Handle any errors here
       print('Error getting user data: $e');
-      return 0; // Return 'Error' or any other appropriate default value
+      return 0; // Error case
     }
   }
 
@@ -155,15 +184,14 @@ class DatabaseService {
       DocumentSnapshot snapshot = await collection.doc(uid).get();
       if (snapshot.exists && snapshot.data() != null) {
         var userData = snapshot.data() as Map<String, dynamic>;
-        return userData[moduleName] ??
-            'Unknown'; // Return 'Unknown' if name is not found
+        // Check if the progress exists and is a bool, else return false
+        return (userData[moduleName] is bool) ? userData[moduleName] : false;
       } else {
-        return false; // Return 'Unknown' if document does not exist
+        return false; // No data found
       }
     } catch (e) {
-      // Handle any errors here
       print('Error getting user data: $e');
-      return false; // Return 'Error' or any other appropriate default value
+      return false; // Error case
     }
   }
 
@@ -173,6 +201,21 @@ class DatabaseService {
       if (snapshot.exists && snapshot.data() != null) {
         var userData = snapshot.data() as Map<String, dynamic>;
         return (userData['favURLs'] as List<dynamic>).cast<String>();
+      } else {
+        return ['Error'];
+      }
+    } catch (e) {
+      print('Error getting user data: $e');
+      return ['Error'];
+    }
+  }
+
+  Future<List<String>> getsavedTitles() async {
+    try {
+      DocumentSnapshot snapshot = await collection.doc(uid).get();
+      if (snapshot.exists && snapshot.data() != null) {
+        var userData = snapshot.data() as Map<String, dynamic>;
+        return (userData['savedTitles'] as List<dynamic>).cast<String>();
       } else {
         return ['Error'];
       }

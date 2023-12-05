@@ -116,16 +116,16 @@ class _ModulePageState extends State<ModulePage> {
       body: Row(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width * 0.3,
             child: ListView.separated(
               itemCount: modules.keys.length,
-              separatorBuilder: (context, index) => Divider(),
+              separatorBuilder: (context, index) => const Divider(),
               itemBuilder: (context, index) {
                 final moduleTitle = modules.keys.elementAt(index);
                 return ExpansionTile(
                   title: Text(
                     moduleTitle,
-                    style: TextStyle(fontSize: 30.0),
+                    style: const TextStyle(fontSize: 30.0),
                   ),
                   children: modules[moduleTitle]!
                       .map((sectionTitle) => Padding(
@@ -140,7 +140,7 @@ class _ModulePageState extends State<ModulePage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   sectionTitle,
-                                  style: TextStyle(fontSize: 30.0),
+                                  style: const TextStyle(fontSize: 30.0),
                                 ),
                               ),
                             ),
@@ -151,11 +151,11 @@ class _ModulePageState extends State<ModulePage> {
             ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.6,
-            padding: EdgeInsets.all(16.0),
+            width: MediaQuery.of(context).size.width * 0.7,
+            padding: const EdgeInsets.all(16.0),
             child: selectedSection.isNotEmpty
                 ? sectionPages[selectedSection]!
-                : Center(
+                : const Center(
                     child: Text(
                       'Select a section to view its content.',
                       style: TextStyle(fontSize: 20.0),

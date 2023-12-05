@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:senior_project/database/services/auth.dart';
+import 'package:senior_project/news_section/widgets/appBar.dart';
 import 'package:senior_project/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
@@ -27,6 +28,7 @@ class _SignInState extends State<SignIn> {
     return loading
         ? Loading()
         : Scaffold(
+            appBar: SectionAppBar(currentSection: 'Login', backArrow: false),
             body: Center(
               child: Stack(
                 children: [
