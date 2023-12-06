@@ -27,7 +27,7 @@ class MyHomePage extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                    'assets/education.jpg'), // Replace with your image path
+                    'assets/education.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -42,7 +42,7 @@ class MyHomePage extends StatelessWidget {
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors
-                          .white), // Added white color for better visibility
+                          .white), 
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 30),
@@ -51,7 +51,7 @@ class MyHomePage extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors
-                          .white), // Added white color for better visibility
+                          .white), 
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 30),
@@ -72,7 +72,7 @@ class MyHomePage extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => BusinessModulePage()),
                     );
-                    // Add your navigation logic here for the second category
+                  
                   },
                   child: const CyberSecurityCategory(
                       "Cybersecurity for Business Owners/Employees"),
@@ -96,7 +96,7 @@ class CyberSecurityCategory extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.8), // Slightly transparent
+        color: Colors.white.withOpacity(0.8), 
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -110,7 +110,7 @@ class CyberSecurityCategory extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
-            color: Colors.black), // Set text color to black for visibility
+            color: Colors.black),
       ),
     );
   }

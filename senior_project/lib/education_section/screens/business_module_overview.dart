@@ -84,7 +84,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
       body: Row(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width * 0.3,
             child: ListView.separated(
               itemCount: modules.keys.length,
               separatorBuilder: (context, index) => const Divider(),
@@ -93,11 +93,11 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
                 return ExpansionTile(
                   title: Text(
                     moduleTitle,
-                    style: const TextStyle(fontSize: 30.0),
+                    style: const TextStyle(fontSize: 25.0),
                   ),
                   children: modules[moduleTitle]!
                       .map((sectionTitle) => Padding(
-                            padding: const EdgeInsets.only(left: 40.0),
+                            padding: const EdgeInsets.only(left: 0.0),
                             child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
@@ -108,7 +108,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   sectionTitle,
-                                  style: const TextStyle(fontSize: 30.0),
+                                  style: const TextStyle(fontSize: 20.0),
                                 ),
                               ),
                             ),
@@ -119,7 +119,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
             ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.6,
+            width: MediaQuery.of(context).size.width * 0.7,
             padding: const EdgeInsets.all(16.0),
             child: selectedSection.isNotEmpty
                 ? sectionPages[selectedSection]!
