@@ -59,7 +59,7 @@ class _BusinessModulePageState extends State<BusinessModulePage> {
   };
 
   final Map<String, Widget> sectionPages = {
-    'Section 1.1: AI in Cybersecurity': const AIinCyber(),
+    'Section 1.1: AI in Cybersecurity':  AIinCyber(),
     'Section 1.2: IOT': const IOT(),
     'Section 2.1: Intro to Cyber Laws': const LawPage(),
     'Section 2.2: Ethical Hacking': const EthicalHacking(),

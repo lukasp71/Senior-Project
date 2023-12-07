@@ -45,19 +45,7 @@ class AttackMethodologyPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => IncidentResponseRecoveryPage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CommonCyberThreatsPage()),
-        );
-      },
+      
     );
   }
 }

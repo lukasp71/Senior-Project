@@ -40,18 +40,7 @@ class DefinitionAndImportancePage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => KeyConceptsPage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => IntroToCybersecurityPage()),
-        );
-      },
+     
     );
   }
 }

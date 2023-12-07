@@ -38,12 +38,7 @@ class IntroToSocialEngineering extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        // TODO: Implement forward navigation
-      },
-      onBackward: () {
-        // TODO: Implement backward navigation
-      },
+      
     );
   }
 }

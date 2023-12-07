@@ -5,14 +5,11 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 class SubsectionPage extends StatelessWidget {
   final String subsectionTitle;
   final String content;
-  final VoidCallback onForward;
-  final VoidCallback onBackward;
+  
 
   SubsectionPage({
     required this.subsectionTitle,
     required this.content,
-    required this.onForward,
-    required this.onBackward,
   });
 
   @override

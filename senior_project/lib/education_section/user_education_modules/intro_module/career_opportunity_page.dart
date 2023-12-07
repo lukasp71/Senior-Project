@@ -37,18 +37,7 @@ class CareersInCybersecurityPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ModulePage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HistoricalContextPage()),
-        );
-      },
+     
     );
   }
 }

@@ -55,19 +55,7 @@ class CommonCyberThreatsPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AttackMethodologyPage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => IntroToThreatsAndAttacksPage()),
-        );
-      },
+      
     );
   }
 }
