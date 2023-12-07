@@ -44,11 +44,11 @@ class _SignInState extends State<SignIn> {
                   ),
                   Center(
                     child: SizedBox(
-                      height: 400, // Set the desired height for the sign-in box
+                      height: 400, 
                       child: SingleChildScrollView(
                         child: Container(
                           width:
-                              300, // Set the desired width for the sign-in box
+                              300, 
                           padding: const EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.8),
@@ -144,7 +144,7 @@ class _SignInState extends State<SignIn> {
                                 const SizedBox(height: 20),
                                 TextButton(
                                   onPressed: () {
-                                    // Add Forgot Password functionality here
+                          
                                   },
                                   child: const Text(
                                     'Forgot Password?',
