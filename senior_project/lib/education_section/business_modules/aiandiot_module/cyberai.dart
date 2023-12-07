@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:senior_project/education_section/business_modules/aiandiot_module/iOT.dart';
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 import 'package:senior_project/education_section/screens/business_module_overview.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const String subsectionTitle = 'Anonymous Browsing';
 const String content = '''
@@ -45,14 +46,13 @@ For more information, see: [Kaspersky AI Cybersecurity](https://usa.kaspersky.co
 ''';
 
 class AIinCyber extends StatelessWidget {
-  const AIinCyber({super.key});
+  const AIinCyber({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      
     );
   }
 }

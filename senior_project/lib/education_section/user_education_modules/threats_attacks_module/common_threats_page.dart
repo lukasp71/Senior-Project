@@ -1,8 +1,7 @@
 // File: lib/education_section/education_modules/threats_and_attacks/common_cyber_threats_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/attack_methodology_page.dart';
-import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/intro_page.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Common Cyber Threats';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/user_education_modules/intro_module/def_importance_page.dart';
-import 'package:senior_project/education_section/user_education_modules/intro_module/historical_content_page.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Section 1.3: Key Concepts of Cybersecurity';

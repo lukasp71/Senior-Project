@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/business_modules/firewall_module/firewall.dart';
-import 'package:senior_project/education_section/business_modules/firewall_module/vpn.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Anonymous Browsing';

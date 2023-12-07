@@ -1,8 +1,7 @@
 // File: lib/education_section/education_modules/threats_and_attacks/attack_methodology_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/common_threats_page.dart';
-import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/incident_response_page.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Attack Methodology';
