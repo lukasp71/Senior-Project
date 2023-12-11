@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SubsectionPage extends StatelessWidget {
   final String subsectionTitle;
   final String content;
-  final VoidCallback onForward;
-  final VoidCallback onBackward;
 
   SubsectionPage({
     required this.subsectionTitle,
     required this.content,
-    required this.onForward,
-    required this.onBackward,
   });
 
   @override
@@ -31,14 +27,7 @@ class SubsectionPage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  // Replace the Text widget with the MarkdownBody widget
-                  child: MarkdownBody(
-                    data: content,
-                    styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context))
-                        .copyWith(
-                      p: GoogleFonts.poppins(fontSize: 18.0),
-                    ),
-                  ),
+                  child: _buildMarkdownContent(context),
                 ),
               ),
               const SizedBox(height: 20.0),
@@ -47,5 +36,25 @@ class SubsectionPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildMarkdownContent(BuildContext context) {
+    return MarkdownBody(
+      data: content,
+      onTapLink: (text, href, title) {
+        _launchURL(href!);
+      },
+      styleSheet: MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+        p: TextStyle(fontSize: 18.0),
+      ),
+    );
+  }
+
+  Future<void> _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

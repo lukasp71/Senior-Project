@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/business_modules/cyberlaw_module/cyberlaw.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
-import 'package:senior_project/education_section/screens/business_module_overview.dart';
+
 
 const String subsectionTitle = 'Ethical Hacking';
 const String content = '''
@@ -53,18 +53,7 @@ class EthicalHacking extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => BusinessModulePage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const LawPage()),
-        );
-      },
+
     );
   }
 }

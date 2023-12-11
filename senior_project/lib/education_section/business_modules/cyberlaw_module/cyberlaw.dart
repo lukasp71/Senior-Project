@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/business_modules/cyberlaw_module/ethicalhacking.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
-import 'package:senior_project/education_section/screens/business_module_overview.dart';
+
 
 const String subsectionTitle = 'Cybersecurity Laws in the United States';
 const String content = '''
@@ -44,18 +44,7 @@ class LawPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const EthicalHacking()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => BusinessModulePage()),
-        );
-      },
+      
     );
   }
 }

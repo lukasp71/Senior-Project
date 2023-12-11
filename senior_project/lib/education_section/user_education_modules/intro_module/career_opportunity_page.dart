@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/user_education_modules/intro_module/historical_content_page.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
-import 'package:senior_project/education_section/screens/education_module_overview.dart';
+
 
 const String subsectionTitle = 'Section 1.4: Careers in Cybersecurity';
 const String content = '''
@@ -37,18 +37,7 @@ class CareersInCybersecurityPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ModulePage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HistoricalContextPage()),
-        );
-      },
+     
     );
   }
 }

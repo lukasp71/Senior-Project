@@ -34,12 +34,7 @@ class EncryptionPracticePage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        // Implement forward navigation
-      },
-      onBackward: () {
-        // Implement backward navigation
-      },
+     
     );
   }
 }

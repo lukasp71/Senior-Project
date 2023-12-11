@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/business_modules/firewall_module/anonymous.dart';
-import 'package:senior_project/education_section/business_modules/firewall_module/intrusion.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'All About Firewalls';
@@ -52,18 +51,7 @@ class FirewallPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const IntrusionPage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const AnonymousBrowsing()),
-        );
-      },
+      
     );
   }
 }

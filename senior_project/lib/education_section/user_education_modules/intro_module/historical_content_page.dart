@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/user_education_modules/intro_module/career_opportunity_page.dart';
-import 'package:senior_project/education_section/user_education_modules/intro_module/key_concepts_page.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle =
@@ -36,18 +35,7 @@ class HistoricalContextPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CareersInCybersecurityPage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => KeyConceptsPage()),
-        );
-      },
+     
     );
   }
 }

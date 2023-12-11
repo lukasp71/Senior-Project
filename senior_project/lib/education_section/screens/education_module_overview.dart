@@ -125,11 +125,11 @@ class _ModulePageState extends State<ModulePage> {
                 return ExpansionTile(
                   title: Text(
                     moduleTitle,
-                    style: const TextStyle(fontSize: 30.0),
+                    style: const TextStyle(fontSize: 25.0),
                   ),
                   children: modules[moduleTitle]!
                       .map((sectionTitle) => Padding(
-                            padding: const EdgeInsets.only(left: 40.0),
+                            padding: const EdgeInsets.only(left: 0.0),
                             child: ElevatedButton(
                               onPressed: () {
                                 setState(() {
@@ -140,7 +140,7 @@ class _ModulePageState extends State<ModulePage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   sectionTitle,
-                                  style: const TextStyle(fontSize: 30.0),
+                                  style: const TextStyle(fontSize: 20.0),
                                 ),
                               ),
                             ),

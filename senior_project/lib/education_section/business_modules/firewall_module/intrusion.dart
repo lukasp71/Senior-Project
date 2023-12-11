@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/business_modules/firewall_module/firewall.dart';
-import 'package:senior_project/education_section/business_modules/firewall_module/vpn.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Anonymous Browsing';
@@ -51,18 +50,7 @@ class IntrusionPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const VPNPage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const FirewallPage()),
-        );
-      },
+     
     );
   }
 }

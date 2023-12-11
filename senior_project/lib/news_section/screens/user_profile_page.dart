@@ -174,7 +174,7 @@ class _UserProfilePageState extends State<UserProfilePage>
       );
     } else {
       return Scaffold(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Color.fromARGB(255, 0, 46, 116),
         appBar: SectionAppBar(currentSection: 'Profile', backArrow: true),
         body: SafeArea(
           child: Column(

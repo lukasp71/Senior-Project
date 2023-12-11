@@ -1,8 +1,7 @@
 // File: lib/education_section/education_modules/threats_and_attacks/incident_response_recovery_page.dart
 
 import 'package:flutter/material.dart';
-import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/attack_methodology_page.dart';
-import 'package:senior_project/education_section/user_education_modules/threats_attacks_module/prevention_methods_page.dart';
+
 import 'package:senior_project/education_section/layouts/subsection_page.dart';
 
 const String subsectionTitle = 'Incident Response and Recovery';
@@ -43,18 +42,7 @@ class IncidentResponseRecoveryPage extends StatelessWidget {
     return SubsectionPage(
       subsectionTitle: subsectionTitle,
       content: content,
-      onForward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PreventionMeasuresPage()),
-        );
-      },
-      onBackward: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AttackMethodologyPage()),
-        );
-      },
+     
     );
   }
 }
